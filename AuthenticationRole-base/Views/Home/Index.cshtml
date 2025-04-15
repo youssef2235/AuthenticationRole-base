@@ -1,26 +1,252 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<Product>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
-
-@if (User.IsInRole("admin"))
-{
-    <a asp-area="Identity" asp-page="/Admin">Admin</a>
-
-}
-else if (User.IsInRole("seller"))
-{
-    <a asp-area="Identity" asp-page="/Seller">Seller</a>
-
-}
-else
-{
-    <a asp-area="Identity" asp-page="/User">User</a>
-
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
 }
 
+
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <img src="~/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="صورة زراعية" class="hero-image">
+    <div class="hero-overlay"></div>
+    <h1>نحو زراعة مستدامة ومتطورة</h1>
+    <p>نحن نقدم أحدث الحلول والخدمات الزراعية لتعزيز الإنتاج وتحقيق التنمية المستدامة</p>
+    <button class="hero-button">استكشف خدماتنا</button>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+    <h2 class="section-title">خدماتنا الرئيسية</h2>
+    <div class="services-grid">
+        <a asp-page="/Services/TechnicalSupport" class="service-card">
+            <div class="service-icon">🚜</div>
+            <h3>الدعم الفني</h3>
+            <p>خدمات استشارية وفنية متخصصة لضمان جودة المحاصيل وزيادة الإنتاجية</p>
+        </a>
+        <a asp-action="AllProducts" asp-controller="Product" class="service-card">
+            <div class="service-icon">⚗️</div>
+            <h3>الأسمدة - المبيدات</h3>
+            <p>منتجات عالية الجودة وصديقة للبيئة لتغذية التربة ومكافحة الآفات بشكل فعال</p>
+        </a>
+        <a asp-page="/Services/Laboratory" class="service-card">
+            <div class="service-icon">🌱</div>
+            <h3>معمل بلوجرين</h3>
+            <p>مختبرات متطورة لفحص التربة والمياه وتحليل جودة المحاصيل</p>
+        </a>
+    </div>
+</section>
+
+<!-- Products and Services Section with Accordion -->
+<section class="product-services-section" id="products-services">
+    <h2 class="product-services-title">المنتجات والخدمات</h2>
+
+    <div class="accordion-container">
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>المنتجات</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    الأسمدة الاحادية - المخصبات الزراعية - الاحماض - المبيدات الفطرية - المبيدات الحشرية - مبيدات النيماتودا - مبيدات الحشائش
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>معمل بلوجرين</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    خدمات معمل بلوجرين المتخصصة في فحص التربة والنبات والمياه
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>شبكات الري الحديث</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    أنظمة الري بالتنقيط والرشاشات وحلول الري الذكية
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>الدعم الفني</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    خدمات الاستشارات الزراعية المتخصصة والدعم الفني للمزارعين
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section class="products" id="products">
+    <h2 class="section-title">منتجاتنا المميزة</h2>
+        <div class="products-grid">
+        @foreach (var product in Model.Take(4))
+        {
+            <a asp-page="/Products/@product.Name" class="product-card">
+                <img src="~/Products/@product.ImageFileName" alt="سماد عضوي" class="product-img">
+                <div class="product-info">
+                    <h3>@product.Name</h3>
+                    <p>@product.Description</p>
+                </div>
+            </a>
+        }
+
+        </div>
+    
+</section>
+
+<!-- Articles Section -->
+<section class="articles" id="articles">
+    <h2 class="section-title">المقالات الزراعية المفضلة</h2>
+    <div class="articles-grid">
+        <a asp-page="/Articles/SustainableFarming" class="article-card">
+            <img src="~/images/download.jpeg" alt="الزراعة المستدامة" class="article-img">
+            <div class="article-info">
+                <div class="article-meta">
+                    <span>5 مارس 2025</span>
+                    <span>الكاتب: محمد أحمد</span>
+                </div>
+                <h3>أساسيات الزراعة المستدامة</h3>
+                <p>تعرف على أهم الممارسات الزراعية المستدامة وكيفية تطبيقها في مزرعتك لزيادة الإنتاج وتقليل الأضرار البيئية.</p>
+                <span class="read-more">اقرأ المزيد ←</span>
+            </div>
+        </a>
+        <a asp-page="/Articles/WaterConservation" class="article-card">
+            <img src="~/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="ترشيد المياه" class="article-img">
+            <div class="article-info">
+                <div class="article-meta">
+                    <span>1 مارس 2025</span>
+                    <span>الكاتب: سارة خالد</span>
+                </div>
+                <h3>أساليب ترشيد المياه في الزراعة</h3>
+                <p>طرق فعالة لترشيد استخدام المياه في الزراعة والحفاظ على هذا المورد الثمين مع الحفاظ على جودة المحاصيل.</p>
+                <span class="read-more">اقرأ المزيد ←</span>
+            </div>
+        </a>
+        <a asp-page="/Articles/OrganicFarming" class="article-card">
+            <img src="/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="الزراعة العضوية" class="article-img">
+            <div class="article-info">
+                <div class="article-meta">
+                    <span>20 فبراير 2025</span>
+                    <span>الكاتب: أحمد عبدالله</span>
+                </div>
+                <h3>دليلك الشامل للزراعة العضوية</h3>
+                <p>كل ما تحتاج معرفته عن الزراعة العضوية وفوائدها وكيفية التحول من الزراعة التقليدية إلى العضوية بنجاح.</p>
+                <span class="read-more">اقرأ المزيد ←</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter">
+    <h2>اشترك في نشرتنا البريدية</h2>
+    <p>احصل على أحدث النصائح والمقالات الزراعية وعروضنا الحصرية مباشرة إلى بريدك الإلكتروني</p>
+    <form class="newsletter-form" method="post">
+        <input type="email" placeholder="البريد الإلكتروني" class="newsletter-input" required>
+        <button type="submit" class="button-green">اشترك الآن</button>
+    </form>
+</section>
+
+<script>
+                        // Accordion functionality for product services section
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all accordion items
+        const accordionItems = document.querySelectorAll('.accordion-item');
+
+        // Set default state - close all items
+        accordionItems.forEach(item => {
+            const content = item.querySelector('.accordion-content');
+            if (content) {
+                content.style.maxHeight = '0';
+                content.style.overflow = 'hidden';
+                content.style.transition = 'max-height 0.3s ease-out';
+            }
+        });
+
+        // Add click event listener to each accordion header
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            const content = item.querySelector('.accordion-content');
+            const icon = item.querySelector('.accordion-icon');
+
+            if (header && content) {
+                header.addEventListener('click', function() {
+                    // Check if item is active
+                    const isActive = header.classList.contains('active');
+
+                    // Close all other open items first
+                    accordionItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            const otherHeader = otherItem.querySelector('.accordion-header');
+                            const otherContent = otherItem.querySelector('.accordion-content');
+                            const otherIcon = otherItem.querySelector('.accordion-icon');
+
+                            if (otherHeader && otherContent && otherIcon) {
+                                otherHeader.classList.remove('active');
+                                otherContent.style.maxHeight = '0';
+                                otherIcon.textContent = '▼';
+                            }
+                        }
+                    });
+
+                    // Toggle current item state
+                    if (isActive) {
+                        header.classList.remove('active');
+                        content.style.maxHeight = '0';
+                        if (icon) icon.textContent = '▼';
+                    } else {
+                        header.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        if (icon) icon.textContent = '▲';
+                    }
+                });
+            }
+        });
+
+        // Hero section button functionality
+        const heroButton = document.querySelector('.hero-button');
+        if (heroButton) {
+            heroButton.addEventListener('click', function() {
+                document.getElementById('services').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+
+                if (emailInput && emailInput.value) {
+                    // Here you would normally send the data to your backend
+                    alert('شكراً للاشتراك في نشرتنا البريدية!');
+                    emailInput.value = '';
+                }
+            });
+        }
+    });
+</script>

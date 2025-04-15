@@ -5,79 +5,39 @@
 @inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        if (User.IsInRole("admin"))
-        {
-            <li class="nav-item dropdown">
-                <a class="nav-link  dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Admin
-                </a>
+    <div class="auth-buttons mobile">
 
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
-                </ul>
-            </li>
-        }
-        else if (User.IsInRole("user"))
+        @if (User.IsInRole("user"))
         {
-            <li class="nav-item dropdown">
-                <a class="nav-link  dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    User
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
-                </ul>
-            </li>
+            <a id="logout" asp-area="Identity" asp-page="/Account/Logout"><button class="button-outline">تسجيل الخروج</button></a>
+            <button class="button-green" style="">طلب عرض أسعار</button>
         }
+		else if (User.IsInRole("admin"))
+		{
+            <button class="button-outline" style="visibility:hidden">تسجيل الخروج</button>
+
+            <a id="logout" asp-area="Identity" asp-page="/Account/Logout"><button class="button-outline">تسجيل الخروج</button></a>
+			<a id="admin" asp-area="Identity" asp-page="/Admin"><button class="button-green">لوحة التحكم</button></a>
+		}
         else if (User.IsInRole("seller"))
         {
-            <li class="nav-item dropdown">
-                <a class="nav-link  dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Seller
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
-                </ul>
-            </li>
+            <a id="logout" asp-area="Identity" asp-page="/Account/Logout"><button class="button-outline">تسجيل الخروج</button></a>
+            <a id="admin" asp-area="Identity" asp-page="/Seller"><button class="button-green">لوحة التحكم</button></a>
         }
-        else
-        {
-            <li class="nav-item dropdown">
-                <a class="nav-link  dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    User
-                </a>
+		else
+		{
+			<a id="login" asp-area="Identity" asp-page="/Account/Login"><button class="button-outline">تسجيل الدخول</button></a>
+			<a id="register" asp-area="Identity" asp-page="/Account/Register"><button class="button-blue">تسجيل حساب جديد</button></a>
+            <button class="button-green" style="">طلب عرض أسعار</button>
+		}
 
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
-                </ul>
-            </li>
-
-        }
-
-
-
-
-
-
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
-    }
+    </div>
 </ul>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+        var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+            return new bootstrap.Dropdown(dropdownToggleEl);
+        });
+    });
+</script>

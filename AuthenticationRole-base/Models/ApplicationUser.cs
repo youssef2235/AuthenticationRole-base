@@ -8,5 +8,6 @@ namespace AuthenticationRole_base.Models
         public string LastName { get; set; } = "";
         public string Address { get; set; } = "";
         public DateTime CreateAt { get; set; } 
+    
     }
 }
