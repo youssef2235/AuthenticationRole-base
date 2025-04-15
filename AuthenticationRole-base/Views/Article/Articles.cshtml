@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Articles";
+}
+
+
+
+<style>
+    .articles {
+        padding: 5rem 5%;
+        text-align: center;
+    }
+
+    .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .article-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        text-decoration: none;
+        color: #333;
+        display: block;
+    }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+        }
+
+    .article-img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .article-info {
+        padding: 1.5rem;
+        text-align: right;
+    }
+
+        .article-info h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+    .article-meta {
+        display: flex;
+        justify-content: space-between;
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .read-more {
+        color: #16a34a;
+        font-weight: 600;
+        margin-top: 0.8rem;
+        display: inline-block;
+    }
+
+</style>
+
+<!-- Articles Section -->
+<section class="articles" id="articles">
+    <h2 class="section-title">المقالات الزراعية المفضلة</h2>
+    <div class="articles-grid">
+        <a asp-page="/Articles/SustainableFarming" class="article-card">
+            <img src="~/images/download.jpeg" alt="الزراعة المستدامة" class="article-img">
+            <div class="article-info">
+                <div class="article-meta">
+                    <span>5 مارس 2025</span>
+                    <span>الكاتب: محمد أحمد</span>
+                </div>
+                <h3>أساسيات الزراعة المستدامة</h3>
+                <p>تعرف على أهم الممارسات الزراعية المستدامة وكيفية تطبيقها في مزرعتك لزيادة الإنتاج وتقليل الأضرار البيئية.</p>
+                <span class="read-more">اقرأ المزيد ←</span>
+            </div>
+        </a>
+        <a asp-page="/Articles/WaterConservation" class="article-card">
+            <img src="~/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="ترشيد المياه" class="article-img">
+            <div class="article-info">
+                <div class="article-meta">
+                    <span>1 مارس 2025</span>
+                    <span>الكاتب: سارة خالد</span>
+                </div>
+                <h3>أساليب ترشيد المياه في الزراعة</h3>
+                <p>طرق فعالة لترشيد استخدام المياه في الزراعة والحفاظ على هذا المورد الثمين مع الحفاظ على جودة المحاصيل.</p>
+                <span class="read-more">اقرأ المزيد ←</span>
+            </div>
+        </a>
+        <a asp-page="/Articles/OrganicFarming" class="article-card">
+            <img src="/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="الزراعة العضوية" class="article-img">
+            <div class="article-info">
+                <div class="article-meta">
+                    <span>20 فبراير 2025</span>
+                    <span>الكاتب: أحمد عبدالله</span>
+                </div>
+                <h3>دليلك الشامل للزراعة العضوية</h3>
+                <p>كل ما تحتاج معرفته عن الزراعة العضوية وفوائدها وكيفية التحول من الزراعة التقليدية إلى العضوية بنجاح.</p>
+                <span class="read-more">اقرأ المزيد ←</span>
+            </div>
+        </a>
+    </div>
+</section>
+

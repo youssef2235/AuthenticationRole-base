@@ -1,0 +1,143 @@
+﻿@model IEnumerable<Lab>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SampleType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceivedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReportDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElectricalConductivity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganicMatter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalNitrogen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailablePhosphorus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExchangePotassium)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calcium)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Magnesium)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Iron)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zinc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SandPercentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClayPercentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiltPercentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApparentDensity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SampleType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceivedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReportDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectricalConductivity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganicMatter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalNitrogen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvailablePhosphorus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExchangePotassium)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calcium)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Magnesium)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Iron)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zinc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SandPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClayPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiltPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApparentDensity)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

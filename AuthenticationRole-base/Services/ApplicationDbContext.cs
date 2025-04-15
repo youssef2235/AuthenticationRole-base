@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using AuthenticationRole_base.Models;
 
 namespace AuthenticationRole_base.Services
 {
@@ -14,6 +15,8 @@ namespace AuthenticationRole_base.Services
 
         // ✅ Add Product DbSet
         public DbSet<Product> Products { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Lab> Lab { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -56,5 +59,6 @@ namespace AuthenticationRole_base.Services
                 entity.Property(p => p.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
             });
         }
+        
     }
 }

@@ -1,4 +1,32 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// Navigation toggle functionality
+document.addEventListener('DOMContentLoaded', function () {
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
 
-// Write your JavaScript code.
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function (event) {
+        if (navLinks && navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            event.target !== navToggle) {
+            navLinks.classList.remove('active');
+        }
+    });
+});
+
+// WhatsApp button functionality
+document.addEventListener('DOMContentLoaded', function () {
+    const whatsappButton = document.querySelector('.whatsapp-button');
+
+    if (whatsappButton) {
+        whatsappButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.open('https://wa.me/966123456789', '_blank');
+        });
+    }
+});

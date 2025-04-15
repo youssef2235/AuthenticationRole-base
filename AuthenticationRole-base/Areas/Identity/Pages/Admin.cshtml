@@ -3,4 +3,270 @@
 @{
 }
 
-<h1>admin</h1>
+
+
+   
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 0;
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: #666;
+        }
+
+        .card-title {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .card-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card-info {
+            font-size: 14px;
+            color: #888;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-trend-up {
+            color: #4CAF50;
+            margin-left: 5px;
+        }
+
+        .card-trend-down {
+            color: #F44336;
+            margin-left: 5px;
+        }
+
+        .products-card {
+            border-top: 4px solid #2196F3;
+        }
+
+        .articles-card {
+            border-top: 4px solid #FF9800;
+        }
+
+        .views-card {
+            border-top: 4px solid #9C27B0;
+        }
+
+        .users-card {
+            border-top: 4px solid #4CAF50;
+        }
+
+        .sales-card {
+            border-top: 4px solid #F44336;
+        }
+
+        .comments-card {
+            border-top: 4px solid #795548;
+        }
+
+        .card-actions {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .action-button {
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            color: #555;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+            .action-button:hover {
+                background-color: #e0e0e0;
+            }
+
+        .progress-container {
+            margin-top: 15px;
+            height: 6px;
+            background-color: #eee;
+            border-radius: 3px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 3px;
+        }
+    </style>
+<body>
+    <pre>
+
+
+    </pre>
+    <h1 style="text-align:center">صفحة تحكم و احصائيات الموقع</h1>
+    <pre>
+
+
+    </pre>
+    <!-- البطاقات فقط بدون هيدر أو فوتر -->
+    <div class="dashboard-cards">
+        <!-- بطاقة المنتجات -->
+        <div class="card products-card">
+            <div class="card-title">إجمالي المنتجات</div>
+            <div class="card-value">247</div>
+            <div class="card-info">
+                زيادة بنسبة
+                <span class="card-trend-up">12%</span>
+                هذا الشهر
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 75%; background-color: #2196F3;"></div>
+            </div>
+            <div class="card-actions">
+                <a asp-action="create" asp-controller="Product"><button class="action-button">إضافة منتج جديد</button></a>
+            </div>
+        </div>
+
+        <!-- بطاقة المنتجات النشطة -->
+        <div class="card products-card">
+            <div class="card-title">المنتجات النشطة</div>
+            <div class="card-value">186</div>
+            <div class="card-info">
+                75% من إجمالي المنتجات
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 75%; background-color: #2196F3;"></div>
+            </div>
+            <div class="card-actions">
+                <a asp-action="Index" asp-controller="Product"><button class="action-button">عرض المنتجات</button></a>
+            </div>
+        </div>
+
+        <!-- بطاقة المنتجات غير المتوفرة -->
+        <div class="card products-card">
+            <div class="card-title">منتجات غير متوفرة</div>
+            <div class="card-value">38</div>
+            <div class="card-info">
+                15% من إجمالي المنتجات
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 15%; background-color: #F44336;"></div>
+            </div>
+            <div class="card-actions">
+                <button class="action-button">إدارة المخزون</button>
+            </div>
+        </div>
+
+        <!-- بطاقة المقالات -->
+        <div class="card articles-card">
+            <div class="card-title">إجمالي المقالات</div>
+            <div class="card-value">135</div>
+            <div class="card-info">
+                زيادة بنسبة
+                <span class="card-trend-up">8%</span>
+                هذا الشهر
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 80%; background-color: #FF9800;"></div>
+            </div>
+            <div class="card-actions">
+                <a asp-action="Create" asp-controller="Articles"><button class="action-button">إضافة مقال جديد</button></a>
+            </div>
+        </div>
+
+        <!-- بطاقة المقالات المنشورة -->
+        <div class="card articles-card">
+            <div class="card-title">مقالات منشورة</div>
+            <div class="card-value">124</div>
+            <div class="card-info">
+                92% من إجمالي المقالات
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 92%; background-color: #4CAF50;"></div>
+            </div>
+            <div class="card-actions">
+                <a asp-action="Index" asp-controller="Articles"><button class="action-button">عرض المقالات</button></a>
+            </div>
+        </div>
+
+        <!-- بطاقة مسودات المقالات -->
+        <div class="card articles-card">
+            <div class="card-title">اضافة تقرير جديد</div>
+            <div class="card-value">11</div>
+            <div class="card-info">
+                8% من إجمالي التقارير 
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 8%; background-color: #FF9800;"></div>
+            </div>
+            <div class="card-actions">
+                <a asp-action="Create" asp-controller="Labs"><button class="action-button">إضافة التقارير</button></a>
+            </div>
+        </div>
+
+        <!-- بطاقة المشاهدات -->
+        <div class="card views-card">
+            <div class="card-title">مشاهدات الصفحات</div>
+            <div class="card-value">24,892</div>
+            <div class="card-info">
+                زيادة بنسبة
+                <span class="card-trend-up">15%</span>
+                مقارنة بالأسبوع الماضي
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 85%; background-color: #9C27B0;"></div>
+            </div>
+        </div>
+
+        <!-- بطاقة المبيعات -->
+        <div class="card sales-card">
+            <div class="card-title">إجمالي المبيعات</div>
+            <div class="card-value">$12,486</div>
+            <div class="card-info">
+                زيادة بنسبة
+                <span class="card-trend-up">9%</span>
+                هذا الشهر
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 70%; background-color: #F44336;"></div>
+            </div>
+        </div>
+    </div>
+    <pre>
+
+
+
+
+    </pre>
+</body>

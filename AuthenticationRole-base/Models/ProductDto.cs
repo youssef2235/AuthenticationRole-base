@@ -4,17 +4,18 @@ namespace AuthenticationRole_base.Models
 {
     public class ProductDto
     {
-        [Required]
-        public string Name { get; set; } = "";
-        [Required]
-        public string Brand { get; set; } = "";
-        [Required]
-        public string Category { get; set; } = "";
-        [Required]
+        public int Id { get; set; }
+        
+        public string Name { get; set; } 
+        
+        public string Brand { get; set; } 
+        
+        public string Category { get; set; } 
+        
         public double Price { get; set; }
-        [Required]
-        public string Description { get; set; } = "";
-        [Required]
+        
+        public string Description { get; set; } 
+       
         public int Pages { get; set; }
 
         public IFormFile? ImageFile { get; set; }

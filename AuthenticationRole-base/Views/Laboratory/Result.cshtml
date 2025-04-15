@@ -1,0 +1,185 @@
+﻿@{
+     
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/LabResult.css" />
+}
+
+<body>
+    <div class="container">
+        <header>
+            <h1>معمل التحاليل الزراعية المتقدمة</h1>
+            <p>تقرير نتائج تحليل التربة والمياه</p>
+        </header>
+
+        <div class="report-info">
+            <div>
+                <div class="info-item"><strong>رقم العينة:</strong> AGR-2025-1542</div>
+                <div class="info-item"><strong>تاريخ الاستلام:</strong> 18/03/2025</div>
+                <div class="info-item"><strong>تاريخ التقرير:</strong> 24/03/2025</div>
+            </div>
+            <div>
+                <div class="info-item"><strong>اسم العميل:</strong> مزرعة الريان للإنتاج الزراعي</div>
+                <div class="info-item"><strong>الموقع:</strong> المنطقة الشرقية - القطيف</div>
+                <div class="info-item"><strong>نوع العينة:</strong> تربة زراعية</div>
+            </div>
+        </div>
+
+        <h2>نتائج تحليل التربة:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>الخاصية</th>
+                    <th>النتيجة</th>
+                    <th>الوحدة</th>
+                    <th>النطاق المرجعي</th>
+                    <th>التقييم</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>درجة الحموضة (pH)</td>
+                    <td>7.2</td>
+                    <td>-</td>
+                    <td>6.5 - 7.5</td>
+                    <td class="status-normal">طبيعي</td>
+                </tr>
+                <tr>
+                    <td>الملوحة (EC)</td>
+                    <td>3.8</td>
+                    <td>dS/m</td>
+                    <td>0 - 2.0</td>
+                    <td class="status-warning">مرتفع</td>
+                </tr>
+                <tr>
+                    <td>المادة العضوية</td>
+                    <td>1.2</td>
+                    <td>%</td>
+                    <td>2.0 - 5.0</td>
+                    <td class="status-danger">منخفض</td>
+                </tr>
+                <tr>
+                    <td>النيتروجين الكلي (N)</td>
+                    <td>0.08</td>
+                    <td>%</td>
+                    <td>0.15 - 0.25</td>
+                    <td class="status-danger">منخفض</td>
+                </tr>
+                <tr>
+                    <td>الفوسفور المتاح (P)</td>
+                    <td>12.5</td>
+                    <td>ppm</td>
+                    <td>10 - 20</td>
+                    <td class="status-normal">طبيعي</td>
+                </tr>
+                <tr>
+                    <td>البوتاسيوم المتبادل (K)</td>
+                    <td>180</td>
+                    <td>ppm</td>
+                    <td>150 - 250</td>
+                    <td class="status-normal">طبيعي</td>
+                </tr>
+                <tr>
+                    <td>الكالسيوم (Ca)</td>
+                    <td>2250</td>
+                    <td>ppm</td>
+                    <td>1000 - 2500</td>
+                    <td class="status-normal">طبيعي</td>
+                </tr>
+                <tr>
+                    <td>المغنيسيوم (Mg)</td>
+                    <td>320</td>
+                    <td>ppm</td>
+                    <td>100 - 400</td>
+                    <td class="status-normal">طبيعي</td>
+                </tr>
+                <tr>
+                    <td>الحديد (Fe)</td>
+                    <td>3.8</td>
+                    <td>ppm</td>
+                    <td>4.0 - 12.0</td>
+                    <td class="status-warning">منخفض</td>
+                </tr>
+                <tr>
+                    <td>الزنك (Zn)</td>
+                    <td>0.6</td>
+                    <td>ppm</td>
+                    <td>1.0 - 3.0</td>
+                    <td class="status-danger">منخفض</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>تحليل النسيج والخصائص الفيزيائية:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>الخاصية</th>
+                    <th>النتيجة</th>
+                    <th>الوحدة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>الرمل</td>
+                    <td>58</td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td>الطمي</td>
+                    <td>28</td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td>الطين</td>
+                    <td>14</td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td>نوع التربة</td>
+                    <td colspan="2">رملية طميية</td>
+                </tr>
+                <tr>
+                    <td>السعة الحقلية</td>
+                    <td>22</td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td>الكثافة الظاهرية</td>
+                    <td>1.42</td>
+                    <td>g/cm³</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="result-summary">
+            
+            <h3 style="padding-bottom:15px">ملخص النتائج والتوصيات:</h3>
+            <p>بناءً على نتائج التحليل، تم تسجيل المشاكل التالية في التربة:</p>
+            <ul style="padding-right:50px;padding-top:20px;">
+                <li>ارتفاع في مستوى الملوحة يتطلب تحسين نظام الصرف وغسيل التربة.</li>
+                <li>انخفاض في مستوى المادة العضوية والنيتروجين، مما يتطلب إضافة الأسمدة العضوية.</li>
+                <li>نقص في بعض العناصر الصغرى مثل الحديد والزنك، يوصى بإضافة أسمدة خاصة بهذه العناصر.</li>
+            </ul>
+            <p style="padding-top:20px;">التوصيات:</p>
+            <ol style="padding-right:50px;padding-top:20px;padding-bottom:15px;">
+                <li>إضافة 25-30 طن/هكتار من السماد العضوي المتحلل جيداً.</li>
+                <li>إضافة 150 كجم/هكتار من سماد اليوريا (46%) على دفعتين.</li>
+                <li>رش محلول كبريتات الحديد (1%) وكبريتات الزنك (0.5%) على النباتات.</li>
+                <li>تحسين نظام الري والصرف للمساعدة في غسيل الأملاح.</li>
+            </ol>
+        </div>
+
+        <div class="actions no-print">
+            <button onclick="window.print()">طباعة التقرير</button>
+        </div>
+        <hr />
+        <div style="margin:15px">
+            <p>تم إجراء التحليل وفقاً للمعايير الدولية المعتمدة - معمل التحاليل الزراعية المتقدمة</p>
+            <p>للاستفسارات: info@agri-lab.com | هاتف: 0123456789</p>
+        </div>
+    </div>
+
+      
+</body>
