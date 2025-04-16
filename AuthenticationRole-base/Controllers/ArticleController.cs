@@ -39,7 +39,10 @@ namespace AuthenticationRole_base.Controllers
             return View();
         }
 
-        
+        public IActionResult Delete()
+        {
+            return View();
+        }
 
 
     }

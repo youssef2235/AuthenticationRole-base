@@ -4,6 +4,7 @@ using AuthenticationRole_base.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthenticationRole_base.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250416110322_deletepages")]
+    partial class deletepages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,9 +178,6 @@ namespace AuthenticationRole_base.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Form")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageFileName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -192,23 +192,8 @@ namespace AuthenticationRole_base.Migrations
                         .HasPrecision(16, 2)
                         .HasColumnType("float(16)");
 
-                    b.Property<string>("Proberties")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
-
-                    b.Property<string>("SeoTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("binfet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("productdata")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("usage")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

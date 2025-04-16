@@ -57,10 +57,10 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label asp-for="Pages" class="col-sm-4 col-form-label">الكمية</label>
+                            <label asp-for="Quantity" class="col-sm-4 col-form-label">الكمية</label>
                             <div class="col-sm-8">
-                                <input asp-for="Pages" class="form-control" type="number" min="0" />
-                                <span asp-validation-for="Pages" class="text-danger"></span>
+                                <input asp-for="Quantity" class="form-control" type="number" min="0" />
+                                <span asp-validation-for="Quantity" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -69,6 +69,56 @@
                             <div class="col-sm-8">
                                 <textarea asp-for="Description" class="form-control" rows="3"></textarea>
                                 <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label asp-for="Proberties" class="col-sm-4 col-form-label">خصائص المنتج</label>
+                            <div class="col-sm-8">
+                                <textarea asp-for="Proberties" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="Proberties" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3 row">
+                            <label asp-for="Form" class="col-sm-4 col-form-label">مكونات وعناصر المنتج</label>
+                            <div class="col-sm-8">
+                                <textarea asp-for="Form" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="Form" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="binfet" class="col-sm-4 col-form-label">فوائد المنتج</label>
+                            <div class="col-sm-8">
+                                <textarea asp-for="binfet" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="binfet" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="usage" class="col-sm-4 col-form-label">ارشادات الاستخدام</label>
+                            <div class="col-sm-8">
+                                <textarea asp-for="usage" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="usage" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3 row">
+                            <label asp-for="productdata" class="col-sm-4 col-form-label">بيانات المنتج</label>
+                            <div class="col-sm-8">
+                                <textarea asp-for="productdata" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="productdata" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="SeoTitle" class="col-sm-4 col-form-label">الوسوم</label>
+                            <div class="col-sm-8">
+                                <textarea asp-for="SeoTitle" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="SeoTitle" class="text-danger"></span>
                             </div>
                         </div>
 

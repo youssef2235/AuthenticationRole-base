@@ -17,17 +17,11 @@ namespace AuthenticationRole_base.Controllers
             _context = context;
         }
 
-        //public List<Product> GetProducts()
-        //{
-          //  return new List<Product>(); // Ensure it's always initialized
-        //}
-        
         public IActionResult Index()
         {
             var products = _context.Products.ToList();
             return View(products);
         }
-
         public IActionResult About()
         {
             return View();
@@ -36,7 +30,6 @@ namespace AuthenticationRole_base.Controllers
         {
             return View();
         }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

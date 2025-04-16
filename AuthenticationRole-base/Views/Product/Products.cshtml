@@ -19,7 +19,7 @@
     <div class="products-grid">
         @foreach (var product in Model)
         {
-            <a asp-page="/Products/Details" asp-route-id="@product.Id" class="product-card">
+            <a asp-action="Details" asp-route-id="@product.Id" class="product-card">
                 <img src="~/products/@product.ImageFileName" alt="@product.Name" class="product-img">
                 <div class="product-info">
                     <h3>@product.Name</h3>
