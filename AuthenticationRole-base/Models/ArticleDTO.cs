@@ -12,7 +12,7 @@ namespace BlueGreenEG.Models
         public string SEO { get; set; }
         public string Content { get; set; }
        
-        public IFormFile? ImageFileName { get; set; }
+        public IFormFile? ImageFile { get; set; }
 
     }
 }

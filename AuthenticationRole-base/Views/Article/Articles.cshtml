@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<AuthenticationRole_base.Models.Article>
+@{
     ViewData["Title"] = "Articles";
 }
 
@@ -69,42 +70,30 @@
 <section class="articles" id="articles">
     <h2 class="section-title">المقالات الزراعية المفضلة</h2>
     <div class="articles-grid">
-        <a asp-page="/Articles/SustainableFarming" class="article-card">
-            <img src="~/images/download.jpeg" alt="الزراعة المستدامة" class="article-img">
-            <div class="article-info">
-                <div class="article-meta">
-                    <span>5 مارس 2025</span>
-                    <span>الكاتب: محمد أحمد</span>
-                </div>
-                <h3>أساسيات الزراعة المستدامة</h3>
-                <p>تعرف على أهم الممارسات الزراعية المستدامة وكيفية تطبيقها في مزرعتك لزيادة الإنتاج وتقليل الأضرار البيئية.</p>
-                <span class="read-more">اقرأ المزيد ←</span>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var article in Model)
+            {
+                <a asp-controller="Article" asp-action="Details" asp-route-id="@article.Id" class="article-card">
+                    <img src="/Articles/@article.ImageFileName" alt="@article.Title" class="article-img">
+                    <div class="article-info">
+                        <div class="article-meta">
+                            <span>@article.CreatedAt.ToString("d MMMM yyyy")</span>
+                            <span>الكاتب: @article.Writer</span>
+                        </div>
+                        <h3>@article.Title</h3>
+                        <p>@(article.Content.Length > 150 ? article.Content.Substring(0, 150) + "..." : article.Content)</p>
+                        <span class="read-more">اقرأ المزيد ←</span>
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            <div class="no-articles">
+                <p>لا توجد مقالات حاليًا</p>
             </div>
-        </a>
-        <a asp-page="/Articles/WaterConservation" class="article-card">
-            <img src="~/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="ترشيد المياه" class="article-img">
-            <div class="article-info">
-                <div class="article-meta">
-                    <span>1 مارس 2025</span>
-                    <span>الكاتب: سارة خالد</span>
-                </div>
-                <h3>أساليب ترشيد المياه في الزراعة</h3>
-                <p>طرق فعالة لترشيد استخدام المياه في الزراعة والحفاظ على هذا المورد الثمين مع الحفاظ على جودة المحاصيل.</p>
-                <span class="read-more">اقرأ المزيد ←</span>
-            </div>
-        </a>
-        <a asp-page="/Articles/OrganicFarming" class="article-card">
-            <img src="/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="الزراعة العضوية" class="article-img">
-            <div class="article-info">
-                <div class="article-meta">
-                    <span>20 فبراير 2025</span>
-                    <span>الكاتب: أحمد عبدالله</span>
-                </div>
-                <h3>دليلك الشامل للزراعة العضوية</h3>
-                <p>كل ما تحتاج معرفته عن الزراعة العضوية وفوائدها وكيفية التحول من الزراعة التقليدية إلى العضوية بنجاح.</p>
-                <span class="read-more">اقرأ المزيد ←</span>
-            </div>
-        </a>
+        }
     </div>
 </section>
 

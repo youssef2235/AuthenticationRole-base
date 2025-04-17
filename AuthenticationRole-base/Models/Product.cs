@@ -29,5 +29,10 @@ namespace AuthenticationRole_base.Models
         public string ImageFileName { get; set; } = "";
 
         public DateTime CreatedAt { get; set; }
+
+        public static implicit operator Product(List<Product> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
