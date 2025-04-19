@@ -4,38 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - بلو جرين للتنمية الزراعية</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet"  href="~/css/layout.css"/>
 
-    <!-- Layout CSS (shared across all pages) -->
-    <link rel="stylesheet" href="~/css/layout.css" />
 
-
-    <!-- Page-specific CSS -->
     @RenderSection("Styles", required: false)
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <a href="/" class="logo">
-            <img src="~/images/blue-green-logo.png" alt="Blue Green Logo" class="logo-img">
-        </a>
+        <div class="navbar-container">
+            <a href="/" class="logo">
+                <img src="~/images/blue-green-logo.png" alt="Blue Green Logo" class="logo-img">
+            </a>
 
-        <ul class="nav-links" id="navLinks">
-                <li><a href="/" >الرئيسية</a></li>
-                <li><a asp-action="AllProducts" asp-controller="Product">المنتجات</a></li>
+            <!-- قائمة الروابط الأفقية للشاشات الكبيرة -->
+            <ul class="desktop-nav">
+                <button class="button-outline" style="visibility:hidden">تسجيل الخروج</button>
+                <li><a href="/" class="active" style="padding-top:10px">الرئيسية</a></li>
+                <li><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
                 <li><a asp-action="Articles" asp-controller="Article">المقالات</a></li>
-                <li><a asp-action="Result" asp-controller="Laboratory">المعمل</a></li>
-                <li><a href="/contact">تواصل معنا</a></li>
-			    <li><a asp-action="About" asp-controller="Home">من نحن</a></li>
-                <li style="visibility:hidden" class="Empty">المعمل</li>
-
+                <li><a asp-action="LAB" asp-controller="Home">المعمل</a></li>
+                <li><a asp-action="About" asp-controller="Home">من نحن</a></li>
+                <li><a asp-action="Questions" asp-controller="Home">الأسئلة الشائعة</a></li>
+                <li><a asp-action="Contact" asp-controller="Home">تواصل معنا</a></li>
                 <partial name="_LoginPartial" />
+              
+            </ul>
+
+            <button class="nav-toggle" id="sidebarToggle">
+                <i class="bi bi-list"></i>
+            </button>
 
             
-           
-
-        </ul>
-        <button class="nav-toggle" id="navToggle">☰</button>
+        </div>
     </nav>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="~/images/blue-green-logo.png" alt="Blue Green Logo" class="sidebar-logo">
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <ul class="sidebar-nav">
+            <li><a href="/" class="active">الرئيسية</a></li>
+            <li><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
+            <li><a asp-action="Articles" asp-controller="Article">المقالات</a></li>
+            <li><a asp-action="LAB" asp-controller="Home">المعمل</a></li>
+            <li><a asp-action="About" asp-controller="Home">من نحن</a></li>
+            <li><a asp-action="Questions" asp-controller="Home">الأسئلة الشائعة</a></li>
+            <li><a asp-action="Contact" asp-controller="Home">تواصل معنا</a></li>
+            <hr />
+            <li>
+                <a>
+                    <button class="btn btn-light" style="">طلب عرض أسعار</button>
+                </a>
+            </li>
+            <partial name="_LoginPartial"/>
+        </ul>
+    </div>
+
+    <!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
     <!-- Main Content -->
     <main>
@@ -47,25 +81,27 @@
         <div class="footer-grid">
             <div class="footer-column">
                 <h3>تواصل معنا</h3>
-                <p>ابو غالب، الظهير الصحراوي طريق القاهرة - الاسكندرية</p>
-                <p>هاتف: 966123456789+</p>
-                <p>البريد الإلكتروني: info@bluegreen.com</p>
+                <p><i class="bi bi-geo-alt ms-2"></i> أبو غالب، الظهير الصحراوي طريق القاهرة - الإسكندرية</p>
+                <p><i class="bi bi-telephone ms-2"></i> هاتف: 01004514461+</p>
+                <p><i class="bi bi-envelope ms-2"></i> البريد الإلكتروني: info@bluegreen.com</p>
                 <div class="social-links">
-                    <a href="#">F</a>
-                    <a href="#">T</a>
-                    <a href="#">I</a>
-                    <a href="#">Y</a>
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
                 </div>
             </div>
+
             <div class="footer-column">
                 <h3>روابط مهمة</h3>
                 <ul>
-                    <li><a href="/">الرئيسية</a></li>
-                    <li><a href="/services">خدماتنا</a></li>
-                    <li><a asp-action="AllProducts" asp-controller="Product">منتجاتنا</a></li>
-                    <li><a  href="/">المقالات</a></li>
-                    <li><a href="/about">من نحن</a></li>
-                    <li><a href="/contact">تواصل معنا</a></li>
+                    <li><a href="/" class="active">الرئيسية</a></li>
+                    <li><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
+                    <li><a asp-action="Articles" asp-controller="Article">المقالات</a></li>
+                    <li><a asp-action="LAB" asp-controller="Home">المعمل</a></li>
+                    <li><a asp-action="About" asp-controller="Home">من نحن</a></li>
+                    <li><a asp-action="Questions" asp-controller="Home">الأسئلة الشائعة</a></li>
+                    <li><a asp-action="Contact" asp-controller="Home">تواصل معنا</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -83,18 +119,72 @@
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="#" class="whatsapp-button">
-        <span></span>
+    <a href="https://wa.me/+201004514461" class="whatsapp-button">
+        <i class="bi bi-whatsapp"></i>
     </a>
 
-    <!-- Layout JavaScript (shared across all pages) -->
-    <script src="~/js/site.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // عناصر القائمة الجانبية
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarClose = document.getElementById('sidebarClose');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarBackdrop = document.getElementById('sidebarBackdrop');
 
-    
+            // فتح القائمة الجانبية
+            sidebarToggle.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarBackdrop.classList.add('active');
+                // منع التمرير في الصفحة الرئيسية عند فتح القائمة
+                document.body.style.overflow = 'hidden';
+            });
 
+            // إغلاق القائمة الجانبية
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                sidebarBackdrop.classList.remove('active');
+                // السماح بالتمرير مرة أخرى
+                document.body.style.overflow = '';
+            }
 
+            // إغلاق بالضغط على زر الإغلاق
+            sidebarClose.addEventListener('click', closeSidebar);
 
-    <!-- Page-specific JavaScript -->
+            // إغلاق بالضغط على الخلفية
+            sidebarBackdrop.addEventListener('click', closeSidebar);
+
+            // إغلاق عند الضغط على أي رابط في القائمة
+            const sidebarLinks = sidebar.querySelectorAll('a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    closeSidebar();
+                });
+            });
+
+            // إضافة الصنف النشط للرابط الحالي (للقائمة الجانبية)
+            const currentLocation = window.location.pathname;
+            const menuItems = document.querySelectorAll('.sidebar-nav a');
+            menuItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentLocation) {
+                    menuItems.forEach(link => link.classList.remove('active'));
+                    item.classList.add('active');
+                }
+            });
+
+            // إضافة الصنف النشط للرابط الحالي (للقائمة الأفقية)
+            const desktopMenuItems = document.querySelectorAll('.desktop-nav a');
+            desktopMenuItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentLocation) {
+                    desktopMenuItems.forEach(link => link.classList.remove('active'));
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

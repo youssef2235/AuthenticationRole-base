@@ -149,85 +149,6 @@ namespace AuthenticationRole_base.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("AuthenticationRole_base.Models.Lab", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double?>("ApparentDensity")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("AvailablePhosphorus")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Calcium")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("ClayPercentage")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ClientName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("ElectricalConductivity")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("ExchangePotassium")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Iron")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Magnesium")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("OrganicMatter")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Problems")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ReceivedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Recommendations")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ReportDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SampleType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("SandPercentage")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("SiltPercentage")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("TotalNitrogen")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Zinc")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("pH")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Lab");
-                });
-
             modelBuilder.Entity("AuthenticationRole_base.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -254,6 +175,9 @@ namespace AuthenticationRole_base.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Form")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImageFileName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -264,12 +188,27 @@ namespace AuthenticationRole_base.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("Pages")
-                        .HasColumnType("int");
-
                     b.Property<double>("Price")
                         .HasPrecision(16, 2)
                         .HasColumnType("float(16)");
+
+                    b.Property<string>("Proberties")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SeoTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("binfet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("productdata")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("usage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

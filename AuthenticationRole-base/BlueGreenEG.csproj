@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>AuthenticationRole_base</RootNamespace>
+    <RootNamespace>BlueGreenEG</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +25,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+    <PackageReference Include="Syncfusion.Blazor.Core" Version="29.1.38" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,7 @@
     <Folder Include="wwwroot\lib\jquery-validation\dist\" />
     <Folder Include="wwwroot\lib\jquery\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
+    <Folder Include="wwwroot\Articles\" />
   </ItemGroup>
 
 </Project>

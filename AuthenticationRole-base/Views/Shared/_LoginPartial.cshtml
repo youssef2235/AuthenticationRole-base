@@ -7,28 +7,15 @@
 <ul class="navbar-nav">
     <div class="auth-buttons mobile">
 
-        @if (User.IsInRole("user"))
-        {
-            <a id="logout" asp-area="Identity" asp-page="/Account/Logout"><button class="button-outline">تسجيل الخروج</button></a>
-            <button class="button-green" style="">طلب عرض أسعار</button>
-        }
-		else if (User.IsInRole("admin"))
+        @if (User.IsInRole("admin"))
 		{
             <button class="button-outline" style="visibility:hidden">تسجيل الخروج</button>
-
-            <a id="logout" asp-area="Identity" asp-page="/Account/Logout"><button class="button-outline">تسجيل الخروج</button></a>
 			<a id="admin" asp-area="Identity" asp-page="/Admin"><button class="button-green">لوحة التحكم</button></a>
 		}
-        else if (User.IsInRole("seller"))
-        {
-            <a id="logout" asp-area="Identity" asp-page="/Account/Logout"><button class="button-outline">تسجيل الخروج</button></a>
-            <a id="admin" asp-area="Identity" asp-page="/Seller"><button class="button-green">لوحة التحكم</button></a>
-        }
+        
 		else
 		{
-			<a id="login" asp-area="Identity" asp-page="/Account/Login"><button class="button-outline">تسجيل الدخول</button></a>
-			<a id="register" asp-area="Identity" asp-page="/Account/Register"><button class="button-blue">تسجيل حساب جديد</button></a>
-            <button class="button-green" style="">طلب عرض أسعار</button>
+            <button class="button-outline" style="visibility:hidden">تسجيل الخروج</button>
 		}
 
     </div>

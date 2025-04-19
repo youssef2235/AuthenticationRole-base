@@ -1,4 +1,4 @@
-﻿@model ProductDto
+﻿@model BlueGreenEG.Models.ArticleDTO
 
 
 @section Styles {
@@ -17,28 +17,28 @@
                     <h2> إضافة مقال جديد</h2>
                 </div>
                 <div class="card-body">
-                    <form method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Product">
+                    <form method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Article">
                         <div class="mb-3 row">
-                            <label asp-for="Name" class="col-sm-4 col-form-label">عنوان المقال</label>
+                            <label asp-for="Title" class="col-sm-4 col-form-label">عنوان المقال</label>
                             <div class="col-sm-8">
-                                <input asp-for="Name" class="form-control" />
-                                <span asp-validation-for="Name" class="text-danger"></span>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="mb-3 row">
-                            <label asp-for="Brand" class="col-sm-4 col-form-label">الكاتب</label>
+                            <label asp-for="Writer" class="col-sm-4 col-form-label">الكاتب</label>
                             <div class="col-sm-8">
-                                <input asp-for="Brand" class="form-control" />
-                                <span asp-validation-for="Brand" class="text-danger"></span>
+                                <input asp-for="Writer" class="form-control" />
+                                <span asp-validation-for="Writer" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="mb-3 row">
-                            <label asp-for="Brand" class="col-sm-4 col-form-label">وظيفة الكاتب</label>
+                            <label asp-for="WriterJob" class="col-sm-4 col-form-label">وظيفة الكاتب</label>
                             <div class="col-sm-8">
-                                <input asp-for="Brand" class="form-control" />
-                                <span asp-validation-for="Brand" class="text-danger"></span>
+                                <input asp-for="WriterJob" class="form-control" />
+                                <span asp-validation-for="WriterJob" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -57,18 +57,18 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label asp-for="Description" class="col-sm-4 col-form-label">SEO كلمات</label>
+                            <label asp-for="SEO" class="col-sm-4 col-form-label">SEO كلمات</label>
                             <div class="col-sm-8">
-                                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-                                <span asp-validation-for="Description" class="text-danger"></span>
+                                <textarea asp-for="SEO" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="SEO" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="mb-3 row">
-                            <label asp-for="Description" class="col-sm-4 col-form-label">المقال</label>
+                            <label asp-for="Content" class="col-sm-4 col-form-label">المقال</label>
                             <div class="col-sm-8">
-                                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-                                <span asp-validation-for="Description" class="text-danger"></span>
+                                <textarea asp-for="Content" class="form-control" rows="3"></textarea>
+                                <span asp-validation-for="Content" class="text-danger"></span>
                             </div>
                         </div>
 
@@ -86,7 +86,7 @@
                                 <button type="submit" class="btn btn-primary w-100">إنشاء</button>
                             </div>
                             <div class="col-sm-4">
-                                <a asp-controller="Product" asp-action="Index" class="btn btn-secondary w-100">الرجوع</a>
+                                <a asp-controller="Article" asp-action="Index" class="btn btn-secondary w-100">الرجوع</a>
                             </div>
                         </div>
                     </form>

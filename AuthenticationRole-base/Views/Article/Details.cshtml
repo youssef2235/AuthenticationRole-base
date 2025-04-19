@@ -1,0 +1,145 @@
+﻿@model BlueGreenEG.ViewModels.ArticleDetails
+@{
+    ViewData["Title"] = Model.Articles.Title;
+}
+
+<style>
+    .article-details {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        direction: rtl;
+    }
+
+    .article-header {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .article-title {
+        font-size: 2.5rem;
+        color: #1f2937;
+        margin-bottom: 1rem;
+    }
+
+    .article-meta {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        color: #6b7280;
+        margin-bottom: 1rem;
+    }
+
+    .article-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .article-category {
+        display: inline-block;
+        background-color: #16a34a;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .article-featured-image {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+
+    .article-content {
+        line-height: 1.8;
+        font-size: 1.125rem;
+        color: #374151;
+    }
+
+    .article-content p {
+        margin-bottom: 1.5rem;
+    }
+
+    .back-to-articles {
+        display: inline-block;
+        margin-top: 2rem;
+        color: #16a34a;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .back-to-articles:hover {
+        text-decoration: underline;
+    }
+
+    .author-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 2rem 0;
+        padding: 1rem;
+        background-color: #f9fafb;
+        border-radius: 8px;
+    }
+
+    .author-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .author-details {
+        flex: 1;
+    }
+
+    .author-name {
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.25rem;
+    }
+
+    .author-job {
+        color: #6b7280;
+        font-size: 0.875rem;
+    }
+</style>
+
+<div class="article-details">
+    <div class="article-header">
+        <h1 class="article-title">@Model.Articles.Title</h1>
+        <div class="article-meta">
+            <div class="article-meta-item">
+                <i class="bi bi-calendar"></i>
+                <span>@Model.Articles.CreatedAt.ToString("d MMMM yyyy")</span>
+            </div>
+            <div class="article-meta-item">
+                <i class="bi bi-person"></i>
+                <span>@Model.Articles.Writer</span>
+            </div>
+        </div>
+        <span class="article-category">@Model.Articles.Category</span>
+    </div>
+
+    <img src="/Articles/@Model.Articles.ImageFileName" alt="@Model.Articles.Title" class="article-featured-image">
+
+    <div class="author-info">
+        <img src="/images/Male-Avatar.png" alt="@Model.Articles.Writer" class="author-image" style="height:20px; width:20px">
+        <div class="author-details">
+            <p class="author-name">@Model.Articles.Writer</p>
+            <p class="author-job">@Model.Articles.WriterJob</p>
+        </div>
+    </div>
+
+    <div class="article-content">
+        @Html.Raw(Model.Articles.Content)
+    </div>
+
+    <a asp-controller="Article" asp-action="Articles" class="back-to-articles">
+        <i class="bi bi-arrow-right"></i> العودة إلى المقالات
+    </a>
+</div>

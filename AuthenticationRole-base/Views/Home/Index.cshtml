@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model BlueGreenEG.ViewModels.HomeViewModel
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Index";
@@ -99,10 +99,10 @@
 <!-- Products Section -->
 <section class="products" id="products">
     <h2 class="section-title">منتجاتنا المميزة</h2>
-        <div class="products-grid">
-        @foreach (var product in Model.Take(4))
+    <div class="products-grid">
+        @foreach (var product in Model.Products)
         {
-            <a asp-page="/Products/@product.Name" class="product-card">
+            <a asp-action="Details" asp-controller="Product" asp-route-Id="@product.Id" class="product-card">
                 <img src="~/Products/@product.ImageFileName" alt="سماد عضوي" class="product-img">
                 <div class="product-info">
                     <h3>@product.Name</h3>
@@ -111,50 +111,29 @@
             </a>
         }
 
-        </div>
-    
+    </div>
+
 </section>
 
 <!-- Articles Section -->
 <section class="articles" id="articles">
     <h2 class="section-title">المقالات الزراعية المفضلة</h2>
     <div class="articles-grid">
-        <a asp-page="/Articles/SustainableFarming" class="article-card">
-            <img src="~/images/download.jpeg" alt="الزراعة المستدامة" class="article-img">
-            <div class="article-info">
-                <div class="article-meta">
-                    <span>5 مارس 2025</span>
-                    <span>الكاتب: محمد أحمد</span>
+        @foreach (var article in Model.Articles)
+        {
+            <a asp-action="Details" asp-controller="Article" asp-route-Id="@article.Id" class="article-card">
+                <img src="~/Articles/@article.ImageFileName" alt="@article.Title" class="article-img">
+                <div class="article-info">
+                    <div class="article-meta">
+                        <span>@article.CreatedAt</span>
+                        <span>@article.WriterJob/ @article.Writer</span>
+                    </div>
+                    <h3>@article.Title</h3>
+                    <p>@article.Content</p>
+                    <span class="read-more">اقرأ المزيد ←</span>
                 </div>
-                <h3>أساسيات الزراعة المستدامة</h3>
-                <p>تعرف على أهم الممارسات الزراعية المستدامة وكيفية تطبيقها في مزرعتك لزيادة الإنتاج وتقليل الأضرار البيئية.</p>
-                <span class="read-more">اقرأ المزيد ←</span>
-            </div>
-        </a>
-        <a asp-page="/Articles/WaterConservation" class="article-card">
-            <img src="~/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="ترشيد المياه" class="article-img">
-            <div class="article-info">
-                <div class="article-meta">
-                    <span>1 مارس 2025</span>
-                    <span>الكاتب: سارة خالد</span>
-                </div>
-                <h3>أساليب ترشيد المياه في الزراعة</h3>
-                <p>طرق فعالة لترشيد استخدام المياه في الزراعة والحفاظ على هذا المورد الثمين مع الحفاظ على جودة المحاصيل.</p>
-                <span class="read-more">اقرأ المزيد ←</span>
-            </div>
-        </a>
-        <a asp-page="/Articles/OrganicFarming" class="article-card">
-            <img src="/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="الزراعة العضوية" class="article-img">
-            <div class="article-info">
-                <div class="article-meta">
-                    <span>20 فبراير 2025</span>
-                    <span>الكاتب: أحمد عبدالله</span>
-                </div>
-                <h3>دليلك الشامل للزراعة العضوية</h3>
-                <p>كل ما تحتاج معرفته عن الزراعة العضوية وفوائدها وكيفية التحول من الزراعة التقليدية إلى العضوية بنجاح.</p>
-                <span class="read-more">اقرأ المزيد ←</span>
-            </div>
-        </a>
+            </a>
+        }
     </div>
 </section>
 
@@ -164,7 +143,7 @@
     <p>احصل على أحدث النصائح والمقالات الزراعية وعروضنا الحصرية مباشرة إلى بريدك الإلكتروني</p>
     <form class="newsletter-form" method="post">
         <input type="email" placeholder="البريد الإلكتروني" class="newsletter-input" required>
-        <button type="submit" class="button-green">اشترك الآن</button>
+        <button type="submit" class="btn btn-dark">اشترك الآن</button>
     </form>
 </section>
 

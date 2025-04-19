@@ -1,0 +1,56 @@
+﻿@model List<AuthenticationRole_base.Models.Product>
+@{
+    ViewData["Title"] = "منتجات بلو جرين";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/css/productspage.css" />
+}
+<div class="blue-green-products">
+    <div class="container">
+        <h1 class="main-title">منتجات بلو جرين</h1>
+
+        <div class="products-container">
+            @foreach (var product in Model)
+            {
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="~/products/@product.ImageFileName" alt="@product.Name">
+                    </div>
+                    <div class="product-content">
+                        <h3>@product.Name</h3>
+                        <p>@product.Description</p>
+                        <a href="/Products/Details/@product.Id" class="details-button">تفاصيل</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Optional: Add intersection observer to make products appear when scrolled into view
+        if ('IntersectionObserver' in window) {
+            const productCards = document.querySelectorAll('.product-card');
+
+            // Remove the initial animation styles so we can control them with the observer
+            productCards.forEach(card => {
+                card.style.animation = 'none';
+                card.style.opacity = '0';
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = `fadeIn 0.5s ease forwards ${index * 0.1}s`;
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            productCards.forEach(card => {
+                observer.observe(card);
+            });
+        }
+    });
+</script>

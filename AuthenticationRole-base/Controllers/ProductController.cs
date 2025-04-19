@@ -1,5 +1,6 @@
 ﻿using AuthenticationRole_base.Models;
 using AuthenticationRole_base.Services;
+using BlueGreenEG.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,7 @@ namespace AuthenticationRole_base.Controllers
             this.environment = environment;
         }
 
-        public IActionResult AllProducts ()
-        {
-            var products = context.Products.ToList();
-            return View(products);
-        }
-        public IActionResult Manage()
+        public IActionResult Products ()
         {
             var products = context.Products.ToList();
             return View(products);
@@ -74,7 +70,14 @@ namespace AuthenticationRole_base.Controllers
                 Category = productDto.Category,
                 Price = productDto.Price,
                 Description = productDto.Description,
-                Pages = productDto.Pages,
+                Quantity = productDto.Quantity,
+                Proberties = productDto.Proberties,
+                Form = productDto.Form,
+                binfet = productDto.binfet,
+                usage = productDto.usage,
+                productdata = productDto.productdata,
+                SeoTitle = productDto.SeoTitle,
+
                 ImageFileName = nameFileName + extension,
                 CreatedAt = DateTime.Now,
             };
@@ -84,6 +87,39 @@ namespace AuthenticationRole_base.Controllers
 
             return RedirectToAction("Index", "Product");
         }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var product = context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            // المنتجات اللي ليها نفس اسم الفئة (Category) و مختلفة عن المنتج الحالي
+            var sameCategoryProducts = context.Products
+                .Where(p => p.Category == product.Category && p.Id != product.Id)
+                .ToList();
+
+            // نختار 2 عشوائيين من نفس الفئة
+            var random = new Random();
+            var randomProducts = sameCategoryProducts
+                .OrderBy(x => random.Next())
+                .Take(2)
+                .ToList();
+
+            var viewmodel = new ProductDetails
+            {
+                Product = product,
+                First = randomProducts.ElementAtOrDefault(0) ?? new Product(),
+                Second = randomProducts.ElementAtOrDefault(1) ?? new Product()
+            };
+
+            return View(viewmodel);
+        }
+
+
         [Authorize(Roles="admin")]
         public IActionResult Edit(int id)
         {
@@ -100,7 +136,14 @@ namespace AuthenticationRole_base.Controllers
                 Category = product.Category,
                 Price = product.Price,
                 Description = product.Description,
-                Pages = product.Pages,
+                Quantity = product.Quantity,
+                Proberties = product.Proberties,
+                Form = product.Form,
+                binfet = product.binfet,
+                usage = product.usage,
+                productdata = product.productdata,
+                SeoTitle = product.SeoTitle,
+
             };
 
             ViewData["ProductId"] = product.Id;
@@ -159,7 +202,14 @@ namespace AuthenticationRole_base.Controllers
             product.Category = productDto.Category;
             product.Price = productDto.Price;
             product.Description = productDto.Description;
-            product.Pages = productDto.Pages;
+            product.Quantity = productDto.Quantity;
+            product.Proberties = productDto.Proberties;
+            product.Form = productDto.Form;
+            product.binfet = productDto.binfet;
+            product.usage = productDto.usage;
+            product.productdata = productDto.productdata;
+            product.SeoTitle = productDto.SeoTitle;
+
             context.SaveChanges();
 
             return RedirectToAction("Index", "Product");

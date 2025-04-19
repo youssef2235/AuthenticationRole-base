@@ -61,13 +61,13 @@
                                     <span class="fw-bold text-primary">@product.Price</span> جنية
                                 </td>
                                 <td>
-                                    @if (product.Pages > 10)
+                                    @if (product.Quantity > 10)
                                     {
-                                        <span class="badge bg-success">@product.Pages</span>
+                                        <span class="badge bg-success">@product.Quantity</span>
                                     }
-                                    else if (product.Pages > 0)
+                                    else if (product.Quantity > 0)
                                     {
-                                        <span class="badge bg-warning text-dark">@product.Pages</span>
+                                        <span class="badge bg-warning text-dark">@product.Quantity</span>
                                     }
                                     else
                                     {

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using AuthenticationRole_base.Models;
 using AuthenticationRole_base.Services;
+using BlueGreenEG.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticationRole_base.Controllers
@@ -17,17 +18,16 @@ namespace AuthenticationRole_base.Controllers
             _context = context;
         }
 
-        //public List<Product> GetProducts()
-        //{
-          //  return new List<Product>(); // Ensure it's always initialized
-        //}
-        
         public IActionResult Index()
         {
-            var products = _context.Products.ToList();
-            return View(products);
+           
+            var homeViewModel = new HomeViewModel
+            {
+                Products = _context.Products.Take(4).ToList(),
+                Articles = _context.Articles.Take(4).ToList()
+            };
+            return View(homeViewModel);
         }
-
         public IActionResult About()
         {
             return View();
@@ -36,6 +36,22 @@ namespace AuthenticationRole_base.Controllers
         {
             return View();
         }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult LAB()
+        {
+            return View();
+        }
+
+        public IActionResult Questions()
+        {
+            return View();
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,110 +1,108 @@
-﻿@{
-    ViewData["Title"] = "Articles";
+﻿@model List<AuthenticationRole_base.Models.Article>
+@{
+    ViewData["Title"] = "المقالات الزراعية";
 }
 
+@section Styles {
+	<link rel="stylesheet" href="~/css/Article.css" />
+}
 
+<!-- قسم المقالات -->
+<section class="articles-section">
+    <!-- الزخارف النباتية -->
+    <div class="plant-decoration plant-top-right"></div>
+    <div class="plant-decoration plant-bottom-left"></div>
 
-<style>
-    .articles {
-        padding: 5rem 5%;
-        text-align: center;
-    }
+    <!-- العنوان الرئيسي -->
+    <header class="section-header">
+        <h1 class="section-title">المقالات الزراعية المفضلة</h1>
+    </header>
 
-    .articles-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-    }
+    <!-- حاوية المقالات -->
+    <div class="articles-wrapper">
+        @if (Model != null && Model.Any())
+        {
+            <!-- المقال المميز -->
+            var featuredArticle = Model.FirstOrDefault();
+            <a asp-controller="Article" asp-action="Details" asp-route-id="@featuredArticle.Id" class="featured-article">
+                <span class="featured-badge">مميز</span>
+                <div class="featured-image-container">
+                    <img src="/Articles/@featuredArticle.ImageFileName" alt="@featuredArticle.Title" class="featured-image">
+                </div>
+                <div class="featured-content">
+                    <h2 class="featured-title">@featuredArticle.Title</h2>
+                    <p class="featured-excerpt">@(featuredArticle.Content.Length > 150 ? featuredArticle.Content.Substring(0, 150) + "..." : featuredArticle.Content)</p>
+                    <div class="featured-meta">
+                        <div>
+                            <div class="meta-info">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <span>@featuredArticle.Writer</span>
+                            </div>
+                        </div>
+                        <span class="read-more">
+                            اقرأ المزيد
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5"></path>
+                                <path d="M12 19l-7-7 7-7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </a>
 
-    .article-card {
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s;
-        text-decoration: none;
-        color: #333;
-        display: block;
-    }
-
-        .article-card:hover {
-            transform: translateY(-10px);
+            <!-- شبكة المقالات العادية -->
+            <div class="articles-grid">
+                @foreach (var article in Model.Skip(1))
+                {
+                    <a asp-controller="Article" asp-action="Details" asp-route-id="@article.Id" class="article-card">
+                        <div class="article-image-container">
+                            <img src="/Articles/@article.ImageFileName" alt="@article.Title" class="article-image">
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title">@article.Title</h3>
+                            <p class="article-excerpt">@(article.Content.Length > 80 ? article.Content.Substring(0, 80) + "..." : article.Content)</p>
+                            <div class="article-meta">
+                                <div class="meta-info">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    <span>@article.CreatedAt.ToString("d MMM")</span>
+                                </div>
+                                <span class="read-more">
+                                    اقرأ المزيد
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M19 12H5"></path>
+                                        <path d="M12 19l-7-7 7-7"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
         }
-
-    .article-img {
-        height: 200px;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .article-info {
-        padding: 1.5rem;
-        text-align: right;
-    }
-
-        .article-info h3 {
-            color: #333;
-            margin-bottom: 0.5rem;
+        else
+        {
+            <!-- رسالة عند عدم وجود مقالات -->
+            <div class="no-articles">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v8"></path>
+                    <path d="M12 18v4"></path>
+                    <path d="M4.93 4.93l5.66 5.66"></path>
+                    <path d="M13.41 13.41l5.66 5.66"></path>
+                    <path d="M2 12h8"></path>
+                    <path d="M18 12h4"></path>
+                    <path d="M4.93 19.07l5.66-5.66"></path>
+                    <path d="M13.41 10.59l5.66-5.66"></path>
+                </svg>
+                <p>لا توجد مقالات متاحة حالياً</p>
+            </div>
         }
-
-    .article-meta {
-        display: flex;
-        justify-content: space-between;
-        color: #666;
-        font-size: 0.9rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .read-more {
-        color: #16a34a;
-        font-weight: 600;
-        margin-top: 0.8rem;
-        display: inline-block;
-    }
-
-</style>
-
-<!-- Articles Section -->
-<section class="articles" id="articles">
-    <h2 class="section-title">المقالات الزراعية المفضلة</h2>
-    <div class="articles-grid">
-        <a asp-page="/Articles/SustainableFarming" class="article-card">
-            <img src="~/images/download.jpeg" alt="الزراعة المستدامة" class="article-img">
-            <div class="article-info">
-                <div class="article-meta">
-                    <span>5 مارس 2025</span>
-                    <span>الكاتب: محمد أحمد</span>
-                </div>
-                <h3>أساسيات الزراعة المستدامة</h3>
-                <p>تعرف على أهم الممارسات الزراعية المستدامة وكيفية تطبيقها في مزرعتك لزيادة الإنتاج وتقليل الأضرار البيئية.</p>
-                <span class="read-more">اقرأ المزيد ←</span>
-            </div>
-        </a>
-        <a asp-page="/Articles/WaterConservation" class="article-card">
-            <img src="~/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="ترشيد المياه" class="article-img">
-            <div class="article-info">
-                <div class="article-meta">
-                    <span>1 مارس 2025</span>
-                    <span>الكاتب: سارة خالد</span>
-                </div>
-                <h3>أساليب ترشيد المياه في الزراعة</h3>
-                <p>طرق فعالة لترشيد استخدام المياه في الزراعة والحفاظ على هذا المورد الثمين مع الحفاظ على جودة المحاصيل.</p>
-                <span class="read-more">اقرأ المزيد ←</span>
-            </div>
-        </a>
-        <a asp-page="/Articles/OrganicFarming" class="article-card">
-            <img src="/images/green-spikelets-barley-field-crop-field-ears-1-scaled.jpg" alt="الزراعة العضوية" class="article-img">
-            <div class="article-info">
-                <div class="article-meta">
-                    <span>20 فبراير 2025</span>
-                    <span>الكاتب: أحمد عبدالله</span>
-                </div>
-                <h3>دليلك الشامل للزراعة العضوية</h3>
-                <p>كل ما تحتاج معرفته عن الزراعة العضوية وفوائدها وكيفية التحول من الزراعة التقليدية إلى العضوية بنجاح.</p>
-                <span class="read-more">اقرأ المزيد ←</span>
-            </div>
-        </a>
     </div>
 </section>
-
