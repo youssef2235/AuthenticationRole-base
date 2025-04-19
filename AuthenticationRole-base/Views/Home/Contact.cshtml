@@ -1,0 +1,199 @@
+﻿@{
+    ViewData["Title"] = "تواصل معنا";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container my-5" dir="rtl">
+    <!-- قسم الترحيب -->
+    <div class="row mb-5">
+        <div class="col-lg-12 text-center">
+            <h1 class="display-4">تواصل معنا</h1>
+            <p class="lead">نحن سعداء بتواصلك معنا، ونتطلع إلى الرد على استفساراتك وتقديم المساعدة التي تحتاجها</p>
+        </div>
+    </div>
+
+    <!-- معلومات الاتصال والنموذج -->
+    <div class="row mb-5">
+        <!-- معلومات الاتصال -->
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 border-0 shadow">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">معلومات الاتصال</h3>
+
+                    <div class="d-flex mb-4">
+                        <div class="me-3">
+                            <i class="bi bi-geo-alt fs-3 text-primary"></i>
+                        </div>
+                        <div>
+                            <h5>العنوان</h5>
+                            <p class="mb-0">123  ابوغالب، المنطقة الزراعية<br>كارتة ابوغالب، الطريق الصحراوي</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-4">
+                        <div class="me-3">
+                            <i class="bi bi-telephone fs-3 text-primary"></i>
+                        </div>
+                        <div>
+                            <h5>اتصل بنا</h5>
+                            <p class="mb-0">هاتف: 01004514461<br>واتساب:  01004514461</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-4">
+                        <div class="me-3">
+                            <i class="bi bi-envelope fs-3 text-primary"></i>
+                        </div>
+                        <div>
+                            <h5>البريد الإلكتروني</h5>
+                            <p class="mb-0">خدمة العملاء: support@bluegreen.com<br>استفسارات عامة: info@bluegreen.com</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="bi bi-clock fs-3 text-primary"></i>
+                        </div>
+                        <div>
+                            <h5>ساعات العمل</h5>
+                            <p class="mb-0">من السبت إلى الخميس: 8 صباحاً - 5 مساءً<br>الجمعة : مغلق</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- نموذج الاتصال -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">أرسل لنا رسالة</h3>
+
+                    <form id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">الاسم الكامل <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">البريد الإلكتروني <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">رقم الهاتف</label>
+                                <input type="tel" class="form-control" id="phone">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="subject" class="form-label">الموضوع <span class="text-danger">*</span></label>
+                                <select class="form-select" id="subject" required>
+                                    <option selected disabled value="">اختر الموضوع...</option>
+                                    <option value="استفسار">استفسار عام</option>
+                                    <option value="منتجات">منتجات زراعية</option>
+                                    <option value="معمل">خدمات المعمل</option>
+                                    <option value="استشارات">استشارات زراعية</option>
+                                    <option value="مبيعات">المبيعات والتوزيع</option>
+                                    <option value="دعم">الدعم الفني</option>
+                                    <option value="آخر">آخر</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">الرسالة <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="privacy">
+                            <label class="form-check-label" for="privacy">أوافق على سياسة الخصوصية وشروط الاستخدام</label>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">إرسال</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+   
+    <!-- الأسئلة الشائعة -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <h2 class="mb-4 text-center">الأسئلة الشائعة</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            ما هي ساعات العمل لديكم؟
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            نعمل من الأحد إلى الخميس من الساعة 8 صباحاً حتى 5 مساءً. نحن مغلقون يومي الجمعة والسبت.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            كيف يمكنني طلب استشارة زراعية؟
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            يمكنك طلب استشارة زراعية عن طريق ملء نموذج الاتصال الموجود في هذه الصفحة، مع اختيار "استشارات زراعية" كموضوع للرسالة. سيتواصل معك أحد خبرائنا خلال 24 ساعة.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            هل تقدمون خدمات التوصيل؟
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            نعم، نوفر خدمة توصيل للمنتجات الزراعية والمستلزمات لجميع المناطق . يُرجى الاتصال بنا لمعرفة تفاصيل التوصيل .
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- التواصل الاجتماعي -->
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2 class="mb-4">تابعنا على وسائل التواصل الاجتماعي</h2>
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <a href="#" class="btn btn-outline-primary rounded-circle p-3"><i class="bi bi-facebook fs-4"></i></a>
+                <a href="#" class="btn btn-outline-success rounded-circle p-3"><i class="bi bi-whatsapp fs-4"></i></a>
+            </div>
+            <p>نتطلع للتواصل معكم وتلبية احتياجاتكم</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // التحقق من صحة النموذج قبل الإرسال
+            $("#contactForm").submit(function(e) {
+                e.preventDefault();
+
+                // هنا يمكن إضافة المزيد من التحقق من صحة البيانات
+
+                // إظهار رسالة نجاح
+                alert("تم إرسال رسالتك بنجاح! سنقوم بالرد عليك في أقرب وقت ممكن.");
+                this.reset();
+            });
+        });
+    </script>
+}

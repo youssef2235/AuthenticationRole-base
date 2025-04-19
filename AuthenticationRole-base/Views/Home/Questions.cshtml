@@ -1,0 +1,454 @@
+﻿@{
+    ViewData["Title"] = "الأسئلة الشائعة";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container my-5" dir="rtl">
+    <!-- قسم الترحيب -->
+    <div class="row mb-5">
+        <div class="col-lg-12 text-center">
+            <h1 class="display-4">الأسئلة الشائعة</h1>
+            <p class="lead">نجيب على استفساراتكم الشائعة حول خدماتنا ومنتجاتنا الزراعية</p>
+        </div>
+    </div>
+
+    <!-- نظام التصفية -->
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-center flex-wrap gap-2">
+                <button class="btn btn-outline-primary active faq-filter" data-target="all">الكل</button>
+                <button class="btn btn-outline-primary faq-filter" data-target="company">عن الشركة</button>
+                <button class="btn btn-outline-primary faq-filter" data-target="lab">المعمل الزراعي</button>
+                <button class="btn btn-outline-primary faq-filter" data-target="products">المنتجات الزراعية</button>
+                <button class="btn btn-outline-primary faq-filter" data-target="articles">المقالات والمحتوى</button>
+                <button class="btn btn-outline-primary faq-filter" data-target="farm-management">إدارة التحاليل الزراعية</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- أداة البحث -->
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="input-group">
+                <input type="text" class="form-control" id="faq-search" placeholder="ابحث في الأسئلة الشائعة...">
+                <button class="btn btn-primary" type="button"><i class="bi bi-search"></i> بحث</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- أسئلة عن الشركة -->
+    <div class="row mb-5 faq-section" data-section="company">
+        <div class="col-lg-12">
+            <h2 class="mb-4">أسئلة عن الشركة</h2>
+        </div>
+        <div class="col-lg-12">
+            <div class="accordion" id="companyAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="company-heading1">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#company-collapse1" aria-expanded="true" aria-controls="company-collapse1">
+                            ما هي قصة تأسيس الشركة؟
+                        </button>
+                    </h2>
+                    <div id="company-collapse1" class="accordion-collapse collapse show" aria-labelledby="company-heading1" data-bs-parent="#companyAccordion">
+                        <div class="accordion-body">
+                            تأسست شركتنا في عام 2005 على يد مجموعة من الخبراء الزراعيين بهدف تقديم حلول زراعية متكاملة تساعد المزارعين على تحسين إنتاجيتهم وزيادة العائد من أراضيهم. بدأت الشركة بتقديم المنتجات الزراعية عالية الجودة، ثم توسعت لتشمل خدمات المعمل الزراعي، وأخيراً أطلقت منصة إدارة المزارع لتقديم حلول متكاملة للقطاع الزراعي.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="company-heading2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#company-collapse2" aria-expanded="false" aria-controls="company-collapse2">
+                            ما هي رؤية الشركة ورسالتها؟
+                        </button>
+                    </h2>
+                    <div id="company-collapse2" class="accordion-collapse collapse" aria-labelledby="company-heading2" data-bs-parent="#companyAccordion">
+                        <div class="accordion-body">
+                            <strong>رؤيتنا:</strong> أن نكون الشريك الأول للمزارعين في رحلتهم نحو زراعة مستدامة ومنتجة.<br>
+                            <strong>رسالتنا:</strong> تقديم حلول زراعية متكاملة بأعلى معايير الجودة، والاستفادة من التكنولوجيا والأبحاث العلمية لتطوير القطاع الزراعي وتحسين إنتاجية المزارعين، مع الحفاظ على الموارد الطبيعية للأجيال القادمة.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="company-heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#company-collapse3" aria-expanded="false" aria-controls="company-collapse3">
+                            كيف يمكنني التواصل مع الشركة؟
+                        </button>
+                    </h2>
+                    <div id="company-collapse3" class="accordion-collapse collapse" aria-labelledby="company-heading3" data-bs-parent="#companyAccordion">
+                        <div class="accordion-body">
+                            يمكنك التواصل معنا من خلال:
+                            <ul>
+                                <li>الهاتف: 01004514461</li>
+                                <li>البريد الإلكتروني: info@yourcompany.com</li>
+                                <li>العنوان: كارتة ابوغالب، الصحراوي</li>
+                                <li>نموذج الاتصال في صفحة "اتصل بنا" على موقعنا</li>
+                                <li>وسائل التواصل الاجتماعي: فيسبوك، تويتر، انستغرام، لينكد إن</li>
+                            </ul>
+                            ساعات العمل الرسمية: من السبت إلى الخميس، 8 صباحاً - 5 مساءً.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- أسئلة عن المعمل الزراعي -->
+    <div class="row mb-5 faq-section" data-section="lab">
+        <div class="col-lg-12">
+            <h2 class="mb-4">أسئلة عن المعمل الزراعي</h2>
+        </div>
+        <div class="col-lg-12">
+            <div class="accordion" id="labAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="lab-heading1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lab-collapse1" aria-expanded="false" aria-controls="lab-collapse1">
+                            ما هي خدمات التحليل التي يقدمها المعمل؟
+                        </button>
+                    </h2>
+                    <div id="lab-collapse1" class="accordion-collapse collapse" aria-labelledby="lab-heading1" data-bs-parent="#labAccordion">
+                        <div class="accordion-body">
+                            يقدم معملنا مجموعة شاملة من خدمات التحليل بما في ذلك:
+                            <ul>
+                                <li>تحليل التربة (العناصر الغذائية، الحموضة، المواد العضوية، الخصوبة)</li>
+                                <li>تحليل المياه (الملوحة، الحموضة، المعادن الذائبة، الملوثات)</li>
+                                <li>تحليل الأنسجة النباتية (تشخيص نقص العناصر والأمراض)</li>
+                                <li>تحليل الأسمدة والمخصبات</li>
+                                <li>تحليل نيماتودا و فطريات</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="lab-heading2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lab-collapse2" aria-expanded="false" aria-controls="lab-collapse2">
+                            كيف يمكنني تقديم عينات للفحص؟
+                        </button>
+                    </h2>
+                    <div id="lab-collapse2" class="accordion-collapse collapse" aria-labelledby="lab-heading2" data-bs-parent="#labAccordion">
+                        <div class="accordion-body">
+                            يمكنك تقديم العينات من خلال زيارة معملنا خلال ساعات العمل (8 صباحاً - 5 مساءً، من الإثنين إلى الجمعة) أو باستخدام خدمة التوصيل لدينا. تتوفر أدوات جمع العينات عند الطلب، ويمكن لموظفينا تقديم إرشادات حول تقنيات أخذ العينات بشكل صحيح. كما يمكنك طلب زيارة ميدانية من فريقنا لأخذ العينات من موقعك مباشرة.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="lab-heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lab-collapse3" aria-expanded="false" aria-controls="lab-collapse3">
+                            كم من الوقت يستغرق الحصول على نتائج الاختبار؟
+                        </button>
+                    </h2>
+                    <div id="lab-collapse3" class="accordion-collapse collapse" aria-labelledby="lab-heading3" data-bs-parent="#labAccordion">
+                        <div class="accordion-body">
+                            تستغرق اختبارات التربة والمياه القياسية عادة 3-5 أيام عمل. أما تحليل الأنسجة النباتية فقد يستغرق 5-7 أيام عمل. تتوفر خدمات الاستعجال مقابل رسوم إضافية، والتي يمكن أن توفر النتائج خلال 24-48 ساعة حسب نوع الاختبار.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="lab-heading4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lab-collapse4" aria-expanded="false" aria-controls="lab-collapse4">
+                            هل تقدمون توصيات وإرشادات بناءً على نتائج التحليل؟
+                        </button>
+                    </h2>
+                    <div id="lab-collapse4" class="accordion-collapse collapse" aria-labelledby="lab-heading4" data-bs-parent="#labAccordion">
+                        <div class="accordion-body">
+                            نعم، تتضمن تقاريرنا الشاملة توصيات مفصلة للتسميد، وتعديلات التربة، وغيرها من الممارسات الزراعية بناءً على نتائج الاختبار الخاصة بك. كما يتوفر خبراؤنا الزراعيون للاستشارة لمناقشة النتائج وتقديم المشورة المخصصة. يمكنك أيضاً طلب جلسة استشارية مع أحد خبراء الزراعة لدينا لوضع خطة متكاملة لمزرعتك.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- أسئلة عن المنتجات الزراعية -->
+    <div class="row mb-5 faq-section" data-section="products">
+        <div class="col-lg-12">
+            <h2 class="mb-4">أسئلة عن المنتجات الزراعية</h2>
+        </div>
+        <div class="col-lg-12">
+            <div class="accordion" id="productsAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="products-heading1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#products-collapse1" aria-expanded="false" aria-controls="products-collapse1">
+                            ما هي أنواع المنتجات الزراعية التي توفرونها؟
+                        </button>
+                    </h2>
+                    <div id="products-collapse1" class="accordion-collapse collapse" aria-labelledby="products-heading1" data-bs-parent="#productsAccordion">
+                        <div class="accordion-body">
+                            نوفر مجموعة واسعة من المنتجات الزراعية عالية الجودة، تشمل:
+                            <ul>
+                                <li>البذور المحسنة والهجينة لمختلف المحاصيل</li>
+                                <li>الأسمدة العضوية والكيميائية المتخصصة</li>
+                                <li>المبيدات الحشرية والفطرية الآمنة</li>
+                                <li>منظمات النمو النباتي</li>
+                                <li>أنظمة الري الحديثة وقطع الغيار</li>
+                                <li>أدوات ومعدات زراعية</li>
+                                <li>محسنات التربة والمواد العضوية</li>
+                            </ul>
+                            يمكنك تصفح كامل تشكيلة منتجاتنا في قسم "المنتجات" على موقعنا.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="products-heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#products-collapse3" aria-expanded="false" aria-controls="products-collapse3">
+                            هل تقدمون ضمان على منتجاتكم؟
+                        </button>
+                    </h2>
+                    <div id="products-collapse3" class="accordion-collapse collapse" aria-labelledby="products-heading3" data-bs-parent="#productsAccordion">
+                        <div class="accordion-body">
+                            نعم، جميع منتجاتنا مضمونة من حيث الجودة والفعالية. نوفر ضمانات محددة لكل فئة من المنتجات:
+                            <ul>
+                                <li>البذور: ضمان نسبة إنبات لا تقل عن 85%</li>
+                                <li>الأسمدة: ضمان نسبة العناصر المعلنة</li>
+                                <li>أنظمة الري: ضمان لمدة سنة ضد عيوب التصنيع</li>
+                                <li>المعدات الزراعية: ضمان لمدة 6 أشهر إلى سنتين حسب نوع المنتج</li>
+                            </ul>
+                            في حالة وجود أي مشكلة بالمنتج، يرجى التواصل مع خدمة العملاء لدينا لاستبداله أو استرداد قيمته.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="products-heading4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#products-collapse4" aria-expanded="false" aria-controls="products-collapse4">
+                            هل تقدمون استشارات فنية لاستخدام المنتجات؟
+                        </button>
+                    </h2>
+                    <div id="products-collapse4" class="accordion-collapse collapse" aria-labelledby="products-heading4" data-bs-parent="#productsAccordion">
+                        <div class="accordion-body">
+                            نعم، نحن نؤمن بأن المنتج الجيد يحتاج إلى استخدام صحيح. لذلك نوفر:
+                            <ul>
+                                <li>دليل استخدام مفصل مع كل منتج</li>
+                                <li>فريق دعم فني متاح للاستشارات عبر الهاتف</li>
+                                <li>ورش عمل وأيام حقلية دورية لشرح كيفية استخدام المنتجات</li>
+                                <li>زيارات ميدانية من مهندسينا الزراعيين للمشاريع الكبيرة</li>
+                                <li>فيديوهات توضيحية على قناتنا في اليوتيوب</li>
+                            </ul>
+                            نهدف إلى ضمان حصول المزارع على أفضل نتيجة من منتجاتنا.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- أسئلة عن المقالات والمحتوى -->
+    <div class="row mb-5 faq-section" data-section="articles">
+        <div class="col-lg-12">
+            <h2 class="mb-4">أسئلة عن المقالات والمحتوى</h2>
+        </div>
+        <div class="col-lg-12">
+            <div class="accordion" id="articlesAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="articles-heading1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#articles-collapse1" aria-expanded="false" aria-controls="articles-collapse1">
+                            ما نوع المقالات والمحتوى الذي تقدمونه على الموقع؟
+                        </button>
+                    </h2>
+                    <div id="articles-collapse1" class="accordion-collapse collapse" aria-labelledby="articles-heading1" data-bs-parent="#articlesAccordion">
+                        <div class="accordion-body">
+                            نقدم محتوى متنوعاً يستهدف احتياجات المزارعين بجميع مستوياتهم:
+                            <ul>
+                                <li>أدلة إرشادية لزراعة المحاصيل المختلفة</li>
+                                <li>نصائح عملية للتعامل مع الآفات والأمراض</li>
+                                <li>تقنيات حديثة في الزراعة والري</li>
+                                <li>أخبار وتطورات القطاع الزراعي محلياً وعالمياً</li>
+                                <li>قصص نجاح لمزارعين تغلبوا على تحديات مختلفة</li>
+                                <li>تقارير موسمية عن أسعار المحاصيل واتجاهات السوق</li>
+                                <li>دراسات حالة ونتائج تجارب زراعية</li>
+                            </ul>
+                            نحرص على تقديم محتوى علمي دقيق وعملي يمكن تطبيقه في الواقع.
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="articles-heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#articles-collapse3" aria-expanded="false" aria-controls="articles-collapse3">
+                            هل يمكنني اقتراح مواضيع للمقالات؟
+                        </button>
+                    </h2>
+                    <div id="articles-collapse3" class="accordion-collapse collapse" aria-labelledby="articles-heading3" data-bs-parent="#articlesAccordion">
+                        <div class="accordion-body">
+                            بالتأكيد! نحن نرحب بمقترحاتكم لمواضيع جديدة تهم المزارعين. يمكنك إرسال اقتراحاتك من خلال:
+                            <ul>
+                                <li>نموذج "اقترح موضوعاً" الموجود في صفحة المقالات</li>
+                                <li>التعليق على المقالات الموجودة بالفعل</li>
+                                <li>إرسال رسالة إلى content@bluegreeneg.com</li>
+                                <li>المشاركة في استطلاعات الرأي التي نجريها دورياً</li>
+                            </ul>
+                            نحرص على الاستجابة لاحتياجات المزارعين وتقديم المحتوى الذي يساعدهم في مواجهة التحديات اليومية.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="articles-heading4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#articles-collapse4" aria-expanded="false" aria-controls="articles-collapse4">
+                            هل تنظمون ندوات أو ورش عمل تعليمية للمزارعين؟
+                        </button>
+                    </h2>
+                    <div id="articles-collapse4" class="accordion-collapse collapse" aria-labelledby="articles-heading4" data-bs-parent="#articlesAccordion">
+                        <div class="accordion-body">
+                            نعم، نحن نؤمن بأهمية التعليم المستمر. لذلك نقوم بتنظيم:
+                            <ul>
+                                <li>ندوات شهرية في مقر الشركة حول موضوعات موسمية</li>
+                                <li>ورش عمل ميدانية في مختلف المناطق الزراعية</li>
+                                <li>أيام حقلية لعرض نتائج التجارب والتقنيات الجديدة</li>
+                                <li>ندوات عبر الإنترنت (ويبينار) أسبوعية</li>
+                                <li>دورات تدريبية متخصصة للمزارعين المحترفين</li>
+                            </ul>
+                            يمكنكم معرفة جدول الفعاليات القادمة من خلال صفحة "الفعاليات" على الموقع أو من خلال الاشتراك في النشرة البريدية الخاصة بالفعاليات.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- أسئلة عن إدارة المزارع -->
+    <div class="row mb-5 faq-section" data-section="farm-management">
+        <div class="col-lg-12">
+            <h2 class="mb-4">أسئلة عن إدارة التحاليل الزراعية</h2>
+        </div>
+        <div class="col-lg-12">
+            <div class="accordion" id="farmManagementAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="farm-heading1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#farm-collapse1" aria-expanded="false" aria-controls="farm-collapse1">
+                            ما هي خدمات إدارة التحاليل الزراعية التي تقدمونها؟
+                        </button>
+                    </h2>
+                    <div id="farm-collapse1" class="accordion-collapse collapse" aria-labelledby="farm-heading1" data-bs-parent="#farmManagementAccordion">
+                        <div class="accordion-body">
+                            نقدم مجموعة متكاملة من خدمات إدارة التحاليل الزراعية التي تشمل:
+                            <ul>
+                                <li>نبدأ بتحليل النقطة المختارة</li>
+                                <li>نعطي بيانات تفصيلية وتحليلية</li>
+                                <li>مقارنات وبيانات زراعية وارشادية</li>
+                                <li>توصيات مستشارينا و توصيات الذكاء الاصطناعي التوليدي الذكي</li>
+                                <li>ادارة لمزرعتك ومعرفة جودتها من خلال صفحة مزرعتي</li>
+                                <li>اخيرا : نجمع بين اراء المستشارين وبين الذكاء الاصطناعي لنعطي الكفاءة التكنولوجية للادارة الذكية</li>
+                            </ul>
+                            يمكن الاستفادة من هذه الخدمات بشكل منفصل أو ضمن حزمة متكاملة.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="farm-heading2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#farm-collapse2" aria-expanded="false" aria-controls="farm-collapse2">
+                            كيف يمكنني الاشتراك في برنامج إدارة التحاليل الزراعية؟
+                        </button>
+                    </h2>
+                    <div id="farm-collapse2" class="accordion-collapse collapse" aria-labelledby="farm-heading2" data-bs-parent="#farmManagementAccordion">
+                        <div class="accordion-body">
+                            للاشتراك في برنامج إدارة التحاليل الزراعية، اتبع الخطوات التالية:
+                            <ol>
+                                <li>زيارة صفحة "المعمل" واختار موقع المعمل اختر تحاليل او انشئ مزرعتك</li>
+                                <li>تواصل معنا عبر الهاتف أو البريد الإلكتروني لترتيب زيارة أولية</li>
+                                <li>سيقوم فريقنا بزيارة مزرعتك لإجراء تقييم شامل للموارد والاحتياجات</li>
+                                <li>بناءً على التقييم، سنقدم لك خطة إدارة مخصصة مع عرض سعر</li>
+                                <li>بعد الموافقة على الخطة والسعر، يتم توقيع عقد الخدمة</li>
+                                <li>يبدأ فريقنا بتنفيذ الخطة مع متابعة دورية للنتائج والتعديلات اللازمة</li>
+                            </ol>
+                            نوفر خطط اشتراك موسمية وسنوية تناسب مختلف أحجام المزارع واحتياجاتها.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="farm-heading4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#farm-collapse4" aria-expanded="false" aria-controls="farm-collapse4">
+                            هل تقدمون استشارات للمشاريع الزراعية الجديدة؟
+                        </button>
+                    </h2>
+                    <div id="farm-collapse4" class="accordion-collapse collapse" aria-labelledby="farm-heading4" data-bs-parent="#farmManagementAccordion">
+                        <div class="accordion-body">
+                            بالتأكيد، نقدم خدمات استشارية متكاملة للمشاريع الزراعية الجديدة تشمل:
+                            <ul>
+                                <li>دراسات الجدوى الاقتصادية والفنية</li>
+                                <li>تقييم الموقع والموارد المتاحة</li>
+                                <li>تصميم المزرعة وتخطيط استخدام الأراضي</li>
+                                <li>اختيار المحاصيل المناسبة للموقع والسوق</li>
+                                <li>تصميم أنظمة الري والبنية التحتية</li>
+                                <li>استراتيجيات التسويق وسلاسل القيمة</li>
+                                <li>خطط العمل والجداول الزمنية للتنفيذ</li>
+                            </ul>
+                            نوفر الدعم في جميع مراحل المشروع من الفكرة إلى التنفيذ والتشغيل.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الأسئلة الأكثر شيوعاً -->
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <h2 class="mb-4">الأسئلة الأكثر شيوعاً</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">كيف يمكنني التسجيل في نشرتكم البريدية؟</h5>
+                            <p class="card-text">يمكنك التسجيل في نشرتنا البريدية من خلال إدخال بريدك الإلكتروني في نموذج الاشتراك الموجود في أسفل كل صفحة من موقعنا، أو من خلال زيارة صفحة "الاشتراك" والتسجيل هناك.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">هل لديكم برامج خاصة للمزارعين الجدد؟</h5>
+                            <p class="card-text">نعم، لدينا برنامج "البداية الناجحة" المخصص للمزارعين الجدد، والذي يوفر استشارات مجانية، وخصومات على المنتجات، ودورات تدريبية مخفضة. تعرف على المزيد في صفحة "البرامج والمبادرات".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم "لم تجد إجابة لسؤالك؟" -->
+    <div class="row mb-5">
+        <div class="col-lg-12 text-center">
+            <div class="p-5 bg-light rounded">
+                <h3>لم تجد إجابة لسؤالك؟</h3>
+                <p class="lead">يمكنك التواصل معنا مباشرة وسنقوم بالرد على استفسارك في أقرب وقت ممكن</p>
+                <a asp-action="Contact" asp-controller="Home" class="btn btn-primary btn-lg">تواصل معنا</a>
+                <p class="mt-3">أو اتصل بنا على: <strong>01004514461</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // وظيفة تصفية الأسئلة حسب القسم
+            $('.faq-filter').click(function () {
+                var target = $(this).data('target');
+                $('.faq-filter').removeClass('active');
+                $(this).addClass('active');
+
+                if (target === 'all') {
+                    $('.faq-section').show();
+                } else {
+                    $('.faq-section').hide();
+                    $('.faq-section[data-section="' + target + '"]').show();
+                }
+            });
+
+            // وظيفة البحث في الأسئلة
+            $('#faq-search').on('keyup', function () {
+                var searchText = $(this).val().toLowerCase();
+
+                $('.accordion-item').each(function () {
+                    var question = $(this).find('.accordion-button').text().toLowerCase();
+                    var answer = $(this).find('.accordion-body').text().toLowerCase();
+
+                    if (question.indexOf(searchText) > -1 || answer.indexOf(searchText) > -1) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
+}

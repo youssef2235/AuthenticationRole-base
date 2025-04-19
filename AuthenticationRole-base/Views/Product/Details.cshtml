@@ -113,6 +113,7 @@
                 <div class="product-section-body">
                     <div class="row">
                         <div class="col-6 mb-3">
+                            <a asp-action="Details" asp-route-Id="@Model.First.Id" style="text-decoration:none">
                             <div class="card h-100">
                                 <img src="~/Products/@Model.First.ImageFileName" class="card-img-top" alt="@Model.First.Name">
                                 <div class="card-body p-2 text-center">
@@ -120,8 +121,11 @@
                                     <p class="card-text text-danger mb-0"></p>
                                 </div>
                             </div>
+                        </a>
                         </div>
+                       
                         <div class="col-6 mb-3">
+                                                    <a asp-action="Details" asp-route-Id="@Model.Second.Id" style="text-decoration:none">
                             <div class="card h-100">
                                 <img src="~/Products/@Model.Second.ImageFileName" class="card-img-top" alt="@Model.Second.Name">
                                 <div class="card-body p-2 text-center">
@@ -129,7 +133,9 @@
                                     <p class="card-text text-danger mb-0"></p>
                                 </div>
                             </div>
+                            </a>
                         </div>
+						
                     </div>
                 </div>
             </div>

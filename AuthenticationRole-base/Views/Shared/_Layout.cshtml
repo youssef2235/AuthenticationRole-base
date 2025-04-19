@@ -21,24 +21,23 @@
 
             <!-- قائمة الروابط الأفقية للشاشات الكبيرة -->
             <ul class="desktop-nav">
-                <li><a href="/" class="active">الرئيسية</a></li>
+                <button class="button-outline" style="visibility:hidden">تسجيل الخروج</button>
+                <li><a href="/" class="active" style="padding-top:10px">الرئيسية</a></li>
                 <li><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
-                <li><a asp-action="Services" asp-controller="Service">خدماتنا</a></li>
                 <li><a asp-action="Articles" asp-controller="Article">المقالات</a></li>
-                <li><a asp-action="Result" asp-controller="Laboratory">المعمل</a></li>
+                <li><a asp-action="LAB" asp-controller="Home">المعمل</a></li>
                 <li><a asp-action="About" asp-controller="Home">من نحن</a></li>
-                <li><a href="/faq">الأسئلة الشائعة</a></li>
+                <li><a asp-action="Questions" asp-controller="Home">الأسئلة الشائعة</a></li>
                 <li><a asp-action="Contact" asp-controller="Home">تواصل معنا</a></li>
+                <partial name="_LoginPartial" />
+              
             </ul>
 
             <button class="nav-toggle" id="sidebarToggle">
                 <i class="bi bi-list"></i>
             </button>
 
-            <div class="nav-buttons">
-                <a href="/login" class="btn btn-outline">تسجيل دخول</a>
-                <a href="/register" class="btn btn-primary">إنشاء حساب</a>
-            </div>
+            
         </div>
     </nav>
 
@@ -52,20 +51,21 @@
         </div>
 
         <ul class="sidebar-nav">
-            <li><a href="/" class="active"><i class="bi bi-house-door"></i>الرئيسية</a></li>
-            <li><a asp-action="Products" asp-controller="Product"><i class="bi bi-box"></i>المنتجات</a></li>
-            <li><a asp-action="Services" asp-controller="Service"><i class="bi bi-gear"></i>خدماتنا</a></li>
-            <li><a asp-action="Articles" asp-controller="Article"><i class="bi bi-newspaper"></i>المقالات</a></li>
-            <li><a asp-action="Result" asp-controller="Laboratory"><i class="bi bi-flask"></i>المعمل</a></li>
-            <li><a asp-action="About" asp-controller="Home"><i class="bi bi-info-circle"></i>من نحن</a></li>
-            <li><a href="/faq"><i class="bi bi-question-circle"></i>الأسئلة الشائعة</a></li>
-            <li><a asp-action="Contact" asp-controller="Home"><i class="bi bi-envelope"></i>تواصل معنا</a></li>
+            <li><a href="/" class="active">الرئيسية</a></li>
+            <li><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
+            <li><a asp-action="Articles" asp-controller="Article">المقالات</a></li>
+            <li><a asp-action="LAB" asp-controller="Home">المعمل</a></li>
+            <li><a asp-action="About" asp-controller="Home">من نحن</a></li>
+            <li><a asp-action="Questions" asp-controller="Home">الأسئلة الشائعة</a></li>
+            <li><a asp-action="Contact" asp-controller="Home">تواصل معنا</a></li>
+            <hr />
+            <li>
+                <a>
+                    <button class="btn btn-light" style="">طلب عرض أسعار</button>
+                </a>
+            </li>
+            <partial name="_LoginPartial"/>
         </ul>
-
-        <div class="sidebar-buttons">
-            <a href="/login" class="btn btn-outline">تسجيل دخول</a>
-            <a href="/register" class="btn btn-primary">إنشاء حساب</a>
-        </div>
     </div>
 
     <!-- Sidebar Backdrop -->
@@ -82,7 +82,7 @@
             <div class="footer-column">
                 <h3>تواصل معنا</h3>
                 <p><i class="bi bi-geo-alt ms-2"></i> أبو غالب، الظهير الصحراوي طريق القاهرة - الإسكندرية</p>
-                <p><i class="bi bi-telephone ms-2"></i> هاتف: 966123456789+</p>
+                <p><i class="bi bi-telephone ms-2"></i> هاتف: 01004514461+</p>
                 <p><i class="bi bi-envelope ms-2"></i> البريد الإلكتروني: info@bluegreen.com</p>
                 <div class="social-links">
                     <a href="#"><i class="bi bi-facebook"></i></a>
@@ -91,15 +91,17 @@
                     <a href="#"><i class="bi bi-youtube"></i></a>
                 </div>
             </div>
+
             <div class="footer-column">
                 <h3>روابط مهمة</h3>
                 <ul>
-                    <li><a href="/"><i class="bi bi-chevron-left ms-2"></i> الرئيسية</a></li>
-                    <li><a href="/services"><i class="bi bi-chevron-left ms-2"></i> خدماتنا</a></li>
-                    <li><a asp-action="Products" asp-controller="Product"><i class="bi bi-chevron-left ms-2"></i> منتجاتنا</a></li>
-                    <li><a href="/articles"><i class="bi bi-chevron-left ms-2"></i> المقالات</a></li>
-                    <li><a href="/about"><i class="bi bi-chevron-left ms-2"></i> من نحن</a></li>
-                    <li><a href="/contact"><i class="bi bi-chevron-left ms-2"></i> تواصل معنا</a></li>
+                    <li><a href="/" class="active">الرئيسية</a></li>
+                    <li><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
+                    <li><a asp-action="Articles" asp-controller="Article">المقالات</a></li>
+                    <li><a asp-action="LAB" asp-controller="Home">المعمل</a></li>
+                    <li><a asp-action="About" asp-controller="Home">من نحن</a></li>
+                    <li><a asp-action="Questions" asp-controller="Home">الأسئلة الشائعة</a></li>
+                    <li><a asp-action="Contact" asp-controller="Home">تواصل معنا</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -117,7 +119,7 @@
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/966123456789" class="whatsapp-button">
+    <a href="https://wa.me/+201004514461" class="whatsapp-button">
         <i class="bi bi-whatsapp"></i>
     </a>
 

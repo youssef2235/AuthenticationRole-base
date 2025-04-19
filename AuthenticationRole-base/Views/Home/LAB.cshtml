@@ -1,0 +1,580 @@
+﻿@{
+    ViewData["Title"] = "المعمل الزراعي";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- إضافة CSS لتحديث الألوان والمظهر -->
+<style>
+    :root {
+        --primary-color: #2e7d32; /* أخضر غامق */
+        --secondary-color: #81c784; /* أخضر متوسط */
+        --light-color: #e8f5e9; /* أخضر فاتح */
+        --gradient-bg: linear-gradient(135deg, #e8f5e9, #c8e6c9, #a5d6a7); /* تدرج أخضر فاتح */
+        --dark-text: #212121;
+        --light-text: #ffffff;
+        --border-radius: 10px;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        font-family: 'Tajawal', sans-serif;
+        color: var(--dark-text);
+        background-color: #fafafa;
+    }
+
+    .bg-gradient-green {
+        background: var(--gradient-bg);
+    }
+
+    .text-primary-custom {
+        color: var(--primary-color);
+    }
+
+    .border-custom {
+        border-color: var(--secondary-color) !important;
+    }
+
+    .welcome-section {
+        background: var(--gradient-bg);
+        border-radius: var(--border-radius);
+        padding: 3rem 1.5rem;
+        margin-bottom: 3rem;
+        box-shadow: var(--shadow);
+    }
+
+    .card {
+        border-radius: var(--border-radius);
+        border: none;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary, .btn-success {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        border-radius: 25px;
+        padding: 8px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover, .btn-success:hover {
+        background-color: #1b5e20;
+        border-color: #1b5e20;
+        transform: translateY(-2px);
+    }
+
+    .btn-outline-primary {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+        border-radius: 25px;
+        padding: 8px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .display-4, .h1, h1 {
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+
+    h2, h3, h4, h5, h6 {
+        color: var(--primary-color);
+    }
+
+    .section-divider {
+        height: 2px;
+        background: var(--gradient-bg);
+        width: 100%;
+        margin: 2rem 0;
+    }
+
+    .list-group-item {
+        border-left: 4px solid var(--secondary-color);
+        margin-bottom: 5px;
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        transition: all 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        background-color: var(--light-color);
+        transform: translateX(5px);
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: var(--light-color);
+        color: var(--primary-color);
+        box-shadow: none;
+    }
+
+    .accordion-button:focus {
+        box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
+    }
+
+    .accordion-item {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        margin-bottom: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .step-card {
+        position: relative;
+        padding-top: 25px;
+    }
+
+    .step-number {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+
+    .img-thumbnail {
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+    }
+
+    .contact-info-card {
+        border-left: 5px solid var(--primary-color);
+    }
+
+    .social-icon {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-right: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .social-icon:hover {
+        transform: scale(1.2);
+    }
+</style>
+
+<div class="container my-5" dir="rtl">
+    <!-- قسم الترحيب المحدث -->
+    <div class="welcome-section text-center">
+        <h1 class="display-4 mb-3">مرحباً بك في معملنا الزراعي</h1>
+        <p class="lead mb-4">ملتزمون بتطوير العلوم الزراعية ودعم المزارعين بأحدث الأبحاث والتقنيات</p>
+        <div class="mt-4">
+            <a href="#services" class="btn btn-primary me-2">استكشف خدماتنا</a>
+            <a href="#contact" class="btn btn-outline-primary">اتصل بنا</a>
+        </div>
+    </div>
+
+    <!-- مقدمة عن المعمل -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+            <img src="/images/LAB1.jpeg" alt="المعمل الزراعي" class="img-fluid rounded shadow-lg">
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <div class="bg-light p-4 rounded shadow-sm">
+                <h2 class="mb-3">نبذة عن معملنا</h2>
+                <div class="section-divider mb-3"></div>
+                <p>يتميز معملنا الزراعي المتطور بأحدث التقنيات لتقديم خدمات شاملة لتحليل التربة والمياه والأنسجة النباتية. نساعد المزارعين والشركات الزراعية على اتخاذ قرارات مدروسة بناءً على بيانات علمية دقيقة.</p>
+                <p>تأسس معملنا في عام 2010، وقدم خدماته لآلاف العملاء في المنطقة، موفراً تحليلات دقيقة وسريعة تساعد على تحسين إنتاجية المحاصيل، وتحسين استخدام الموارد، وتعزيز ممارسات الزراعة المستدامة.</p>
+                <div class="mt-4">
+                    <a href="https://localhost:7119/" class="btn btn-primary me-2">خدماتنا</a>
+                    <a asp-action="Contact" asp-controller="Home" class="btn btn-outline-primary">اتصل بنا</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- خدمات المعمل -->
+    <div id="services" class="row mb-5">
+        <div class="col-lg-12">
+            <h2 class="mb-4 text-center">خدماتنا المتميزة</h2>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-top border-custom border-4">
+                <div class="card-body d-flex flex-column">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-moisture fs-1 text-primary-custom"></i>
+                    </div>
+                    <h3 class="card-title h5 text-center">تحليل التربة</h3>
+                    <p class="card-text">اختبارات شاملة للعناصر الغذائية في التربة، ومستويات الحموضة، ومحتوى المواد العضوية، والخصوبة لتحسين إنتاج المحاصيل.</p>
+                    <div class="mt-auto text-center">
+                        <a href="#" class="btn btn-sm btn-outline-primary">المزيد من التفاصيل</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-top border-custom border-4">
+                <div class="card-body d-flex flex-column">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-droplet fs-1 text-primary-custom"></i>
+                    </div>
+                    <h3 class="card-title h5 text-center">اختبار جودة المياه</h3>
+                    <p class="card-text">تحليل جودة مياه الري، بما في ذلك الملوحة، والحموضة، والمعادن الذائبة، والملوثات المحتملة.</p>
+                    <div class="mt-auto text-center">
+                        <a href="#" class="btn btn-sm btn-outline-primary">المزيد من التفاصيل</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-top border-custom border-4">
+                <div class="card-body d-flex flex-column">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-flower1 fs-1 text-primary-custom"></i>
+                    </div>
+                    <h3 class="card-title h5 text-center">تحليل الأنسجة النباتية</h3>
+                    <p class="card-text">فحص أنسجة النباتات لتحديد نقص العناصر الغذائية، والأمراض، وتحسين استراتيجيات التسميد.</p>
+                    <div class="mt-auto text-center">
+                        <a href="#" class="btn btn-sm btn-outline-primary">المزيد من التفاصيل</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- إدارة المزارع -->
+    <div id="farm-management" class="row mb-5 py-4 bg-gradient-green rounded shadow">
+        <div class="col-lg-12">
+            <h2 class="mb-4 text-center">إدارة تحاليل وصحة مزرعتك</h2>
+        </div>
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="/images/fARM1.jpeg" alt="إدارة المزارع" class="img-fluid rounded shadow-lg">
+        </div>
+        <div class="col-lg-6">
+            <div class="card h-100 border-0">
+                <div class="card-body">
+                    <h3 class="h4 mb-3">خدمة متكاملة لإدارة مزرعتك</h3>
+                    <p class="fw-bold mb-3">نقدم لك منصة متكاملة تمكنك من:</p>
+                    <div class="list-group mb-4">
+                        <div class="list-group-item bg-transparent">
+                            <i class="bi bi-check-circle-fill text-primary-custom me-2"></i>
+                            إنشاء ملف تعريفي كامل لمزرعتك مع تحديد مساحتها وموقعها
+                        </div>
+                        <div class="list-group-item bg-transparent">
+                            <i class="bi bi-check-circle-fill text-primary-custom me-2"></i>
+                            تقسيم مزرعتك إلى قطع وأحواض زراعية منفصلة
+                        </div>
+                        <div class="list-group-item bg-transparent">
+                            <i class="bi bi-check-circle-fill text-primary-custom me-2"></i>
+                            عرض بيانات لتحاليل مزرعتك وعرض اقتراحات للتحسين
+                        </div>
+                        <div class="list-group-item bg-transparent">
+                            <i class="bi bi-check-circle-fill text-primary-custom me-2"></i>
+                            استخدمنا الذكاء الاصطناعي التوليدي لانشاء توصيات خاصة لمزرعتك
+                        </div>
+                        <div class="list-group-item bg-transparent">
+                            <i class="bi bi-check-circle-fill text-primary-custom me-2"></i>
+                            الحصول على توصيات مخصصة حسب نتائج تحليل تربة كل قطعة
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success btn-lg">سجل مزرعتك الآن</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- كيفية إنشاء وإدارة المزرعة -->
+    <div id="farm-registration" class="row mb-5">
+        <div class="col-lg-12">
+            <h2 class="mb-4 text-center">كيف تبدأ في إدارة مزرعتك معنا</h2>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 step-card">
+                <div class="step-number">1</div>
+                <div class="card-body text-center pt-4">
+                    <div class="mb-3">
+                        <i class="bi bi-person-plus fs-2 text-primary-custom"></i>
+                    </div>
+                    <h3 class="card-title h5">إنشاء حساب</h3>
+                    <p class="card-text">سجل معنا وأنشئ حساباً خاصاً بك للوصول إلى خدمات إدارة المزارع.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 step-card">
+                <div class="step-number">2</div>
+                <div class="card-body text-center pt-4">
+                    <div class="mb-3">
+                        <i class="bi bi-geo-alt fs-2 text-primary-custom"></i>
+                    </div>
+                    <h3 class="card-title h5">تسجيل مزرعتك</h3>
+                    <p class="card-text">أدخل بيانات مزرعتك وحدد موقعها ومساحتها الإجمالية.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 step-card">
+                <div class="step-number">3</div>
+                <div class="card-body text-center pt-4">
+                    <div class="mb-3">
+                        <i class="bi bi-grid-3x3-gap fs-2 text-primary-custom"></i>
+                    </div>
+                    <h3 class="card-title h5">تقسيم المزرعة</h3>
+                    <p class="card-text">قم بتقسيم مزرعتك إلى قطع أرض وأحواض حسب احتياجاتك الزراعية.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 step-card">
+                <div class="step-number">4</div>
+                <div class="card-body text-center pt-4">
+                    <div class="mb-3">
+                        <i class="bi bi-gear fs-2 text-primary-custom"></i>
+                    </div>
+                    <h3 class="card-title h5">ابدأ الإدارة</h3>
+                    <p class="card-text">استفد من نصائحنا المخصصة وأدوات تحليل بياناتك لإدارة مزرعتك بكفاءة.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- مرافق المعمل -->
+    <div class="row mb-5 bg-light p-4 rounded shadow-sm">
+        <div class="col-lg-12">
+            <h2 class="mb-4 text-center">مرافقنا المتطورة</h2>
+        </div>
+        <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+            <img src="/images/LAB2.jpeg" alt="معدات المعمل" class="img-fluid rounded shadow-lg">
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <div class="card h-100 border-0 bg-transparent">
+                <div class="card-body">
+                    <h3 class="mb-3">معدات عالية التقنية</h3>
+                    <p class="fw-bold">معملنا مجهز بأحدث الأجهزة التحليلية بما في ذلك:</p>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item bg-transparent">
+                            <i class="bi bi-hdd-rack-fill text-primary-custom me-2"></i>
+                            مطياف الامتصاص الذري
+                        </li>
+                        <li class="list-group-item bg-transparent">
+                            <i class="bi bi-hdd-rack-fill text-primary-custom me-2"></i>
+                            جهاز كروماتوغرافيا السائل عالي الأداء (HPLC)
+                        </li>
+                        <li class="list-group-item bg-transparent">
+                            <i class="bi bi-hdd-rack-fill text-primary-custom me-2"></i>
+                            جهاز الكروماتوغرافيا الغازية مع مطياف الكتلة (GC-MS)
+                        </li>
+                        <li class="list-group-item bg-transparent">
+                            <i class="bi bi-hdd-rack-fill text-primary-custom me-2"></i>
+                            أجهزة تفاعل البلمرة المتسلسل وتحليل الحمض النووي
+                        </li>
+                        <li class="list-group-item bg-transparent">
+                            <i class="bi bi-hdd-rack-fill text-primary-custom me-2"></i>
+                            أنظمة آلية لمعالجة العينات
+                        </li>
+                    </ul>
+                    <p>يتم إجراء جميع الاختبارات بواسطة فريق من العلماء والفنيين الزراعيين المؤهلين الذين يتبعون بروتوكولات صارمة لمراقبة الجودة لضمان دقة النتائج.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- الأسئلة الشائعة -->
+    <div id="faq" class="row mb-5">
+        <div class="col-lg-12">
+            <h2 class="mb-4 text-center">الأسئلة الشائعة</h2>
+        </div>
+        <div class="col-lg-12">
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="bi bi-question-circle me-2 text-primary-custom"></i>
+                            كيف يمكنني تقديم عينات للفحص؟
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            يمكنك تقديم العينات من خلال زيارة معملنا خلال ساعات العمل (8 صباحاً - 5 مساءً، من الإثنين إلى الجمعة) أو باستخدام خدمة التوصيل لدينا. تتوفر أدوات جمع العينات عند الطلب، ويمكن لموظفينا تقديم إرشادات حول تقنيات أخذ العينات بشكل صحيح.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="bi bi-question-circle me-2 text-primary-custom"></i>
+                            كم من الوقت يستغرق الحصول على نتائج الاختبار؟
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            تستغرق اختبارات التربة والمياه القياسية عادة 3-5 أيام عمل. أما تحليل الأنسجة النباتية فقد يستغرق 5-7 أيام عمل. تتوفر خدمات الاستعجال مقابل رسوم إضافية، والتي يمكن أن توفر النتائج خلال 24-48 ساعة حسب نوع الاختبار.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="bi bi-question-circle me-2 text-primary-custom"></i>
+                            هل تقدمون توصيات بناءً على نتائج الاختبار؟
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            نعم، تتضمن تقاريرنا الشاملة توصيات مفصلة للتسميد، وتعديلات التربة، وغيرها من الممارسات الزراعية بناءً على نتائج الاختبار الخاصة بك. كما يتوفر خبراؤنا الزراعيون للاستشارة لمناقشة النتائج وتقديم المشورة المخصصة.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <i class="bi bi-question-circle me-2 text-primary-custom"></i>
+                            هل تقدمون زيارات ميدانية وأخذ عينات في الموقع؟
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            نعم، يمكن لفريقنا إجراء زيارات ميدانية وأخذ عينات في الموقع للمزارع الكبيرة أو الحالات المعقدة. تشمل هذه الخدمة جمع العينات بشكل احترافي والملاحظات الميدانية الأولية. يرجى الاتصال بنا لتحديد موعد زيارة والحصول على عرض سعر.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSix">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <i class="bi bi-question-circle me-2 text-primary-custom"></i>
+                            كيف يمكنني تسجيل مزرعتي في نظام الإدارة الخاص بكم؟
+                        </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            يمكنك التسجيل من خلال زيارة صفحة "إدارة المزارع" على موقعنا، أو زيارة مكتبنا شخصياً حيث سيساعدك فريقنا في إنشاء حسابك وإدخال بيانات مزرعتك. بعد التسجيل، ستتمكن من الوصول إلى لوحة التحكم الخاصة بك عبر الإنترنت لإدارة كل جوانب مزرعتك.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- قسم الاتصال -->
+    <div id="contact" class="row mb-5 py-4 bg-gradient-green rounded shadow">
+        <div class="col-lg-12">
+            <h2 class="mb-4 text-center">اتصل بمعملنا</h2>
+        </div>
+        <div class="col-lg-8 mx-auto">
+            <div class="card h-100 contact-info-card">
+                <div class="card-body">
+                    <h3 class="card-title h5 mb-4">معلومات المعمل</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="bi bi-geo-alt-fill text-primary-custom me-2"></i>
+                                    <strong>العنوان:</strong> كارته ابو غالب، الطريق الصحراوي
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-telephone-fill text-primary-custom me-2"></i>
+                                    <strong>الهاتف:</strong> 01004514461
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="bi bi-envelope-fill text-primary-custom me-2"></i>
+                                    <strong>البريد الإلكتروني:</strong> lab@yourcompany.com
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-clock-fill text-primary-custom me-2"></i>
+                                    <strong>ساعات العمل:</strong> السبت إلى الخميس، 8 صباحاً - 5 مساءً
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h4 class="h6 mb-3">تابعونا عبر وسائل التواصل الاجتماعي</h4>
+                            <div class="d-flex">
+                                <a href="#" class="social-icon me-3"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="social-icon me-3"><i class="bi bi-twitter"></i></a>
+                                <a href="#" class="social-icon me-3"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نبذة ختامية -->
+    <div class="row mb-3">
+        <div class="col-lg-12 text-center">
+            <div class="card border-0 bg-light shadow-sm">
+                <div class="card-body py-4">
+                    <h3 class="mb-3">نتطلع للعمل معكم لتحسين إنتاجية مزارعكم</h3>
+                    <p>فريقنا من الخبراء الزراعيين جاهز لمساعدتكم في كل خطوة</p>
+                    <a href="#" class="btn btn-success">ابدأ الآن</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- إضافة سكريبت لمكونات Bootstrap ورابط لأيقونات Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // تهيئة مكونات Bootstrap إذا لزم الأمر
+
+        // إضافة تأثير حركي عند التمرير للعناصر
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.card, .welcome-section, .section-divider');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight;
+
+                if (elementPosition < screenPosition - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // تطبيق CSS للعناصر قبل التمرير
+        const elements = document.querySelectorAll('.card, .welcome-section, .section-divider');
+        elements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        // تفعيل حدث التمرير
+        window.addEventListener('scroll', animateOnScroll);
+
+        // تشغيل الحركة للعناصر المرئية عند تحميل الصفحة
+        animateOnScroll();
+    });
+</script>

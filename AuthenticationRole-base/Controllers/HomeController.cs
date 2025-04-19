@@ -36,6 +36,23 @@ namespace AuthenticationRole_base.Controllers
         {
             return View();
         }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult LAB()
+        {
+            return View();
+        }
+
+        public IActionResult Questions()
+        {
+            return View();
+        }
+
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
