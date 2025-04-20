@@ -1,5 +1,4 @@
-﻿@page
-@model AuthenticationRole_base.Areas.Identity.Pages.AdminModel
+﻿
 @{
 }
 
@@ -143,13 +142,8 @@
     <div class="dashboard-cards">
         <!-- بطاقة المنتجات -->
         <div class="card products-card">
-            <div class="card-title">إجمالي المنتجات</div>
-            <div class="card-value">247</div>
-            <div class="card-info">
-                زيادة بنسبة
-                <span class="card-trend-up">12%</span>
-                هذا الشهر
-            </div>
+            <div class="card-value">اضف منتج جديد</div>
+            <div class="card-title">تاكد من ادخال البيانات الصحيحة لتحصل على تجربة عرض مميزة</div>
             <div class="progress-container">
                 <div class="progress-bar" style="width: 75%; background-color: #2196F3;"></div>
             </div>
@@ -160,11 +154,9 @@
 
         <!-- بطاقة المنتجات النشطة -->
         <div class="card products-card">
-            <div class="card-title">المنتجات النشطة</div>
-            <div class="card-value">186</div>
-            <div class="card-info">
-                75% من إجمالي المنتجات
-            </div>
+            <div class="card-value">جميع المنتجات</div>
+            <div class="card-title">186</div>
+           
             <div class="progress-container">
                 <div class="progress-bar" style="width: 75%; background-color: #2196F3;"></div>
             </div>
@@ -173,30 +165,12 @@
             </div>
         </div>
 
-        <!-- بطاقة المنتجات غير المتوفرة -->
-        <div class="card products-card">
-            <div class="card-title">منتجات غير متوفرة</div>
-            <div class="card-value">38</div>
-            <div class="card-info">
-                15% من إجمالي المنتجات
-            </div>
-            <div class="progress-container">
-                <div class="progress-bar" style="width: 15%; background-color: #F44336;"></div>
-            </div>
-            <div class="card-actions">
-                <button class="action-button">إدارة المخزون</button>
-            </div>
-        </div>
+      
 
         <!-- بطاقة المقالات -->
         <div class="card articles-card">
-            <div class="card-title">إجمالي المقالات</div>
-            <div class="card-value">135</div>
-            <div class="card-info">
-                زيادة بنسبة
-                <span class="card-trend-up">8%</span>
-                هذا الشهر
-            </div>
+            <div class="card-value">اضف مقال جديد</div>
+            <div class="card-title">تاكد من ادخال البيانات الصحيحة لتحصل على تجربة عرض مميزة</div>
             <div class="progress-container">
                 <div class="progress-bar" style="width: 80%; background-color: #FF9800;"></div>
             </div>
@@ -207,61 +181,30 @@
 
         <!-- بطاقة المقالات المنشورة -->
         <div class="card articles-card">
-            <div class="card-title">مقالات منشورة</div>
-            <div class="card-value">124</div>
-            <div class="card-info">
-                92% من إجمالي المقالات
-            </div>
+
+            <div class="card-value">جميع مقالات</div>
+            <div class="card-title">124</div>
             <div class="progress-container">
                 <div class="progress-bar" style="width: 92%; background-color: #4CAF50;"></div>
             </div>
             <div class="card-actions">
-                <a asp-action="Index" asp-controller="Articles"><button class="action-button">عرض المقالات</button></a>
+                <a asp-action="Index" asp-controller="Article"><button class="action-button">عرض المقالات</button></a>
             </div>
         </div>
 
-        <!-- بطاقة مسودات المقالات -->
         <div class="card articles-card">
-            <div class="card-title">اضافة تقرير جديد</div>
-            <div class="card-value">11</div>
-            <div class="card-info">
-                8% من إجمالي التقارير 
-            </div>
+            <div class="card-value">طلبات الاتصال بنا</div>
+            <div class="card-title">11</div>
             <div class="progress-container">
                 <div class="progress-bar" style="width: 8%; background-color: #FF9800;"></div>
             </div>
             <div class="card-actions">
-                <a asp-action="Create" asp-controller="Labs"><button class="action-button">إضافة التقارير</button></a>
+                <a><button class="action-button">طلبات الاتصال بنا</button></a>
             </div>
         </div>
 
-        <!-- بطاقة المشاهدات -->
-        <div class="card views-card">
-            <div class="card-title">مشاهدات الصفحات</div>
-            <div class="card-value">24,892</div>
-            <div class="card-info">
-                زيادة بنسبة
-                <span class="card-trend-up">15%</span>
-                مقارنة بالأسبوع الماضي
-            </div>
-            <div class="progress-container">
-                <div class="progress-bar" style="width: 85%; background-color: #9C27B0;"></div>
-            </div>
-        </div>
-
-        <!-- بطاقة المبيعات -->
-        <div class="card sales-card">
-            <div class="card-title">إجمالي المبيعات</div>
-            <div class="card-value">$12,486</div>
-            <div class="card-info">
-                زيادة بنسبة
-                <span class="card-trend-up">9%</span>
-                هذا الشهر
-            </div>
-            <div class="progress-container">
-                <div class="progress-bar" style="width: 70%; background-color: #F44336;"></div>
-            </div>
-        </div>
+      
+       
     </div>
     <pre>
 

@@ -1,13 +1,18 @@
 ﻿@model BlueGreenEG.ViewModels.HomeViewModel
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Index";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/home.css" />
 }
 
+<head>
+    <meta name="description" content="نحن نقدم أحدث الحلول والخدمات الزراعية لتعزيز الإنتاج وتحقيق التنمية المستدامة. تعرف على خدماتنا ومنتجاتنا في هذا الموقع.">
+    <meta name="keywords" content="زراعة, خدمات زراعية, منتجات زراعية, استدامة, دعم فني, أسمدة, ري حديث">
+    <meta name="robots" content="index, follow">
+    <title>الصفحة الرئيسية - بلوجرين للتنمية الزراعية</title>
+</head>
 
 
 <!-- Hero Section -->
@@ -125,11 +130,11 @@
                 <img src="~/Articles/@article.ImageFileName" alt="@article.Title" class="article-img">
                 <div class="article-info">
                     <div class="article-meta">
-                        <span>@article.CreatedAt</span>
-                        <span>@article.WriterJob/ @article.Writer</span>
+                        <span>@article.CreatedAt.ToString("dd/MM/yyyy")</span>
+                        <span>@article.Writer</span>
                     </div>
                     <h3>@article.Title</h3>
-                    <p>@article.Content</p>
+                    <p>@(article.Content.Length > 150 ? article.Content.Substring(0, 150) + "..." : article.Content)</p>
                     <span class="read-more">اقرأ المزيد ←</span>
                 </div>
             </a>

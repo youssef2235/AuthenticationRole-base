@@ -9,5 +9,7 @@ namespace BlueGreenEG.ViewModels
 
         public Product First { get; set; } = new Product();
         public Product Second { get; set; } = new Product();
+
+
     }
 }

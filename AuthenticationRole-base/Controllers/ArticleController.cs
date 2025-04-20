@@ -69,11 +69,13 @@ namespace AuthenticationRole_base.Controllers
             {
                 Title = articleDTO.Title,
                 Writer = articleDTO.Writer,
-                WriterJob = articleDTO.WriterJob,
                 Category = articleDTO.Category,
                 SEO = articleDTO.SEO,
                 Content = articleDTO.Content,
-                
+                Content2 = articleDTO.Content2,
+                Content3 = articleDTO.Content3,
+                Content4 = articleDTO.Content4,
+
 
                 ImageFileName = nameFileName + extension,
                 CreatedAt = DateTime.Now,
@@ -130,10 +132,12 @@ namespace AuthenticationRole_base.Controllers
             {
                 Title = article.Title,
                 Writer = article.Writer,
-                WriterJob = article.WriterJob,
                 Category = article.Category,
                 SEO = article.SEO,
-                Content = article.Content
+                Content = article.Content,
+                Content2 = article.Content2,
+                Content3 = article.Content3,
+                Content4 = article.Content4,
             };
 
             ViewData["ArticleId"] = article.Id;
@@ -189,10 +193,13 @@ namespace AuthenticationRole_base.Controllers
 
             article.Title = articleDto.Title;
             article.Writer = articleDto.Writer;
-            article.WriterJob = articleDto.WriterJob;
             article.Category = articleDto.Category;
             article.SEO = articleDto.SEO;
             article.Content = articleDto.Content;
+            article.Content2 = articleDto.Content2;
+            article.Content3 = articleDto.Content3;
+            article.Content4 = articleDto.Content4;
+
 
             context.SaveChanges();
 

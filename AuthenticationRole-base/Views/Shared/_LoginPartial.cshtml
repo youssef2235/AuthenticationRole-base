@@ -10,7 +10,7 @@
         @if (User.IsInRole("admin"))
 		{
             <button class="button-outline" style="visibility:hidden">تسجيل الخروج</button>
-			<a id="admin" asp-area="Identity" asp-page="/Admin"><button class="button-green">لوحة التحكم</button></a>
+			<a id="admin" asp-action="Admin" asp-controller="Admin"><button class="button-green">لوحة التحكم</button></a>
 		}
         
 		else

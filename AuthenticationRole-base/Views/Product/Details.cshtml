@@ -4,263 +4,220 @@
     ViewData["Title"] = Model.Product.Name;
 }
 
-<div class="container-fluid bluegreen-style mt-4">
-    <div class="row mb-3">
-        <div class="col-12">
-            <nav aria-label="breadcrumb" class="bg-light p-2 rounded">
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
-                    <li class="breadcrumb-item active">@Model.Product.Name</li>
-                </ol>
-            </nav>
+@section Styles {
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background: linear-gradient(to right, #e6ffe6, #ffffff);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .breadcrumb {
+            background-color: #fff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .product-image {
+            border-radius: 15px;
+            max-height: 450px;
+            object-fit: contain;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .product-name {
+            color: #2e7d32;
+            font-weight: 700;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+            .section h3 {
+                font-size: 1.3rem;
+                background-color: #2e7d32;
+                color: white;
+                padding: 10px 15px;
+                border-radius: 8px 8px 0 0;
+                margin-bottom: 0;
+            }
+
+            .section ul {
+                list-style-type: none;
+                padding: 20px;
+                background-color: #fff;
+                margin: 0;
+                border-radius: 0 0 8px 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            }
+
+                .section ul li::before {
+                    content: "✔";
+                    color: #43a047;
+                    margin-left: 10px;
+                }
+
+                .section ul li {
+                    padding: 5px 0;
+                    direction: rtl;
+                }
+
+        .similar-product-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+            .similar-product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            }
+
+            .similar-product-card img {
+                height: 150px;
+                object-fit: contain;
+                padding: 10px;
+                background-color: #fff;
+            }
+
+        .tags a {
+            background-color: #d0f0d0;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 5px;
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+            .tags a:hover {
+                background-color: #b2dfb2;
+            }
+
+    </style>
+}
+
+<div class="container py-4">
+
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
+            <li class="breadcrumb-item"><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
+            <li class="breadcrumb-item active">@Model.Product.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- صورة المنتج -->
+        <div class="col-md-5 text-center">
+            <img src="~/Products/@Model.Product.ImageFileName" onerror="this.src='/images/product-placeholder.jpg'" alt="@Model.Product.Name" class="img-fluid product-image" />
+        </div>
+
+        <!-- تفاصيل المنتج -->
+        <div class="col-md-7">
+            <h1 class="product-name mb-4">@Model.Product.Name</h1>
+
+            <div class="section">
+                <h3>خصائص المنتج</h3>
+                <ul>
+                    @foreach (var item in Model.Product.Proberties?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>تركيب المنتج</h3>
+                <ul>
+                    @foreach (var item in Model.Product.Form?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>فوائد المنتج</h3>
+                <ul>
+                    @foreach (var item in Model.Product.binfet?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>الجرعة ومعدلات الاستخدام</h3>
+                <ul>
+                    @foreach (var item in Model.Product.usage?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>بيانات المنتج</h3>
+                <ul>
+                    @foreach (var item in Model.Product.productdata?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="text-center mb-4">
-            <img src="~/Products/@Model.Product.ImageFileName" alt="@Model.Product.Name" class="img-fluid product-image" onerror="this.src='/images/product-placeholder.jpg'" />
-        </div>
-        <!-- قسم تفاصيل المنتج -->
-        <div class="col-lg-7">
-            <h1 class="mb-4 product-name">@Model.Product.Name</h1>
-
-            <!-- خصائص المنتج -->
-            <div class="product-section mb-4">
-                <div class="product-section-header">
-                    <h3 class="mb-0">خصائص المنتج</h3>
-                </div>
-                <div class="product-section-body">
-                    <ul class="mb-0">
-                        @foreach (var line in Model.Product.Proberties?.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                        {
-                            <li>@line</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            <!-- تركيب المنتج -->
-            <div class="product-section mb-4">
-                <div class="product-section-header">
-                    <h3 class="mb-0">تركيب المنتج</h3>
-                </div>
-                <div class="product-section-body">
-                    <ul class="mb-0">
-                        @foreach (var line in Model.Product.Form?.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                        {
-                            <li>@line</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            <!-- فوائد المنتج -->
-            <div class="product-section mb-4">
-                <div class="product-section-header">
-                    <h3 class="mb-0">فوائد المنتج</h3>
-                </div>
-                <div class="product-section-body">
-                    <ul class="mb-0">
-                        @foreach (var line in Model.Product.binfet?.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                        {
-                            <li>@line</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            <!-- الجرعة ومعدلات الاستخدام -->
-            <div class="product-section mb-4">
-                <div class="product-section-header">
-                    <h3 class="mb-0">الجرعة ومعدلات الاستخدام</h3>
-                </div>
-                <div class="product-section-body">
-                    <ul class="mb-0">
-                        @foreach (var line in Model.Product.usage?.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                        {
-                            <li>@line</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            <!-- بيانات المنتج -->
-            <div class="product-section mb-4">
-                <div class="product-section-header">
-                    <h3 class="mb-0">بيانات المنتج</h3>
-                </div>
-                <div class="product-section-body">
-                    <ul class="mb-0">
-                        @foreach (var line in Model.Product.productdata?.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                        {
-                            <li>@line</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- قسم الصورة وخيارات الشراء -->
-        <div class="col-lg-5">
-          
-
-            <!-- منتجات مشابهة -->
-            <div class="product-section mb-4">
-                <div class="product-section-header">
-                    <h3 class="mb-0">منتجات مشابهة</h3>
-                </div>
-                <div class="product-section-body">
-                    <div class="row">
-                        <div class="col-6 mb-3">
-                            <a asp-action="Details" asp-route-Id="@Model.First.Id" style="text-decoration:none">
-                            <div class="card h-100">
-                                <img src="~/Products/@Model.First.ImageFileName" class="card-img-top" alt="@Model.First.Name">
-                                <div class="card-body p-2 text-center">
-                                    <h6 class="card-title mb-1">@Model.First.Name</h6>
-                                    <p class="card-text text-danger mb-0"></p>
-                                </div>
-                            </div>
-                        </a>
-                        </div>
-                       
-                        <div class="col-6 mb-3">
-                                                    <a asp-action="Details" asp-route-Id="@Model.Second.Id" style="text-decoration:none">
-                            <div class="card h-100">
-                                <img src="~/Products/@Model.Second.ImageFileName" class="card-img-top" alt="@Model.Second.Name">
-                                <div class="card-body p-2 text-center">
-                                    <h6 class="card-title mb-1">@Model.Second.Name</h6>
-                                    <p class="card-text text-danger mb-0"></p>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-						
+    <!-- منتجات مشابهة -->
+    <div class="row mt-5">
+        <h3 class="mb-3">منتجات مشابهة</h3>
+        <div class="col-sm-6 col-lg-3">
+            <a asp-action="Details" asp-route-id="@Model.First.Id" class="text-decoration-none text-dark">
+                <div class="card similar-product-card text-center">
+                    <img src="~/Products/@Model.First.ImageFileName" alt="@Model.First.Name" class="card-img-top">
+                    <div class="card-body">
+                        <h6 class="card-title">@Model.First.Name</h6>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <a asp-action="Details" asp-route-id="@Model.Second.Id" class="text-decoration-none text-dark">
+                <div class="card similar-product-card text-center">
+                    <img src="~/Products/@Model.Second.ImageFileName" alt="@Model.Second.Name" class="card-img-top">
+                    <div class="card-body">
+                        <h6 class="card-title">@Model.Second.Name</h6>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 
     <!-- التصنيف والوسوم -->
-    <div class="row mt-3">
+    <div class="row mt-4">
         <div class="col-12">
-            <div class="bg-light p-3 rounded">
+            <div class="bg-white p-3 rounded shadow-sm">
                 <div class="mb-2">
-                    <strong>التصنيف:</strong> <a href="#">@Model.Product.Category</a>
+                    <strong>التصنيف:</strong> <a href="#" class="text-success">@Model.Product.Category</a>
                 </div>
-                <div>
+                <div class="tags">
                     <strong>الوسوم:</strong>
-                    @foreach (var line in Model.Product.SeoTitle?.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                    @foreach (var tag in Model.Product.SeoTitle?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
                     {
-                        <a href="#" >@line  , </a> 
+                        <a href="#">@tag</a>
                     }
-                   
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-@section Styles {
-    <style>
-        /* أنماط صفحة تفاصيل المنتج */
-        .product-section {
-            margin-bottom: 25px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-
-        }
-
-        .product-section-header {
-            background-color: #121212;
-            color: white;
-            padding: 12px 15px;
-            font-weight: bold;
-            position: relative;
-        }
-
-            .product-section-header:after {
-                content: '';
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                width: 5px;
-                background-color: #d92c2c;
-            }
-
-        .product-section-body {
-            padding: 15px;
-            background-color: white;
-        }
-
-        .product-section ul {
-            padding-right: 20px;
-            list-style-type: none;
-            margin-bottom: 0;
-        }
-
-            .product-section ul li {
-                position: relative;
-                padding-right: 15px;
-                margin-bottom: 8px;
-            }
-
-                .product-section ul li:last-child {
-                    margin-bottom: 0;
-                }
-
-                .product-section ul li:before {
-                    content: "•";
-                    color: #d92c2c;
-                    font-weight: bold;
-                    display: inline-block;
-                    position: absolute;
-                    right: 0;
-                }
-
-        .product-image {
-            border: 1px solid #ddd;
-            padding: 15px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            max-height: 500px;
-            object-fit: contain;
-        }
-
-        .product-name {
-            color: #d92c2c;
-            font-weight: bold;
-        }
-
-        .breadcrumb-item + .breadcrumb-item::before {
-            float: right;
-            padding-left: 0.5rem;
-            padding-right: 0;
-        }
-
-        /* تخصيص نمط الصفحة */
-        body {
-            background-color: #f8f9fa;
-        }
-
-        h3 {
-            font-size: 1.3rem;
-        }
-
-        .product-section-header h3 {
-            margin-bottom: 0;
-            font-size: 1.2rem;
-        }
-
-        /* تخصيص أزرار الكمية */
-        .input-group {
-            width: 150px;
-            margin: 0 auto;
-        }
-    </style>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 }

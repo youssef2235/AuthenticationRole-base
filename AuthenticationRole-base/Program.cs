@@ -17,6 +17,17 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 
 var app = builder.Build();
 
+app.UseStatusCodePages(async context =>
+{
+    var response = context.HttpContext.Response;
+
+    if (response.StatusCode == 404)
+    {
+        response.Redirect("/Error/404");
+    }
+});
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -32,7 +43,7 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapStaticAssets();
 app.MapRazorPages();
-
+app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",

@@ -11,15 +11,15 @@ namespace AuthenticationRole_base.Models
         [Required]
         [MaxLength(100)]
         public string Writer { get; set; } 
-        [MaxLength(100)]
-        [Required]
-        public string WriterJob { get; set; }
         [Required]
         public string Category { get; set; }
         [Required]
         public string SEO { get; set; }
         [Required]
         public string Content { get; set; }
+        public string? Content2 { get; set; }
+        public string? Content3 { get; set; }
+        public string? Content4 { get; set; }
         [Required]
         [MaxLength(100)]
         public string ImageFileName { get; set; } 
