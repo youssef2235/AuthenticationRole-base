@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = Model.Articles.Title;
 }
-
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -135,6 +134,98 @@
         color: #6b7280;
         font-size: 0.875rem;
     }
+
+    /* إضافة أنماط لمحتوى TinyMCE */
+    .article-full-content {
+        margin-top: 2rem;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+        /* تنسيق محتوى المحرر */
+        .article-full-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .article-full-content h1,
+        .article-full-content h2,
+        .article-full-content h3,
+        .article-full-content h4 {
+            color: #1f2937;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .article-full-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .article-full-content ul,
+        .article-full-content ol {
+            margin-bottom: 1rem;
+            padding-right: 1.5rem;
+        }
+
+        .article-full-content blockquote {
+            border-right: 4px solid #16a34a;
+            padding: 0.5rem 1rem;
+            margin: 1rem 0;
+            background-color: #f9fafb;
+            font-style: italic;
+        }
+
+        .article-full-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+            .article-full-content table th,
+            .article-full-content table td {
+                border: 1px solid #e5e7eb;
+                padding: 0.75rem;
+                text-align: right;
+            }
+
+            .article-full-content table th {
+                background-color: #f9fafb;
+            }
+
+        .article-full-content a {
+            color: #16a34a;
+            text-decoration: none;
+        }
+
+            .article-full-content a:hover {
+                text-decoration: underline;
+            }
+
+        .article-full-content pre {
+            background-color: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+    /* تقسيم المقال إلى أقسام للقراءة السهلة */
+    .content-section {
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
 </style>
 
 <div class="article-details">
@@ -155,45 +246,21 @@
 
     <img src="/Articles/@Model.Articles.ImageFileName" alt="@Model.Articles.Title" class="article-featured-image">
 
-   @if(Model.Articles.Content != null){
-        <div class="article-section">
-            <h2 class="section-title">مقدمة المقال</h2>
-            <div class="section-content">
-                @Html.Raw(Model.Articles.Content)
-            </div>
-        </div>
-   }
-   @if(Model.Articles.Content2 != null)
-   {
-        <!-- جزء المقال الثاني -->
-        <div class="article-section">
-            <h2 class="section-title">الفصل الأول</h2>
-            <div class="section-content">
-                @Html.Raw(Model.Articles.Content2)
-            </div>
-        </div>
-   }
 
-   @if(Model.Articles.Content3 != null)
-   {
-        <!-- جزء المقال الثالث -->
-        <div class="article-section">
-            <h2 class="section-title">الفصل الثاني</h2>
-            <div class="section-content">
-                @Html.Raw(Model.Articles.Content3)
-            </div>
+    @if (!string.IsNullOrEmpty(Model.Articles.Content))
+    {
+        <div class="article-full-content">
+            @Html.Raw(Model.Articles.Content)
         </div>
-   }
-   @if(Model.Articles.Content != null)
-   {
-        <!-- جزء المقال الرابع -->
-        <div class="article-section">
-            <h2 class="section-title">الفصل الثالث</h2>
-            <div class="section-content">
-                @Html.Raw(Model.Articles.Content4)
-            </div>
+    }
+
+    <div class="author-info">
+        <img src="~/images/Male-Avatar.png" alt="@Model.Articles.Writer" class="author-image">
+        <div class="author-details">
+            <div class="author-name">@Model.Articles.Writer</div>
+            <div class="author-job">كاتب محتوى في بلو جرين</div>
         </div>
-   }
+    </div>
 
     <a asp-controller="Article" asp-action="Articles" class="back-to-articles">
         <i class="bi bi-arrow-right"></i> العودة إلى المقالات

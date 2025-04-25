@@ -17,6 +17,7 @@ namespace BlueGreenEG.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "admin")]
         public IActionResult TestDatabaseConnection()
         {
             try

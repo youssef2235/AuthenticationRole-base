@@ -17,7 +17,12 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
-
+var webHostEnvironment = app.Services.GetRequiredService<IWebHostEnvironment>();
+var articlesPath = Path.Combine(webHostEnvironment.WebRootPath, "Articles");
+if (!Directory.Exists(articlesPath))
+{
+    Directory.CreateDirectory(articlesPath);
+}
 app.UseStatusCodePages(async context =>
 {
     var response = context.HttpContext.Response;

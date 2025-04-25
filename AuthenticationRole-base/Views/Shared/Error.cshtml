@@ -1,25 +1,31 @@
 ﻿@model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "قيد العمل";
 }
+@using Microsoft.AspNetCore.Hosting
+@inject IWebHostEnvironment Environment
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="text-center mt-5">
+    <h1 class="text-primary">قيد العمل</h1>
+    <h2 class="mb-4">يعمل مهندسينا على تطوير وتحديث هذه الصفحة الآن</h2>
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    <div class="mt-4">
+        <!-- Development/Programming Icon using SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+            <line x1="12" y1="2" x2="12" y2="22"></line>
+        </svg>
+    </div>
+
+    <p class="text-muted mt-4">
+        نشكركم على تفهمكم، سنعود قريباً.
     </p>
-}
+</div>
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+@if (Model.ShowRequestId && Environment.IsDevelopment())
+{
+    <div class="mt-5 text-muted small">
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </div>
+}

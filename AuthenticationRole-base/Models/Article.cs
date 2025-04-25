@@ -8,18 +8,12 @@ namespace AuthenticationRole_base.Models
         public int Id { get; set; }
         [Required]
         public string Title { get; set; } 
-        [Required]
         [MaxLength(100)]
-        public string Writer { get; set; } 
-        [Required]
-        public string Category { get; set; }
-        [Required]
-        public string SEO { get; set; }
-        [Required]
-        public string Content { get; set; }
-        public string? Content2 { get; set; }
-        public string? Content3 { get; set; }
-        public string? Content4 { get; set; }
+        public string? Writer { get; set; } 
+        public string? Category { get; set; }
+        public string? SEO { get; set; }
+        public string? Content { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string ImageFileName { get; set; } 

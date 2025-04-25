@@ -25,6 +25,7 @@ namespace AuthenticationRole_base.Controllers
             var articles = context.Articles.ToList();
             return View(articles);
         }
+        [Authorize(Roles = "admin")]
 
         public IActionResult Index()
         {
@@ -32,11 +33,14 @@ namespace AuthenticationRole_base.Controllers
 
             return View(articles);
         }
+        [Authorize(Roles = "admin")]
 
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "admin")]
+
         [HttpPost]
         public IActionResult Create(ArticleDTO articleDTO)
         {
@@ -72,9 +76,7 @@ namespace AuthenticationRole_base.Controllers
                 Category = articleDTO.Category,
                 SEO = articleDTO.SEO,
                 Content = articleDTO.Content,
-                Content2 = articleDTO.Content2,
-                Content3 = articleDTO.Content3,
-                Content4 = articleDTO.Content4,
+              
 
 
                 ImageFileName = nameFileName + extension,
@@ -135,9 +137,7 @@ namespace AuthenticationRole_base.Controllers
                 Category = article.Category,
                 SEO = article.SEO,
                 Content = article.Content,
-                Content2 = article.Content2,
-                Content3 = article.Content3,
-                Content4 = article.Content4,
+               
             };
 
             ViewData["ArticleId"] = article.Id;
@@ -196,9 +196,7 @@ namespace AuthenticationRole_base.Controllers
             article.Category = articleDto.Category;
             article.SEO = articleDto.SEO;
             article.Content = articleDto.Content;
-            article.Content2 = articleDto.Content2;
-            article.Content3 = articleDto.Content3;
-            article.Content4 = articleDto.Content4;
+          
 
 
             context.SaveChanges();

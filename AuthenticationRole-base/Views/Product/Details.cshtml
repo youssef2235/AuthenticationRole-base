@@ -1,223 +1,261 @@
 ﻿@model BlueGreenEG.ViewModels.ProductDetails
 
 @{
-    ViewData["Title"] = Model.Product.Name;
+    ViewData["Title"] = Model.Product.Name + " - " + Model.Product.Category;
 }
 
-@section Styles {
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background: linear-gradient(to right, #e6ffe6, #ffffff);
-            font-family: 'Segoe UI', sans-serif;
-        }
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | BlueGreenEG</title>
+    <meta name="keywords" content="@Model.Product.SeoTitle" />
 
-        .breadcrumb {
-            background-color: #fff;
-            padding: 10px 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="@Model.Product.Name | BlueGreenEG" />
+    <meta property="og:image" content="@Url.Content("~/Products/" + Model.Product.ImageFileName)" />
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content="@Url.Action("Details", "Product", new { id = Model.Product.Id, slug = Model.Product.Name.Replace(" ", "-") }, Context.Request.Scheme)" />
 
-        .product-image {
-            border-radius: 15px;
-            max-height: 450px;
-            object-fit: contain;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
+    <!-- Canonical URL -->
+    <link rel="canonical" href="@Url.Action("Details", "Product", new { id = Model.Product.Id, slug = Model.Product.Name.Replace(" ", "-") }, Context.Request.Scheme)" />
 
-        .product-name {
-            color: #2e7d32;
-            font-weight: 700;
-        }
+    @section Styles {
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="~/css/Product_details.css" />
 
-        .section {
-            margin-bottom: 30px;
-        }
+    }
+</head>
 
-            .section h3 {
-                font-size: 1.3rem;
-                background-color: #2e7d32;
-                color: white;
-                padding: 10px 15px;
-                border-radius: 8px 8px 0 0;
-                margin-bottom: 0;
-            }
+<body>
+    <div class="container py-5">
+        <!-- Breadcrumb -->
+        <nav aria-label="مسار التنقل" class="mb-4">
+            <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="/" itemprop="item" title="الصفحة الرئيسية"><i class="bi bi-house"></i> <span itemprop="name">الرئيسية</span></a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a asp-action="Products" asp-controller="Product" itemprop="item" title="جميع المنتجات"> >> <span itemprop="name">المنتجات</span></a>
+                    <meta itemprop="position" content="2" />
+                </li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" hidden>
+                    <a asp-action="Category" asp-controller="Product" asp-route-category="@Model.Product.Category" itemprop="item" title="منتجات @Model.Product.Category"><span itemprop="name">@Model.Product.Category</span></a>
+                    <meta itemprop="position" content="3" />
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span itemprop="name">@Model.Product.Name</span>
+                    <meta itemprop="position" content="4" />
+                </li>
+            </ol>
+        </nav>
 
-            .section ul {
-                list-style-type: none;
-                padding: 20px;
-                background-color: #fff;
-                margin: 0;
-                border-radius: 0 0 8px 8px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            }
+        <article class="product-content" itemscope itemtype="https://schema.org/Product">
+            <!-- Product Hero Section -->
+            <div class="product-hero">
+                <div class="row">
+                    <!-- Left Column - Image Gallery -->
+                    <div class="col-lg-5 mb-4">
+                        <div class="product-gallery">
+                            <div class="main-image-container">
+                                <img src="~/Products/@Model.Product.ImageFileName"
+                                     onerror="this.src='/images/product-placeholder.jpg'"
+                                     alt="@Model.Product.Name - @Model.Product.Category من BlueGreenEG"
+                                     id="mainProductImage"
+                                     loading="lazy"
+                                     itemprop="image" />
+                            </div>
+                            <div class="thumbnail-container">
+                                <img src="~/Products/@Model.Product.ImageFileName"
+                                     class="thumbnail active"
+                                     onclick="changeImage(this)"
+                                     alt="صورة رئيسية لمنتج @Model.Product.Name"
+                                     loading="lazy" />
+                                <!-- الصور المصغرة الإضافية تضاف هنا -->
+                            </div>
+                        </div>
+                    </div>
 
-                .section ul li::before {
-                    content: "✔";
-                    color: #43a047;
-                    margin-left: 10px;
-                }
+                    <!-- Right Column - Product Intro -->
+                    <div class="col-lg-7">
+                        <h1 class="product-title" itemprop="name">@Model.Product.Name</h1>
 
-                .section ul li {
-                    padding: 5px 0;
-                    direction: rtl;
-                }
+                        <!-- Category Badge -->
+                        <div class="mb-4">
+                            <a href="#"
+                               class="tag category-tag"
+                               title="منتجات @Model.Product.Category">
+                                <i class="bi bi-folder"></i> <span itemprop="category">@Model.Product.Category</span>
+                            </a>
+                        </div>
 
-        .similar-product-card {
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-            .similar-product-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            }
-
-            .similar-product-card img {
-                height: 150px;
-                object-fit: contain;
-                padding: 10px;
-                background-color: #fff;
-            }
-
-        .tags a {
-            background-color: #d0f0d0;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-left: 5px;
-            color: #2e7d32;
-            text-decoration: none;
-        }
-
-            .tags a:hover {
-                background-color: #b2dfb2;
-            }
-
-    </style>
-}
-
-<div class="container py-4">
-
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
-            <li class="breadcrumb-item"><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
-            <li class="breadcrumb-item active">@Model.Product.Name</li>
-        </ol>
-    </nav>
-
-    <div class="row g-4">
-        <!-- صورة المنتج -->
-        <div class="col-md-5 text-center">
-            <img src="~/Products/@Model.Product.ImageFileName" onerror="this.src='/images/product-placeholder.jpg'" alt="@Model.Product.Name" class="img-fluid product-image" />
-        </div>
-
-        <!-- تفاصيل المنتج -->
-        <div class="col-md-7">
-            <h1 class="product-name mb-4">@Model.Product.Name</h1>
-
-            <div class="section">
-                <h3>خصائص المنتج</h3>
-                <ul>
-                    @foreach (var item in Model.Product.Proberties?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                    {
-                        <li>@item</li>
-                    }
-                </ul>
-            </div>
-
-            <div class="section">
-                <h3>تركيب المنتج</h3>
-                <ul>
-                    @foreach (var item in Model.Product.Form?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                    {
-                        <li>@item</li>
-                    }
-                </ul>
-            </div>
-
-            <div class="section">
-                <h3>فوائد المنتج</h3>
-                <ul>
-                    @foreach (var item in Model.Product.binfet?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                    {
-                        <li>@item</li>
-                    }
-                </ul>
-            </div>
-
-            <div class="section">
-                <h3>الجرعة ومعدلات الاستخدام</h3>
-                <ul>
-                    @foreach (var item in Model.Product.usage?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                    {
-                        <li>@item</li>
-                    }
-                </ul>
-            </div>
-
-            <div class="section">
-                <h3>بيانات المنتج</h3>
-                <ul>
-                    @foreach (var item in Model.Product.productdata?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                    {
-                        <li>@item</li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- منتجات مشابهة -->
-    <div class="row mt-5">
-        <h3 class="mb-3">منتجات مشابهة</h3>
-        <div class="col-sm-6 col-lg-3">
-            <a asp-action="Details" asp-route-id="@Model.First.Id" class="text-decoration-none text-dark">
-                <div class="card similar-product-card text-center">
-                    <img src="~/Products/@Model.First.ImageFileName" alt="@Model.First.Name" class="card-img-top">
-                    <div class="card-body">
-                        <h6 class="card-title">@Model.First.Name</h6>
+                        <!-- Call to Action Buttons -->
+                        <div class="cta-container">
+                            <a asp-action="Contact" asp-controller="Home" class="btn btn-cta btn-outline" title="استفسار عن منتج @Model.Product.Name">
+                                <i class="bi bi-question-circle"></i> استفسار
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <a asp-action="Details" asp-route-id="@Model.Second.Id" class="text-decoration-none text-dark">
-                <div class="card similar-product-card text-center">
-                    <img src="~/Products/@Model.Second.ImageFileName" alt="@Model.Second.Name" class="card-img-top">
-                    <div class="card-body">
-                        <h6 class="card-title">@Model.Second.Name</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
+            </div>
 
-    <!-- التصنيف والوسوم -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="bg-white p-3 rounded shadow-sm">
-                <div class="mb-2">
-                    <strong>التصنيف:</strong> <a href="#" class="text-success">@Model.Product.Category</a>
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Product Properties -->
+                    <section class="info-card">
+                        <h2><i class="bi bi-list-check"></i> خصائص المنتج</h2>
+                        <ul>
+                            @foreach (var item in Model.Product.Proberties?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                    </section>
+
+                    <!-- Product Composition -->
+                    <section class="info-card">
+                        <h2><i class="bi bi-flask"></i> تركيب المنتج</h2>
+                        <ul itemprop="additionalProperty" itemscope itemtype="https://schema.org/PropertyValue">
+                            <meta itemprop="name" content="تركيب" />
+                            @foreach (var item in Model.Product.Form?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                            {
+                                <li itemprop="value">@item</li>
+                            }
+                        </ul>
+                    </section>
+
+                    <!-- Product Benefits -->
+                    <section class="info-card">
+                        <h2><i class="bi bi-gift"></i> فوائد المنتج</h2>
+                        <ul>
+                            @foreach (var item in Model.Product.binfet?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                    </section>
                 </div>
-                <div class="tags">
-                    <strong>الوسوم:</strong>
-                    @foreach (var tag in Model.Product.SeoTitle?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                    {
-                        <a href="#">@tag</a>
-                    }
+
+                <div class="col-lg-4">
+                    <!-- Usage Recommendations -->
+                    <section class="info-card">
+                        <h2><i class="bi bi-clipboard-data"></i> معدلات الاستخدام</h2>
+                        <ul itemprop="additionalProperty" itemscope itemtype="https://schema.org/PropertyValue">
+                            <meta itemprop="name" content="معدلات الاستخدام" />
+                            @foreach (var item in Model.Product.usage?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                            {
+                                <li itemprop="value">@item</li>
+                            }
+                        </ul>
+                    </section>
+
+                    <!-- Product Data -->
+                    <section class="info-card">
+                        <h2><i class="bi bi-info-circle"></i> بيانات المنتج</h2>
+                        <ul>
+                            @foreach (var item in Model.Product.productdata?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                    </section>
+
+                    <!-- Tags -->
+                    <section class="info-card">
+                        <h2><i class="bi bi-tags"></i> الوسوم</h2>
+                        <div class="tags-section">
+                            @foreach (var tag in Model.Product.SeoTitle?.Split(new[] { "\n", "\r\n", "," }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                            {
+                                <a href="#" class="tag" title="منتجات متعلقة بـ @tag.Trim()"><i class="bi bi-tag"></i> @tag.Trim()</a>
+                            }
+                        </div>
+                    </section>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-}
+            <!-- Similar Products Section -->
+            @if (Model.First != null || Model.Second != null)
+            {
+                <section class="similar-products-section">
+                    <h2 class="similar-products-title"><i class="bi bi-grid"></i> منتجات مشابهة</h2>
+                    <div class="row g-4">
+                        @if (Model.First != null)
+                        {
+                            <div class="col-md-6 col-lg-4">
+                                <a asp-action="Details"
+                                   asp-route-id="@Model.First.Id"
+                                   asp-route-slug="@Model.First.Name.Replace(" ", "-")"
+                                   class="text-decoration-none"
+                                   title="تفاصيل منتج @Model.First.Name">
+                                    <div class="similar-product-card">
+                                        <div class="similar-product-img">
+                                            <img src="~/Products/@Model.First.ImageFileName"
+                                                 onerror="this.src='/images/product-placeholder.jpg'"
+                                                 alt="@Model.First.Name - @Model.First.Category من BlueGreenEG"
+                                                 loading="lazy">
+                                        </div>
+                                        <h3 class="similar-product-title">@Model.First.Name</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                        @if (Model.Second != null)
+                        {
+                            <div class="col-md-6 col-lg-4">
+                                <a asp-action="Details"
+                                   asp-route-id="@Model.Second.Id"
+                                   asp-route-slug="@Model.Second.Name.Replace(" ", "-")"
+                                   class="text-decoration-none"
+                                   title="تفاصيل منتج @Model.Second.Name">
+                                    <div class="similar-product-card">
+                                        <div class="similar-product-img">
+                                            <img src="~/Products/@Model.Second.ImageFileName"
+                                                 onerror="this.src='/images/product-placeholder.jpg'"
+                                                 alt="@Model.Second.Name - @Model.Second.Category من BlueGreenEG"
+                                                 loading="lazy">
+                                        </div>
+                                        <h3 class="similar-product-title">@Model.Second.Name</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </section>
+            }
+
+            <!-- Schema.org Product Markup -->
+            <script type="application/ld+json">
+                {
+                  "name": "@Model.Product.Name",
+                  "image": "@Url.Content($"~/Products/{Model.Product.ImageFileName}")",
+                  "category": "@Model.Product.Category",
+                  "brand": {
+                    "name": "بلو جرين للتنمية الزراعية"
+                  }
+                }
+            </script>
+        </article>
+    </div>
+
+    @section Scripts {
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // وظيفة لتغيير الصورة الرئيسية عند النقر على الصور المصغرة
+            function changeImage(element) {
+                document.getElementById('mainProductImage').src = element.src;
+
+                // إزالة الفئة النشطة من جميع الصور المصغرة
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                thumbnails.forEach(thumb => {
+                    thumb.classList.remove('active');
+                });
+
+                // إضافة الفئة النشطة للصورة المصغرة التي تم النقر عليها
+                element.classList.add('active');
+            }
+        </script>
+    }
+</body>
+</html>
