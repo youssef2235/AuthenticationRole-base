@@ -1,56 +1,334 @@
 ﻿@model List<AuthenticationRole_base.Models.Product>
 @{
     ViewData["Title"] = "منتجات بلو جرين";
-}
-@section Styles{
-    <link rel="stylesheet" href="~/css/productspage.css" />
-}
-<div class="blue-green-products">
-    <div class="container">
-        <h1 class="main-title">منتجات بلو جرين</h1>
+    var search = Context.Request.Query["search"].ToString();
+    var category = Context.Request.Query["category"].ToString();
+    var categories = Model.Select(p => p.Category).Distinct().OrderBy(c => c).ToList();
 
-        <div class="products-container">
-            @foreach (var product in Model)
+    var filteredProducts = Model.Where(p =>
+        (string.IsNullOrWhiteSpace(search) ||
+         p.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+         p.Description.Contains(search, StringComparison.OrdinalIgnoreCase))
+        &&
+        (string.IsNullOrWhiteSpace(category) || p.Category == category)
+    ).ToList();
+}
+
+@section Styles {
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary-color: #2c7be5;
+            --secondary-color: #00d97e;
+            --dark-color: #12263f;
+            --light-color: #f9fbfd;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        html {
+            overflow-y: scroll; /* يخلي فيه مساحة ثابتة للسكرول حتى لو مفيش */
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            direction: rtl;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), #1a5bc7);
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            color: white;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-subtitle {
+            font-weight: 500;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .filter-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark-color);
+        }
+        
+        .product-description {
+            color: #6e84a3;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        
+        .product-category {
+            background: rgba(44, 123, 229, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-details {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+        
+        .btn-details:hover {
+            background-color: #00c571;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .no-results {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .no-results-icon {
+            font-size: 3rem;
+            color: #f6c343;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-btn {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            border: 1px solid #e3ebf6;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(44, 123, 229, 0.25);
+        }
+        
+        .category-badge {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .category-badge:hover {
+            transform: scale(1.05);
+        }
+        
+        .active-category {
+            background-color: var(--primary-color) !important;
+            color: white !important;
+        }
+    </style>
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-title" style="color:lawngreen">منتجات بلو جرين</h1>
+        <p class="page-subtitle">منتجات تستحق الثقة </p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="filter-card">
+        <form method="get" class="row g-3 align-items-center">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                    <input type="text" name="search" value="@search" class="form-control border-start-0" placeholder="ابحث عن منتج...">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <select name="category" class="form-select" style="padding-right:30px">
+                    @if (string.IsNullOrEmpty(category))
+                    {
+                        <option value="" selected>كل الفئات</option>
+                    }
+                    else
+                    {
+                        <option value="">كل الفئات</option>
+                    }
+
+                    @foreach (var cat in categories)
+                    {
+                        if (cat == category)
+                        {
+                            <option value="@cat" selected>@cat</option>
+                        }
+                        else
+                        {
+                            <option value="@cat">@cat</option>
+                        }
+                    }
+                </select>
+
+            </div>
+            <div class="col-md-3">
+                <button class="btn search-btn w-100 text-white" type="submit">
+                    <i class="fas fa-filter me-2"></i> تصفية النتائج
+                </button>
+            </div>
+        </form>
+        
+        @if (!string.IsNullOrEmpty(category)) {
+            <div class="mt-3">
+                <a asp-action="Products" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-times me-1"></i> إزالة الفلتر
+                </a>
+            </div>
+        }
+    </div>
+
+    @if (filteredProducts.Any())
+    {
+        <div class="mb-4">
+            <h5 class="fw-bold">@filteredProducts.Count منتجات متاحة</h5>
+            
+            <div class="d-flex flex-wrap gap-2 mt-2">
+                @foreach (var cat in categories)
+                {
+                    <a href="?category=@cat" class="category-badge text-decoration-none @(cat == category ? "active-category" : "")">
+                        <span class="badge @(cat == category ? "bg-primary" : "bg-light text-dark")">@cat</span>
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+            @foreach (var product in filteredProducts)
             {
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="~/products/@product.ImageFileName" alt="@product.Name">
-                    </div>
-                    <div class="product-content">
-                        <h3>@product.Name</h3>
-                        <p>@product.Description</p>
-                        <a href="/Products/Details/@product.Id" class="details-button">تفاصيل</a>
+                <div class="col">
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="~/products/@product.ImageFileName" alt="@product.Name" class="img-fluid">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">@product.Name</h3>
+                            <p class="product-description">@product.Description</p>
+                            <span class="product-category">@product.Category</span>
+                            <a href="/Product/Details/@product.Id" class="btn btn-details">
+                                <i class="fas fa-info-circle me-2"></i> التفاصيل
+                            </a>
+                        </div>
                     </div>
                 </div>
             }
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="no-results">
+            <div class="no-results-icon">
+                <i class="fas fa-search-minus"></i>
+            </div>
+            <h3 class="fw-bold mb-3">لا توجد نتائج مطابقة</h3>
+            <p class="text-muted mb-4">لم نتمكن من العثور على منتجات تطابق بحثك "@search"@(!string.IsNullOrEmpty(category) ? $" ضمن فئة {category}" : "")</p>
+            <a asp-action="Products" class="btn btn-primary px-4">
+                <i class="fas fa-store me-2"></i> تصفح جميع المنتجات
+            </a>
+        </div>
+    }
 </div>
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Optional: Add intersection observer to make products appear when scrolled into view
-        if ('IntersectionObserver' in window) {
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // يمكن إضافة أي تفاعلات إضافية هنا
+        document.addEventListener('DOMContentLoaded', function() {
+            // إضافة تأثيرات للبطاقات عند التمرير
             const productCards = document.querySelectorAll('.product-card');
-
-            // Remove the initial animation styles so we can control them with the observer
-            productCards.forEach(card => {
-                card.style.animation = 'none';
-                card.style.opacity = '0';
-            });
-
+            
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
+                entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.animation = `fadeIn 0.5s ease forwards ${index * 0.1}s`;
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
                     }
                 });
             }, { threshold: 0.1 });
-
+            
             productCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
                 observer.observe(card);
             });
-        }
-    });
-</script>
+        });
+    </script>
+}

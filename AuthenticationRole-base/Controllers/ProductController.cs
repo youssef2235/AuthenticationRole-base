@@ -23,6 +23,8 @@ namespace AuthenticationRole_base.Controllers
             var products = context.Products.ToList();
             return View(products);
         }
+        [Authorize(Roles = "admin")]
+
         public IActionResult Index()
         {
             var products = context.Products.ToList();
@@ -34,6 +36,7 @@ namespace AuthenticationRole_base.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "admin")]
 
         [HttpPost]
         public IActionResult Create(ProductDto productDto)
@@ -134,9 +137,9 @@ namespace AuthenticationRole_base.Controllers
                 Name = product.Name,
                 Brand = product.Brand,
                 Category = product.Category,
-                Price = product.Price,
+                Price = (double)product.Price,
                 Description = product.Description,
-                Quantity = product.Quantity,
+                Quantity = (int)product.Quantity,
                 Proberties = product.Proberties,
                 Form = product.Form,
                 binfet = product.binfet,
@@ -154,6 +157,7 @@ namespace AuthenticationRole_base.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
 
         public IActionResult Edit(int id, ProductDto productDto)
         {

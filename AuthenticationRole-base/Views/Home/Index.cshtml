@@ -1,14 +1,15 @@
 ﻿@model BlueGreenEG.ViewModels.HomeViewModel
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "الصفحة الرئيسية - بلوجرين للتنمية الزراعية";
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/home.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/home.css"  />
 }
-
-
 
 <!-- Hero Section -->
 <section class="hero" id="home">
@@ -24,17 +25,17 @@
     <h2 class="section-title">خدماتنا الرئيسية</h2>
     <div class="services-grid">
         <a asp-page="/Services/TechnicalSupport" class="service-card">
-            <div class="service-icon">🚜</div>
+            <div class="service-icon"><i class="fas fa-tractor"></i></div>
             <h3>الدعم الفني</h3>
             <p>خدمات استشارية وفنية متخصصة لضمان جودة المحاصيل وزيادة الإنتاجية</p>
         </a>
         <a asp-action="AllProducts" asp-controller="Product" class="service-card">
-            <div class="service-icon">⚗️</div>
+            <div class="service-icon"><i class="fas fa-flask"></i></div>
             <h3>الأسمدة - المبيدات</h3>
             <p>منتجات عالية الجودة وصديقة للبيئة لتغذية التربة ومكافحة الآفات بشكل فعال</p>
         </a>
         <a asp-page="/Services/Laboratory" class="service-card">
-            <div class="service-icon">🌱</div>
+            <div class="service-icon"><i class="fas fa-microscope"></i></div>
             <h3>معمل بلوجرين</h3>
             <p>مختبرات متطورة لفحص التربة والمياه وتحليل جودة المحاصيل</p>
         </a>
@@ -43,53 +44,61 @@
 
 <!-- Products and Services Section with Accordion -->
 <section class="product-services-section" id="products-services">
-    <h2 class="product-services-title">المنتجات والخدمات</h2>
+    <h2 class="section-title">المنتجات والخدمات</h2>
 
     <div class="accordion-container">
         <div class="accordion-item">
             <div class="accordion-header">
-                <span>المنتجات</span>
-                <span class="accordion-icon">▼</span>
+                <span><i class="fas fa-seedling me-2"></i> المنتجات</span>
+                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content">
                 <div class="accordion-content-inner">
-                    الأسمدة الاحادية - المخصبات الزراعية - الاحماض - المبيدات الفطرية - المبيدات الحشرية - مبيدات النيماتودا - مبيدات الحشائش
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check-circle text-success me-2"></i> الأسمدة الاحادية</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> المخصبات الزراعية</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> الاحماض</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> المبيدات الفطرية</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> المبيدات الحشرية</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> مبيدات النيماتودا</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> مبيدات الحشائش</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <div class="accordion-item">
             <div class="accordion-header">
-                <span>معمل بلوجرين</span>
-                <span class="accordion-icon">▼</span>
+                <span><i class="fas fa-flask me-2"></i> معمل بلوجرين</span>
+                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content">
                 <div class="accordion-content-inner">
-                    خدمات معمل بلوجرين المتخصصة في فحص التربة والنبات والمياه
+                    <p>خدمات معمل بلوجرين المتخصصة في فحص التربة والنبات والمياه</p>
                 </div>
             </div>
         </div>
 
         <div class="accordion-item">
             <div class="accordion-header">
-                <span>شبكات الري الحديث</span>
-                <span class="accordion-icon">▼</span>
+                <span><i class="fas fa-tint me-2"></i> شبكات الري الحديث</span>
+                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content">
                 <div class="accordion-content-inner">
-                    أنظمة الري بالتنقيط والرشاشات وحلول الري الذكية
+                    <p>أنظمة الري بالتنقيط والرشاشات وحلول الري الذكية</p>
                 </div>
             </div>
         </div>
 
         <div class="accordion-item">
             <div class="accordion-header">
-                <span>الدعم الفني</span>
-                <span class="accordion-icon">▼</span>
+                <span><i class="fas fa-headset me-2"></i> الدعم الفني</span>
+                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
             </div>
             <div class="accordion-content">
                 <div class="accordion-content-inner">
-                    خدمات الاستشارات الزراعية المتخصصة والدعم الفني للمزارعين
+                    <p>خدمات الاستشارات الزراعية المتخصصة والدعم الفني للمزارعين</p>
                 </div>
             </div>
         </div>
@@ -103,16 +112,16 @@
         @foreach (var product in Model.Products)
         {
             <a asp-action="Details" asp-controller="Product" asp-route-Id="@product.Id" class="product-card">
-                <img src="~/Products/@product.ImageFileName" alt="سماد عضوي" class="product-img">
+                <span class="product-category">@product.Category</span>
+                <img src="~/Products/@product.ImageFileName" alt="@product.Name" class="product-img">
                 <div class="product-info">
                     <h3>@product.Name</h3>
                     <p>@product.Description</p>
+                    <span class="read-more">عرض التفاصيل <i class="fas fa-arrow-left"></i></span>
                 </div>
             </a>
         }
-
     </div>
-
 </section>
 
 <!-- Articles Section -->
@@ -125,12 +134,12 @@
                 <img src="~/Articles/@article.ImageFileName" alt="@article.Title" class="article-img">
                 <div class="article-info">
                     <div class="article-meta">
-                        <span>@article.CreatedAt</span>
-                        <span>@article.WriterJob/ @article.Writer</span>
+                        <span><i class="far fa-calendar-alt me-1"></i> @article.CreatedAt.ToString("dd/MM/yyyy")</span>
+                        <span><i class="fas fa-user me-1"></i> @article.Writer</span>
                     </div>
                     <h3>@article.Title</h3>
-                    <p>@article.Content</p>
-                    <span class="read-more">اقرأ المزيد ←</span>
+                    <p>@(article.Content.Length > 150 ? article.Content.Substring(0, 150) + "..." : article.Content)</p>
+                    <span class="read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                 </div>
             </a>
         }
@@ -147,85 +156,106 @@
     </form>
 </section>
 
-<script>
-                        // Accordion functionality for product services section
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get all accordion items
-        const accordionItems = document.querySelectorAll('.accordion-item');
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Accordion functionality for product services section
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all accordion items
+            const accordionItems = document.querySelectorAll('.accordion-item');
 
-        // Set default state - close all items
-        accordionItems.forEach(item => {
-            const content = item.querySelector('.accordion-content');
-            if (content) {
-                content.style.maxHeight = '0';
-                content.style.overflow = 'hidden';
-                content.style.transition = 'max-height 0.3s ease-out';
-            }
-        });
+            // Set default state - close all items
+            accordionItems.forEach(item => {
+                const content = item.querySelector('.accordion-content');
+                if (content) {
+                    content.style.maxHeight = '0';
+                    content.style.overflow = 'hidden';
+                    content.style.transition = 'max-height 0.3s ease-out';
+                }
+            });
 
-        // Add click event listener to each accordion header
-        accordionItems.forEach(item => {
-            const header = item.querySelector('.accordion-header');
-            const content = item.querySelector('.accordion-content');
-            const icon = item.querySelector('.accordion-icon');
+            // Add click event listener to each accordion header
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                const icon = item.querySelector('.accordion-icon i');
 
-            if (header && content) {
-                header.addEventListener('click', function() {
-                    // Check if item is active
-                    const isActive = header.classList.contains('active');
+                if (header && content) {
+                    header.addEventListener('click', function() {
+                        // Check if item is active
+                        const isActive = header.classList.contains('active');
 
-                    // Close all other open items first
-                    accordionItems.forEach(otherItem => {
-                        if (otherItem !== item) {
-                            const otherHeader = otherItem.querySelector('.accordion-header');
-                            const otherContent = otherItem.querySelector('.accordion-content');
-                            const otherIcon = otherItem.querySelector('.accordion-icon');
+                        // Close all other open items first
+                        accordionItems.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                const otherHeader = otherItem.querySelector('.accordion-header');
+                                const otherContent = otherItem.querySelector('.accordion-content');
+                                const otherIcon = otherItem.querySelector('.accordion-icon i');
 
-                            if (otherHeader && otherContent && otherIcon) {
-                                otherHeader.classList.remove('active');
-                                otherContent.style.maxHeight = '0';
-                                otherIcon.textContent = '▼';
+                                if (otherHeader && otherContent && otherIcon) {
+                                    otherHeader.classList.remove('active');
+                                    otherContent.style.maxHeight = '0';
+                                    otherIcon.className = 'fas fa-chevron-down';
+                                }
                             }
+                        });
+
+                        // Toggle current item state
+                        if (isActive) {
+                            header.classList.remove('active');
+                            content.style.maxHeight = '0';
+                            if (icon) icon.className = 'fas fa-chevron-down';
+                        } else {
+                            header.classList.add('active');
+                            content.style.maxHeight = content.scrollHeight + 'px';
+                            if (icon) icon.className = 'fas fa-chevron-up';
                         }
                     });
+                }
+            });
 
-                    // Toggle current item state
-                    if (isActive) {
-                        header.classList.remove('active');
-                        content.style.maxHeight = '0';
-                        if (icon) icon.textContent = '▼';
-                    } else {
-                        header.classList.add('active');
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                        if (icon) icon.textContent = '▲';
+            // Hero section button functionality
+            const heroButton = document.querySelector('.hero-button');
+            if (heroButton) {
+                heroButton.addEventListener('click', function() {
+                    document.getElementById('services').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Newsletter form submission
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const emailInput = this.querySelector('input[type="email"]');
+
+                    if (emailInput && emailInput.value) {
+                        // Here you would normally send the data to your backend
+                        alert('شكراً للاشتراك في نشرتنا البريدية!');
+                        emailInput.value = '';
                     }
                 });
             }
-        });
 
-        // Hero section button functionality
-        const heroButton = document.querySelector('.hero-button');
-        if (heroButton) {
-            heroButton.addEventListener('click', function() {
-                document.getElementById('services').scrollIntoView({
-                    behavior: 'smooth'
+            // Animation on scroll
+            const animateElements = document.querySelectorAll('.service-card, .product-card, .article-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
                 });
-            });
-        }
+            }, { threshold: 0.1 });
 
-        // Newsletter form submission
-        const newsletterForm = document.querySelector('.newsletter-form');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const emailInput = this.querySelector('input[type="email"]');
-
-                if (emailInput && emailInput.value) {
-                    // Here you would normally send the data to your backend
-                    alert('شكراً للاشتراك في نشرتنا البريدية!');
-                    emailInput.value = '';
-                }
+            animateElements.forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
             });
-        }
-    });
-</script>
+        });
+    </script>
+}

@@ -9,13 +9,13 @@ namespace AuthenticationRole_base.Models
         [MaxLength(100)]
         public string Name { get; set; } = "";
         [MaxLength(100)]
-        public string Brand { get; set; } = "";
+        public string? Brand { get; set; } = "";
         [MaxLength(100)]
-        public string Category { get; set; } = "";
+        public string? Category { get; set; } = "";
         [Precision(16, 2)]
-        public double Price { get; set; }
-        public string Description { get; set; } = "";
-        public int Quantity { get; set; }
+        public double? Price { get; set; }
+        public string? Description { get; set; } = "";
+        public int? Quantity { get; set; }
 
         public string? Proberties { get; set; } = "";
         public string? Form { get; set; } = "";

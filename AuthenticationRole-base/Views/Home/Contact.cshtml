@@ -1,6 +1,8 @@
-﻿@{
+﻿@model BlueGreenEG.Models.FormContact
+@{
     ViewData["Title"] = "تواصل معنا";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "_Layout";
+    
 }
 
 <div class="container my-5" dir="rtl">
@@ -11,7 +13,13 @@
             <p class="lead">نحن سعداء بتواصلك معنا، ونتطلع إلى الرد على استفساراتك وتقديم المساعدة التي تحتاجها</p>
         </div>
     </div>
-
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
     <!-- معلومات الاتصال والنموذج -->
     <div class="row mb-5">
         <!-- معلومات الاتصال -->
@@ -69,26 +77,29 @@
                 <div class="card-body">
                     <h3 class="card-title mb-4">أرسل لنا رسالة</h3>
 
-                    <form id="contactForm">
+                    <form id="contactForm" asp-action="Create" asp-controller="FormContacts" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="name" class="form-label">الاسم الكامل <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="name" required>
+                                <label asp-for="Name" class="form-label">الاسم<span class="text-danger">*</span></label>
+                                <input asp-for="Name" type="text" class="form-control" required />
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">البريد الإلكتروني <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" id="email" required>
+                                <label asp-for="Email" class="form-label">البريد الإلكتروني <span class="text-danger">*</span></label>
+                                <input asp-for="Email" type="email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="phone" class="form-label">رقم الهاتف</label>
-                                <input type="tel" class="form-control" id="phone">
+                                <label asp-for="PhoneNumber" class="form-label">رقم الهاتف</label>
+                                <input asp-for="PhoneNumber" type="tel" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="subject" class="form-label">الموضوع <span class="text-danger">*</span></label>
-                                <select class="form-select" id="subject" required>
+                                <label asp-for="SubMessage" class="form-label">الموضوع <span class="text-danger">*</span></label>
+                                <select class="form-select" asp-for="SubMessage">
                                     <option selected disabled value="">اختر الموضوع...</option>
                                     <option value="استفسار">استفسار عام</option>
                                     <option value="منتجات">منتجات زراعية</option>
@@ -98,23 +109,27 @@
                                     <option value="دعم">الدعم الفني</option>
                                     <option value="آخر">آخر</option>
                                 </select>
+                                <span asp-validation-for="SubMessage" class="text-danger"></span>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="message" class="form-label">الرسالة <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                            <label asp-for="Message" class="form-label">الرسالة <span class="text-danger">*</span></label>
+                            <textarea asp-for="Message" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="privacy">
-                            <label class="form-check-label" for="privacy">أوافق على سياسة الخصوصية وشروط الاستخدام</label>
+                            <input for="AcceptPolicy" type="checkbox" class="form-check-input" />
+                            <label class="form-check-label" for="AcceptPolicy">أوافق على سياسة الخصوصية وشروط الاستخدام</label>
+                            <span validation-for="AcceptPolicy" class="text-danger"></span>
                         </div>
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary btn-lg px-5">إرسال</button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -136,7 +151,7 @@
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            نعمل من الأحد إلى الخميس من الساعة 8 صباحاً حتى 5 مساءً. نحن مغلقون يومي الجمعة والسبت.
+                            نعمل من السبت إلى الخميس من الساعة 8 صباحاً حتى 5 مساءً..
                         </div>
                     </div>
                 </div>
@@ -174,7 +189,7 @@
             <h2 class="mb-4">تابعنا على وسائل التواصل الاجتماعي</h2>
             <div class="d-flex justify-content-center gap-3 mb-4">
                 <a href="#" class="btn btn-outline-primary rounded-circle p-3"><i class="bi bi-facebook fs-4"></i></a>
-                <a href="#" class="btn btn-outline-success rounded-circle p-3"><i class="bi bi-whatsapp fs-4"></i></a>
+                <a href="https://wa.me/+201004514461" class="btn btn-outline-success rounded-circle p-3"><i class="bi bi-whatsapp fs-4"></i></a>
             </div>
             <p>نتطلع للتواصل معكم وتلبية احتياجاتكم</p>
         </div>
@@ -182,18 +197,5 @@
 </div>
 
 @section Scripts {
-    <script>
-        $(document).ready(function() {
-            // التحقق من صحة النموذج قبل الإرسال
-            $("#contactForm").submit(function(e) {
-                e.preventDefault();
-
-                // هنا يمكن إضافة المزيد من التحقق من صحة البيانات
-
-                // إظهار رسالة نجاح
-                alert("تم إرسال رسالتك بنجاح! سنقوم بالرد عليك في أقرب وقت ممكن.");
-                this.reset();
-            });
-        });
-    </script>
+    <partial name="_ValidationScriptsPartial" />
 }

@@ -2,6 +2,7 @@ using AuthenticationRole_base.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using AuthenticationRole_base.Models;
+using System.Runtime.Intrinsics.X86;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,22 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 var app = builder.Build();
+var webHostEnvironment = app.Services.GetRequiredService<IWebHostEnvironment>();
+var articlesPath = Path.Combine(webHostEnvironment.WebRootPath, "Articles");
+if (!Directory.Exists(articlesPath))
+{
+    Directory.CreateDirectory(articlesPath);
+}
+app.UseStatusCodePages(async context =>
+{
+    var response = context.HttpContext.Response;
+
+    if (response.StatusCode == 404)
+    {
+        response.Redirect("/Error/404");
+    }
+});
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -30,14 +47,11 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.MapStaticAssets();
 app.MapRazorPages();
-
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();
