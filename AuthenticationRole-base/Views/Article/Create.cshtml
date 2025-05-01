@@ -113,11 +113,45 @@
                             <div class="col-sm-8">
                                 <select asp-for="Category" class="form-select">
                                     <option value="">-- اختر الفئة --</option>
-                                    <option value="ارشاد زراعي">ارشاد زراعي</option>
-                                    <option value="امراض زراعية">امراض زراعية</option>
-                                    <option value="اسمدة و مبيدات">اسمدة و مبيدات</option>
-                                    <option value="موضوعات تنموية و زراعية">موضوعا تتنموية و زراعية</option>
-                                    <option value="تكنولوجيا زراعية">تكنولوجيا زراعية</option>
+                                    <option value="مبيدات">مبيدات</option>
+                                    <option value="أسمدة">أسمدة</option>
+                                    <option value="زراعة عضوية">زراعة عضوية</option>
+                                    <option value="الزراعة الذكية">الزراعة الذكية</option>
+                                    <option value="الزراعة المحمية">الزراعة المحمية</option>
+                                    <option value="الزراعة بدون تربة">الزراعة بدون تربة</option>
+                                    <option value="البيوت المحمية">البيوت المحمية</option>
+                                    <option value="الري بالتنقيط">الري بالتنقيط</option>
+                                    <option value="الري بالرش">الري بالرش</option>
+                                    <option value="إدارة التربة">إدارة التربة</option>
+                                    <option value="تحليل التربة">تحليل التربة</option>
+                                    <option value="وقاية النبات">وقاية النبات</option>
+                                    <option value="أمراض النبات">أمراض النبات</option>
+                                    <option value="حشرات زراعية">حشرات زراعية</option>
+                                    <option value="محاصيل حقلية">محاصيل حقلية</option>
+                                    <option value="محاصيل صيفية">محاصيل صيفية</option>
+                                    <option value="محاصيل شتوية">محاصيل شتوية</option>
+                                    <option value="محاصيل استراتيجية">محاصيل استراتيجية</option>
+                                    <option value="إنتاج الخضر">إنتاج الخضر</option>
+                                    <option value="إنتاج الفاكهة">إنتاج الفاكهة</option>
+                                    <option value="نباتات طبية وعطرية">نباتات طبية وعطرية</option>
+                                    <option value="زراعة الزهور">زراعة الزهور</option>
+                                    <option value="النباتات المنزلية">النباتات المنزلية</option>
+                                    <option value="الزراعة المنزلية">الزراعة المنزلية</option>
+                                    <option value="تسميد">تسميد</option>
+                                    <option value="تدوير المخلفات الزراعية">تدوير المخلفات الزراعية</option>
+                                    <option value="الزراعة المائية">الزراعة المائية</option>
+                                    <option value="الزراعة العمودية">الزراعة العمودية</option>
+                                    <option value="أدوات ومعدات زراعية">أدوات ومعدات زراعية</option>
+                                    <option value="الثروة الحيوانية">الثروة الحيوانية</option>
+                                    <option value="تربية الدواجن">تربية الدواجن</option>
+                                    <option value="تربية الأغنام">تربية الأغنام</option>
+                                    <option value="تربية الأبقار">تربية الأبقار</option>
+                                    <option value="تربية النحل">تربية النحل</option>
+                                    <option value="الإنتاج السمكي">الإنتاج السمكي</option>
+                                    <option value="زراعة الأسطح">زراعة الأسطح</option>
+                                    <option value="إرشاد زراعي">إرشاد زراعي</option>
+                                    <option value="أخبار زراعية">أخبار زراعية</option>
+                                    <option value="مشاريع زراعية">مشاريع زراعية</option>
                                     <option value="اخرى">اخرى</option>
                                 </select>
                             </div>
@@ -134,13 +168,12 @@
                       
 
                         <!-- New Rich Text Editor Field for Full Article Content -->
-                        <div class="mb-3 row">
-                            <label for="Content" class="col-sm-4 col-form-label">محتوى المقال</label>
-                            <div class="col-sm-8">
-                                <textarea id="Content" name="Content" class="content-editor"></textarea>
-                                <span class="text-danger" id="content-validation"></span>
-                            </div>
+                        <div class="form-group">
+                            <label asp-for="Content">محتوى المقال</label>
+                            <textarea asp-for="Content" class="form-control" id="Content"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
+
 
                         <div class="mb-3 row">
                             <label asp-for="ImageFile" class="col-sm-4 col-form-label">صورة المقال</label>
@@ -167,82 +200,43 @@
 </div>
 
 @section Scripts {
+    <script src="https://cdn.tiny.cloud/1/hpkpbc2he4kkgqltluhoojhddikpqifoicmevf4ul6i3yt1e/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
     <script>
-        // Initialize TinyMCE with RTL support for Arabic
-              tinymce.init({
+        tinymce.init({
             selector: '#Content',
             height: 500,
             directionality: 'rtl',
-            plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
-            menubar: 'file edit view insert format tools table help',
-            toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen preview save print | insertfile image media template link anchor codesample | ltr rtl',
-            toolbar_sticky: true,
-
-
+            plugins: 'image media link code fullscreen lists',
+            toolbar: 'undo redo | styles | bold italic underline | alignleft aligncenter alignright | bullist numlist | image media link | fullscreen code',
+            convert_urls: false,
+            automatic_uploads: true,
+            images_upload_url: '/ImageUpload/UploadMedia',
+            media_live_embeds: true,
+            file_picker_types: 'image media',
             images_upload_handler: function (blobInfo, progress) {
-                return new Promise(function(resolve, reject) {
-                    var xhr, formData;
-
-                    xhr = new XMLHttpRequest();
-                    xhr.withCredentials = false;
-                    xhr.open('POST', '/ImageUpload/UploadImage');
-
-                    xhr.upload.onprogress = function (e) {
-                        progress(e.loaded / e.total * 100);
-                    };
-
-                    xhr.onload = function() {
-                        var json;
-
-                        if (xhr.status === 403) {
-                            reject('HTTP Error: ' + xhr.status + ' ' + xhr.statusText);
-                            return;
-                        }
-
-                        if (xhr.status < 200 || xhr.status >= 300) {
+                return new Promise(function (resolve, reject) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/ImageUpload/UploadMedia');
+                    xhr.onload = function () {
+                        if (xhr.status != 200) {
                             reject('HTTP Error: ' + xhr.status);
                             return;
                         }
-
-                        try {
-                            json = JSON.parse(xhr.responseText);
-                        } catch (e) {
-                            reject('Invalid JSON response: ' + xhr.responseText);
-                            return;
-                        }
-
-                        if (!json || typeof json.location != 'string') {
-                            reject('Invalid JSON response structure');
-                            return;
-                        }
-
+                        var json = JSON.parse(xhr.responseText);
                         resolve(json.location);
                     };
-
-                    xhr.onerror = function() {
-                        reject('Image upload failed due to a network error');
-                    };
-
-                    formData = new FormData();
+                    var formData = new FormData();
                     formData.append('file', blobInfo.blob(), blobInfo.filename());
-
                     xhr.send(formData);
                 });
             },
-
-            // Other settings
-            autosave_ask_before_unload: true,
-            autosave_interval: '30s',
-            autosave_prefix: '{path}{query}-{id}-',
-            autosave_restore_when_empty: false,
-            autosave_retention: '2m',
-            image_advtab: true,
-
-            setup: function(editor) {
-                editor.on('change', function() {
+            setup: function (editor) {
+                editor.on('change', function () {
                     editor.save();
                 });
             }
         });
     </script>
+
 }

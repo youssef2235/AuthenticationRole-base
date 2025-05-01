@@ -1,268 +1,143 @@
 ﻿@model BlueGreenEG.ViewModels.ArticleDetails
+
 @{
     ViewData["Title"] = Model.Articles.Title;
+    var tags = Model.Articles.SEO?.Split(',') ?? new string[] { };
+    var articleUrl = Context.Request.Scheme + "://" + Context.Request.Host + Context.Request.Path + Context.Request.QueryString;
+
 }
-<style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f4f7fa;
-    }
 
-    .article-details {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-        direction: rtl;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+@section Styles {
+    <link rel="stylesheet" href="~/css/article-details.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+}
 
-    .article-header {
-        margin-bottom: 2rem;
-        text-align: center;
-    }
+<div class="article-container">
+    <!-- المحتوى الرئيسي -->
+    <main class="article-main">
+        <!-- رأس المقال -->
+        <div class="article-header">
+            <img src="/Articles/@Model.Articles.ImageFileName" alt="@Model.Articles.Title" class="hero-image" />
+            <span class="article-badge">@Model.Articles.Category</span>
+        </div>
 
-    .article-title {
-        font-size: 2.5rem;
-        color: #1f2937;
-        margin-bottom: 1rem;
-        font-weight: bold;
-    }
+        <!-- محتوى المقال -->
+        <article class="article-content">
+            <h1 class="article-title">@Model.Articles.Title</h1>
 
-    .article-meta {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        color: #6b7280;
-        margin-bottom: 1rem;
-    }
-
-    .article-meta-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .article-category {
-        display: inline-block;
-        background-color: #16a34a;
-        color: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
-        font-size: 0.875rem;
-    }
-
-    .article-featured-image {
-        width: 100%;
-        height: auto;
-        max-height: 400px;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-bottom: 2rem;
-        transition: transform 0.3s ease-in-out;
-    }
-
-        .article-featured-image:hover {
-            transform: scale(1.05);
-        }
-
-    .article-section {
-        margin-bottom: 2rem;
-        background-color: #f9fafb;
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .section-title {
-        font-size: 1.75rem;
-        color: #1f2937;
-        margin-bottom: 1rem;
-        font-weight: 600;
-    }
-
-    .section-content {
-        font-size: 1.125rem;
-        line-height: 1.8;
-        color: #374151;
-    }
-
-    .back-to-articles {
-        display: inline-block;
-        margin-top: 2rem;
-        color: #16a34a;
-        font-weight: 600;
-        text-decoration: none;
-        font-size: 1.125rem;
-        transition: color 0.3s;
-    }
-
-        .back-to-articles:hover {
-            text-decoration: underline;
-            color: #107e36;
-        }
-
-    .author-info {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin: 2rem 0;
-        padding: 1rem;
-        background-color: #f9fafb;
-        border-radius: 8px;
-    }
-
-    .author-image {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-    .author-details {
-        flex: 1;
-    }
-
-    .author-name {
-        font-weight: 600;
-        color: #1f2937;
-        margin-bottom: 0.25rem;
-    }
-
-    .author-job {
-        color: #6b7280;
-        font-size: 0.875rem;
-    }
-
-    /* إضافة أنماط لمحتوى TinyMCE */
-    .article-full-content {
-        margin-top: 2rem;
-        padding: 2rem;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    }
-
-        /* تنسيق محتوى المحرر */
-        .article-full-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .article-full-content h1,
-        .article-full-content h2,
-        .article-full-content h3,
-        .article-full-content h4 {
-            color: #1f2937;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .article-full-content p {
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .article-full-content ul,
-        .article-full-content ol {
-            margin-bottom: 1rem;
-            padding-right: 1.5rem;
-        }
-
-        .article-full-content blockquote {
-            border-right: 4px solid #16a34a;
-            padding: 0.5rem 1rem;
-            margin: 1rem 0;
-            background-color: #f9fafb;
-            font-style: italic;
-        }
-
-        .article-full-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
-
-            .article-full-content table th,
-            .article-full-content table td {
-                border: 1px solid #e5e7eb;
-                padding: 0.75rem;
-                text-align: right;
-            }
-
-            .article-full-content table th {
-                background-color: #f9fafb;
-            }
-
-        .article-full-content a {
-            color: #16a34a;
-            text-decoration: none;
-        }
-
-            .article-full-content a:hover {
-                text-decoration: underline;
-            }
-
-        .article-full-content pre {
-            background-color: #1f2937;
-            color: #f9fafb;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-    /* تقسيم المقال إلى أقسام للقراءة السهلة */
-    .content-section {
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #e5e7eb;
-    }
-
-        .content-section:last-child {
-            border-bottom: none;
-        }
-</style>
-
-<div class="article-details">
-    <div class="article-header">
-        <h1 class="article-title">@Model.Articles.Title</h1>
-        <div class="article-meta">
-            <div class="article-meta-item">
-                <i class="bi bi-calendar"></i>
-                <span>@Model.Articles.CreatedAt.ToString("d MMMM yyyy")</span>
+            <div class="meta-info">
+                <span class="meta-item"><i class="bi bi-calendar"></i> @Model.Articles.CreatedAt.ToString("d MMMM yyyy")</span>
+                <span class="meta-item"><i class="bi bi-person"></i> @Model.Articles.Writer</span>
+                <span class="meta-item"><i class="bi bi-eye"></i> 2345 مشاهدة</span>
+                <span class="meta-item"><i class="bi bi-clock"></i> وقت القراءة: 5 دقائق</span>
             </div>
-            <div class="article-meta-item">
-                <i class="bi bi-person"></i>
-                <span>@Model.Articles.Writer</span>
+
+            <div class="article-body">
+                @if (!string.IsNullOrEmpty(Model.Articles.Content))
+                {
+                    @Html.Raw(Model.Articles.Content)
+                }
             </div>
+
+            <!-- مشاركة المقال -->
+            <div class="share-panel">
+                <h3 class="share-title">شارك هذا المقال</h3>
+                <div class="share-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=@articleUrl"
+                       target="_blank" class="share-btn facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=@articleUrl&text= @Model.Articles.Title"
+                       target="_blank" class="share-btn twitter">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a href="https://01022356064.whatsapp.com/send?text=@Model.Articles.Title%20@articleUrl"
+                       target="_blank" class="share-btn whatsapp">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=@articleUrl"
+                       target="_blank" class="share-btn linkedin">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- زر العودة -->
+            <div class="back-action">
+                <a asp-controller="Article" asp-action="Articles" class="back-btn">
+                    <i class="bi bi-arrow-left"></i> العودة إلى قائمة المقالات
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <!-- الشريط الجانبي المثبت -->
+    <aside class="article-sidebar" style="margin-top:60px">
+        <div class="sidebar-inner">
+            <!-- وسوم المقال -->
+            @if (tags.Any())
+            {
+                <div class="sidebar-widget">
+                    <h4 class="widget-title">وسوم المقال</h4>
+                    <div class="tag-cloud">
+                        @foreach (var tag in tags)
+                        {
+                            <a href="/Article/Articles?search=@tag.Trim()" class="tag-item">@tag.Trim()</a>
+                        }
+                    </div>
+                </div>
+            }
+
+            <!-- مقالات ذات صلة -->
+            @if (Model.relatedArticles != null && Model.relatedArticles.Any())
+            {
+                <div class="sidebar-widget">
+                    <h4 class="widget-title">مقالات ذات صلة</h4>
+                    <div class="related-posts">
+                        @foreach (var article in Model.relatedArticles)
+                        {
+                            <a asp-controller="Article" asp-action="Details" asp-route-id="@article.Id" class="related-post">
+                                <img src="/Articles/@article.ImageFileName" alt="@article.Title" />
+                                <h5 class="related-post-title">@article.Title</h5>
+                            </a>
+                        }
+                    </div>
+                </div>
+            }
+            @*
+            <!-- قسم إضافي -->
+            <div class="sidebar-widget highlight-box">
+                <h4 class="widget-title">هل تعلم؟</h4>
+                <p>الزراعة المستدامة يمكن أن تزيد الإنتاجية بنسبة تصل إلى 58% مع تقليل استخدام المياه بنسبة 30%.</p>
+            </div>
+            *@
         </div>
-        <span class="article-category">@Model.Articles.Category</span>
-    </div>
-
-    <img src="/Articles/@Model.Articles.ImageFileName" alt="@Model.Articles.Title" class="article-featured-image">
-
-
-    @if (!string.IsNullOrEmpty(Model.Articles.Content))
-    {
-        <div class="article-full-content">
-            @Html.Raw(Model.Articles.Content)
-        </div>
-    }
-
-    <div class="author-info">
-        <img src="~/images/Male-Avatar.png" alt="@Model.Articles.Writer" class="author-image">
-        <div class="author-details">
-            <div class="author-name">@Model.Articles.Writer</div>
-            <div class="author-job">كاتب محتوى في بلو جرين</div>
-        </div>
-    </div>
-
-    <a asp-controller="Article" asp-action="Articles" class="back-to-articles">
-        <i class="bi bi-arrow-right"></i> العودة إلى المقالات
-    </a>
+    </aside>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.article-sidebar');
+
+            function adjustSidebarHeight() {
+                if (window.innerWidth > 1024) {
+                    const windowHeight = window.innerHeight;
+                    const sidebarHeight = sidebar.scrollHeight;
+
+                    if (sidebarHeight > windowHeight) {
+                        sidebar.style.height = windowHeight + 'px';
+                    } else {
+                        sidebar.style.height = 'auto';
+                    }
+                } else {
+                    sidebar.style.height = 'auto';
+                }
+            }
+
+            window.addEventListener('resize', adjustSidebarHeight);
+            adjustSidebarHeight();
+        });
+    </script>
+}

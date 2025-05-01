@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BlueGreenEG.Models;
 using BlueGreenEG.ViewModels;
+using System.Text.RegularExpressions;
 
 namespace AuthenticationRole_base.Controllers
 {
@@ -107,14 +108,14 @@ namespace AuthenticationRole_base.Controllers
             var random = new Random();
             var randomArticles = sameCategoryArticles
                 .OrderBy(x => random.Next())
-                .Take(2)
+                .Take(4)
                 .ToList();
 
             var viewmodel = new ArticleDetails
             {
                 Articles = article,
-                First = randomArticles.ElementAtOrDefault(0) ?? new Article(),
-                Second = randomArticles.ElementAtOrDefault(1) ?? new Article()
+                relatedArticles = randomArticles?? new List<Article>()
+                
             };
 
             return View(viewmodel);
@@ -212,6 +213,15 @@ namespace AuthenticationRole_base.Controllers
             if (article == null)
             {
                 return NotFound();
+            }
+
+            var matches = Regex.Matches(article.Content ?? "", @"\/uploads\/articles\/[^\s""']+");
+
+            foreach (Match match in matches)
+            {
+                var filePath = Path.Combine("wwwroot", match.Value.TrimStart('/'));
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
             }
 
             string imageFullPath = Path.Combine(environment.WebRootPath, "Articles", article.ImageFileName);

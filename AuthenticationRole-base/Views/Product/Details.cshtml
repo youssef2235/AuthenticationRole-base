@@ -1,261 +1,236 @@
 ﻿@model BlueGreenEG.ViewModels.ProductDetails
-
 @{
     ViewData["Title"] = Model.Product.Name + " - " + Model.Product.Category;
 }
 
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] | BlueGreenEG</title>
-    <meta name="keywords" content="@Model.Product.SeoTitle" />
+    <title>@ViewData["Title"] | بلو جرين</title>
 
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="@Model.Product.Name | BlueGreenEG" />
-    <meta property="og:image" content="@Url.Content("~/Products/" + Model.Product.ImageFileName)" />
-    <meta property="og:type" content="product" />
-    <meta property="og:url" content="@Url.Action("Details", "Product", new { id = Model.Product.Id, slug = Model.Product.Name.Replace(" ", "-") }, Context.Request.Scheme)" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="@Url.Action("Details", "Product", new { id = Model.Product.Id, slug = Model.Product.Name.Replace(" ", "-") }, Context.Request.Scheme)" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 
-    @section Styles {
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-        <link rel="stylesheet" href="~/css/Product_details.css" />
-
-    }
+   <link rel="stylesheet" href="~/css/Product_details.css" />
 </head>
-
 <body>
-    <div class="container py-5">
-        <!-- Breadcrumb -->
-        <nav aria-label="مسار التنقل" class="mb-4">
-            <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a href="/" itemprop="item" title="الصفحة الرئيسية"><i class="bi bi-house"></i> <span itemprop="name">الرئيسية</span></a>
-                    <meta itemprop="position" content="1" />
-                </li>
-                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <a asp-action="Products" asp-controller="Product" itemprop="item" title="جميع المنتجات"> >> <span itemprop="name">المنتجات</span></a>
-                    <meta itemprop="position" content="2" />
-                </li>
-                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" hidden>
-                    <a asp-action="Category" asp-controller="Product" asp-route-category="@Model.Product.Category" itemprop="item" title="منتجات @Model.Product.Category"><span itemprop="name">@Model.Product.Category</span></a>
-                    <meta itemprop="position" content="3" />
-                </li>
-                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                    <span itemprop="name">@Model.Product.Name</span>
-                    <meta itemprop="position" content="4" />
-                </li>
-            </ol>
-        </nav>
-
-        <article class="product-content" itemscope itemtype="https://schema.org/Product">
-            <!-- Product Hero Section -->
-            <div class="product-hero">
-                <div class="row">
-                    <!-- Left Column - Image Gallery -->
-                    <div class="col-lg-5 mb-4">
-                        <div class="product-gallery">
-                            <div class="main-image-container">
-                                <img src="~/Products/@Model.Product.ImageFileName"
-                                     onerror="this.src='/images/product-placeholder.jpg'"
-                                     alt="@Model.Product.Name - @Model.Product.Category من BlueGreenEG"
-                                     id="mainProductImage"
-                                     loading="lazy"
-                                     itemprop="image" />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img src="~/Products/@Model.Product.ImageFileName"
-                                     class="thumbnail active"
-                                     onclick="changeImage(this)"
-                                     alt="صورة رئيسية لمنتج @Model.Product.Name"
-                                     loading="lazy" />
-                                <!-- الصور المصغرة الإضافية تضاف هنا -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column - Product Intro -->
-                    <div class="col-lg-7">
-                        <h1 class="product-title" itemprop="name">@Model.Product.Name</h1>
-
-                        <!-- Category Badge -->
-                        <div class="mb-4">
-                            <a href="#"
-                               class="tag category-tag"
-                               title="منتجات @Model.Product.Category">
-                                <i class="bi bi-folder"></i> <span itemprop="category">@Model.Product.Category</span>
-                            </a>
-                        </div>
-
-                        <!-- Call to Action Buttons -->
-                        <div class="cta-container">
-                            <a asp-action="Contact" asp-controller="Home" class="btn btn-cta btn-outline" title="استفسار عن منتج @Model.Product.Name">
-                                <i class="bi bi-question-circle"></i> استفسار
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-8">
-                    <!-- Product Properties -->
-                    <section class="info-card">
-                        <h2><i class="bi bi-list-check"></i> خصائص المنتج</h2>
-                        <ul>
-                            @foreach (var item in Model.Product.Proberties?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                            {
-                                <li>@item</li>
-                            }
-                        </ul>
-                    </section>
-
-                    <!-- Product Composition -->
-                    <section class="info-card">
-                        <h2><i class="bi bi-flask"></i> تركيب المنتج</h2>
-                        <ul itemprop="additionalProperty" itemscope itemtype="https://schema.org/PropertyValue">
-                            <meta itemprop="name" content="تركيب" />
-                            @foreach (var item in Model.Product.Form?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                            {
-                                <li itemprop="value">@item</li>
-                            }
-                        </ul>
-                    </section>
-
-                    <!-- Product Benefits -->
-                    <section class="info-card">
-                        <h2><i class="bi bi-gift"></i> فوائد المنتج</h2>
-                        <ul>
-                            @foreach (var item in Model.Product.binfet?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                            {
-                                <li>@item</li>
-                            }
-                        </ul>
-                    </section>
-                </div>
-
-                <div class="col-lg-4">
-                    <!-- Usage Recommendations -->
-                    <section class="info-card">
-                        <h2><i class="bi bi-clipboard-data"></i> معدلات الاستخدام</h2>
-                        <ul itemprop="additionalProperty" itemscope itemtype="https://schema.org/PropertyValue">
-                            <meta itemprop="name" content="معدلات الاستخدام" />
-                            @foreach (var item in Model.Product.usage?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                            {
-                                <li itemprop="value">@item</li>
-                            }
-                        </ul>
-                    </section>
-
-                    <!-- Product Data -->
-                    <section class="info-card">
-                        <h2><i class="bi bi-info-circle"></i> بيانات المنتج</h2>
-                        <ul>
-                            @foreach (var item in Model.Product.productdata?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                            {
-                                <li>@item</li>
-                            }
-                        </ul>
-                    </section>
-
-                    <!-- Tags -->
-                    <section class="info-card">
-                        <h2><i class="bi bi-tags"></i> الوسوم</h2>
-                        <div class="tags-section">
-                            @foreach (var tag in Model.Product.SeoTitle?.Split(new[] { "\n", "\r\n", "," }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
-                            {
-                                <a href="#" class="tag" title="منتجات متعلقة بـ @tag.Trim()"><i class="bi bi-tag"></i> @tag.Trim()</a>
-                            }
-                        </div>
-                    </section>
-                </div>
-            </div>
-
-            <!-- Similar Products Section -->
-            @if (Model.First != null || Model.Second != null)
-            {
-                <section class="similar-products-section">
-                    <h2 class="similar-products-title"><i class="bi bi-grid"></i> منتجات مشابهة</h2>
-                    <div class="row g-4">
-                        @if (Model.First != null)
-                        {
-                            <div class="col-md-6 col-lg-4">
-                                <a asp-action="Details"
-                                   asp-route-id="@Model.First.Id"
-                                   asp-route-slug="@Model.First.Name.Replace(" ", "-")"
-                                   class="text-decoration-none"
-                                   title="تفاصيل منتج @Model.First.Name">
-                                    <div class="similar-product-card">
-                                        <div class="similar-product-img">
-                                            <img src="~/Products/@Model.First.ImageFileName"
-                                                 onerror="this.src='/images/product-placeholder.jpg'"
-                                                 alt="@Model.First.Name - @Model.First.Category من BlueGreenEG"
-                                                 loading="lazy">
-                                        </div>
-                                        <h3 class="similar-product-title">@Model.First.Name</h3>
-                                    </div>
-                                </a>
-                            </div>
-                        }
-                        @if (Model.Second != null)
-                        {
-                            <div class="col-md-6 col-lg-4">
-                                <a asp-action="Details"
-                                   asp-route-id="@Model.Second.Id"
-                                   asp-route-slug="@Model.Second.Name.Replace(" ", "-")"
-                                   class="text-decoration-none"
-                                   title="تفاصيل منتج @Model.Second.Name">
-                                    <div class="similar-product-card">
-                                        <div class="similar-product-img">
-                                            <img src="~/Products/@Model.Second.ImageFileName"
-                                                 onerror="this.src='/images/product-placeholder.jpg'"
-                                                 alt="@Model.Second.Name - @Model.Second.Category من BlueGreenEG"
-                                                 loading="lazy">
-                                        </div>
-                                        <h3 class="similar-product-title">@Model.Second.Name</h3>
-                                    </div>
-                                </a>
-                            </div>
-                        }
-                    </div>
-                </section>
-            }
-
-            <!-- Schema.org Product Markup -->
-            <script type="application/ld+json">
-                {
-                  "name": "@Model.Product.Name",
-                  "image": "@Url.Content($"~/Products/{Model.Product.ImageFileName}")",
-                  "category": "@Model.Product.Category",
-                  "brand": {
-                    "name": "بلو جرين للتنمية الزراعية"
-                  }
-                }
-            </script>
-        </article>
+    <!-- Header -->
+    <div class="product-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                    <li class="breadcrumb-item"><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
+                    <li class="breadcrumb-item"><a href="/Product/Products?search=&category=@Model.Product.Category">@Model.Product.Category</a></li>
+                    <li class="breadcrumb-item active">@Model.Product.Name</li>
+                </ol>
+            </nav>
+        </div>
     </div>
 
-    @section Scripts {
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            // وظيفة لتغيير الصورة الرئيسية عند النقر على الصور المصغرة
-            function changeImage(element) {
-                document.getElementById('mainProductImage').src = element.src;
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Product Gallery -->
+            <div class="col-lg-6 mb-4">
+                <div class="product-card">
+                    <div class="main-image">
+                        <img src="~/Products/@Model.Product.ImageFileName"
+                             alt="@Model.Product.Name"
+                             id="mainProductImage"
+                             class="img-fluid"
+                             style="max-height: 100%"
+                             onerror="this.src='/images/product-placeholder.jpg'">
+                    </div>
+                    <div class="thumbnails">
+                        <img src="~/Products/@Model.Product.ImageFileName"
+                             class="thumbnail active"
+                             onclick="changeImage(this)"
+                             alt="@Model.Product.Name">
+                        <!-- يمكن إضافة المزيد من الصور المصغرة هنا -->
+                    </div>
+                </div>
+            </div>
 
-                // إزالة الفئة النشطة من جميع الصور المصغرة
-                const thumbnails = document.querySelectorAll('.thumbnail');
-                thumbnails.forEach(thumb => {
-                    thumb.classList.remove('active');
+            <!-- Product Info -->
+            <div class="col-lg-6 mb-4">
+                <div class="product-card h-100 p-4">
+                    <span class="category-badge">
+                        <i class="fas fa-leaf me-1"></i> @Model.Product.Category
+                    </span>
+                    <h1 class="product-title mb-3">@Model.Product.Name</h1>
+                    <p class="lead">@Model.Product.Description</p>
+
+                    <div class="d-flex gap-3 mt-4">
+                        <a asp-action="Contact" asp-controller="Home" class="btn btn-primary btn-lg flex-grow-1">
+                            <i class="fas fa-envelope me-2"></i> اطلب المنتج
+                        </a>
+                        <a asp-action="Contact" asp-controller="Home" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-phone me-2"></i> استفسار
+                        </a>
+                    </div>
+
+                    <!-- Quick Specs -->
+                    <div class="mt-4 pt-3 border-top">
+                        <h3 class="h5 mb-3">مواصفات سريعة</h3>
+                        <table class="specs-table">
+                            <tbody>
+                                @foreach (var item in Model.Product.productdata?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                                {
+                                    <tr>
+                                        <td>@item.Split(':')[0]</td>
+                                        <td>@(item.Contains(":") ? item.Split(':')[1] : item)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="row mt-4">
+            <div class="col-lg-8">
+                <!-- Properties -->
+                <div class="feature-card">
+                    <h3 class="feature-title"><i class="fas fa-list-check me-2"></i>الخصائص الفنية</h3>
+                    <ul class="feature-list">
+                        @foreach (var item in Model.Product.Proberties?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </div>
+
+                <!-- Benefits -->
+                <div class="feature-card">
+                    <h3 class="feature-title"><i class="fas fa-spa me-2"></i>فوائد المنتج</h3>
+                    <ul class="feature-list">
+                        @foreach (var item in Model.Product.binfet?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <!-- Composition -->
+                <div class="feature-card">
+                    <h3 class="feature-title"><i class="fas fa-flask me-2"></i>التركيب الكيميائي</h3>
+                    <ul class="feature-list">
+                        @foreach (var item in Model.Product.Form?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </div>
+
+                <!-- Usage -->
+                <div class="feature-card">
+                    <h3 class="feature-title"><i class="fas fa-clipboard-list me-2"></i>طريقة الاستخدام</h3>
+                    <ul class="feature-list">
+                        @foreach (var item in Model.Product.usage?.Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries) ?? Enumerable.Empty<string>())
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Similar Products -->
+        @if (Model.First != null || Model.Second != null)
+        {
+            <div class="mt-5">
+                <h3 class="feature-title"><i class="fas fa-seedling me-2"></i>منتجات مشابهة</h3>
+                <div class="row mt-3">
+                    @if (Model.First != null)
+                    {
+                        <div class="col-md-6 mb-4">
+                            <a asp-action="Details" asp-controller="Product" asp-route-id="@Model.First.Id" class="text-decoration-none text-dark">
+                                <div class="similar-product">
+                                    <div class="similar-img">
+                                        <img src="~/Products/@Model.First.ImageFileName"
+                                             alt="@Model.First.Name"
+                                             class="img-fluid"
+                                             style="max-height: 100%"
+                                             onerror="this.src='/images/product-placeholder.jpg'">
+                                    </div>
+                                    <div class="p-3">
+                                        <h4 class="h5 mb-2">@Model.First.Name</h4>
+                                        <span class="text-primary">عرض التفاصيل <i class="fas fa-arrow-left ms-1"></i></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                    @if (Model.Second != null)
+                    {
+                        <div class="col-md-6 mb-4">
+                            <a asp-action="Details" asp-controller="Product" asp-route-id="@Model.Second.Id" class="text-decoration-none text-dark">
+                                <div class="similar-product">
+                                    <div class="similar-img">
+                                        <img src="~/Products/@Model.Second.ImageFileName"
+                                             alt="@Model.Second.Name"
+                                             class="img-fluid"
+                                             style="max-height: 100%"
+                                             onerror="this.src='/images/product-placeholder.jpg'">
+                                    </div>
+                                    <div class="p-3">
+                                        <h4 class="h5 mb-2">@Model.Second.Name</h4>
+                                        <span class="text-primary">عرض التفاصيل <i class="fas fa-arrow-left ms-1"></i></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    <script>
+        // تغيير الصورة الرئيسية
+        function changeImage(element) {
+            const mainImage = document.getElementById('mainProductImage');
+            mainImage.src = element.src;
+
+            // إزالة التنشيط من جميع الصور المصغرة
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+
+            // تنشيط الصورة المحددة
+            element.classList.add('active');
+        }
+
+        // تأثيرات الظهور عند التمرير
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card, .similar-product');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
                 });
+            }, { threshold: 0.1 });
 
-                // إضافة الفئة النشطة للصورة المصغرة التي تم النقر عليها
-                element.classList.add('active');
-            }
-        </script>
-    }
+            featureCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
