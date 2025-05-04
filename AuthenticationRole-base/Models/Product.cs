@@ -13,9 +13,9 @@ namespace AuthenticationRole_base.Models
         [MaxLength(100)]
         public string? Category { get; set; } = "";
         [Precision(16, 2)]
-        public double? Price { get; set; }
+        public double? Price { get; set; } = 0.0;
         public string? Description { get; set; } = "";
-        public int? Quantity { get; set; }
+        public int? Quantity { get; set; } = 0;
 
         public string? Proberties { get; set; } = "";
         public string? Form { get; set; } = "";

@@ -25,8 +25,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a asp-action="Products" asp-controller="Product">المنتجات</a></li>
-                    <li class="breadcrumb-item"><a href="/Product/Products?search=&category=@Model.Product.Category">@Model.Product.Category</a></li>
+                    <li class="breadcrumb-item"><a href="/product">المنتجات</a></li>
+                    <li class="breadcrumb-item"><a href="/product?search=&category=@Model.Product.Category">@Model.Product.Category</a></li>
                     <li class="breadcrumb-item active">@Model.Product.Name</li>
                 </ol>
             </nav>

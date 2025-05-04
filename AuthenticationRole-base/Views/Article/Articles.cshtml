@@ -260,14 +260,8 @@
     </style>
 }
 
-<div class="page-header">
-    <div class="container">
-        <h1 class="page-title" style="color:lawngreen">المكتبة الزراعية</h1>
-        <p class="page-subtitle">أحدث المقالات والأبحاث في مجال الزراعة الحديثة</p>
-    </div>
-</div>
 
-<div class="container">
+<div class="container" style="padding-top:40px">
     <!-- البحث المتقدم -->
     <div class="advanced-search">
         <ul class="nav search-tabs mb-4" id="searchTabs" role="tablist">
@@ -392,7 +386,7 @@
     <!-- قائمة المقالات -->
     @if (filteredArticles.Any())
     {
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" style="padding-bottom:40px">
             @foreach (var article in filteredArticles)
             {
                 <div class="col">
@@ -416,7 +410,10 @@
                                 </span>
                             </div>
 
-                            <a href="/Article/Details/@article.Id" class="btn-details" style="text-decoration:none">
+                            <a asp-controller="Article" asp-action="Details"
+                               asp-route-title="@article.Title.Replace(" ", "-")"
+                               asp-route-id="@article.Id"
+                                 class="btn-details" style="text-decoration:none">
                                 <i class="far fa-eye me-1"></i> قراءة المزيد
                             </a>
                         </div>
@@ -427,7 +424,7 @@
     }
     else
     {
-        <div class="no-results">
+        <div class="no-results" style="padding-bottom:40px">
             <div class="no-results-icon">
                 <i class="fas fa-search-minus"></i>
             </div>

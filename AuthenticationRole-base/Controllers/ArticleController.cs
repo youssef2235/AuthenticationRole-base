@@ -21,6 +21,7 @@ namespace AuthenticationRole_base.Controllers
             this.context = context;
             this.environment = environment;
         }
+        [Route("blog")]
         public IActionResult Articles()
         {
             var articles = context.Articles.ToList();
@@ -91,9 +92,11 @@ namespace AuthenticationRole_base.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        [Route("blog/{title}")]
+        public IActionResult Details(string title ,int id)
         {
-            var article = context.Articles.FirstOrDefault(p => p.Id == id);
+            var article = context.Articles.FirstOrDefault(a => a.Id == id && a.Title.Replace(" ", "-") == title);
+
             if (article == null)
             {
                 return NotFound();

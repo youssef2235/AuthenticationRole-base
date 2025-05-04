@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthenticationRole_base.Controllers
 {
+
+
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -18,13 +20,15 @@ namespace AuthenticationRole_base.Controllers
             this.environment = environment;
         }
 
+        [Route("product")]
         public IActionResult Products ()
         {
             var products = context.Products.ToList();
             return View(products);
         }
-        [Authorize(Roles = "admin")]
 
+        [Authorize(Roles = "admin")]
+        [HttpGet("Index")]
         public IActionResult Index()
         {
             var products = context.Products.ToList();
@@ -32,13 +36,15 @@ namespace AuthenticationRole_base.Controllers
         }
 
         [Authorize(Roles ="admin")]
+
+        [HttpGet("create")]
         public IActionResult Create()
         {
             return View();
         }
-        [Authorize(Roles = "admin")]
 
-        [HttpPost]
+        [Authorize(Roles = "admin")]
+        [HttpPost("create")]
         public IActionResult Create(ProductDto productDto)
         {
             if (productDto.ImageFile == null)
@@ -84,17 +90,20 @@ namespace AuthenticationRole_base.Controllers
                 ImageFileName = nameFileName + extension,
                 CreatedAt = DateTime.Now,
             };
-
+            if(productDto.Quantity == null)
+            {
+                product.Quantity = 0;
+            }
             context.Products.Add(product);
             context.SaveChanges();
 
             return RedirectToAction("Index", "Product");
         }
 
-        [HttpGet]
-        public IActionResult Details(int id)
+        [HttpGet("product/{title}")]
+        public IActionResult Details(string title,int id)
         {
-            var product = context.Products.FirstOrDefault(p => p.Id == id);
+            var product = context.Products.FirstOrDefault(p => p.Id == id && p.Name.Replace(" ", "-") == title);
             if (product == null)
             {
                 return NotFound();
@@ -122,8 +131,8 @@ namespace AuthenticationRole_base.Controllers
             return View(viewmodel);
         }
 
-
         [Authorize(Roles="admin")]
+        [HttpGet("product/edit/{id}")]
         public IActionResult Edit(int id)
         {
             Product product = context.Products.Find(id);
@@ -158,7 +167,6 @@ namespace AuthenticationRole_base.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-
         public IActionResult Edit(int id, ProductDto productDto)
         {
             var product = context.Products.Find(id);

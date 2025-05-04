@@ -198,14 +198,8 @@
     </style>
 }
 
-<div class="page-header">
-    <div class="container">
-        <h1 class="page-title" style="color:lawngreen">منتجات بلو جرين</h1>
-        <p class="page-subtitle">منتجات تستحق الثقة </p>
-    </div>
-</div>
 
-<div class="container">
+<div class="container" style="padding-top:40px">
     <div class="filter-card">
         <form method="get" class="row g-3 align-items-center">
             <div class="col-md-5">
@@ -282,7 +276,7 @@
                             <h3 class="product-title">@product.Name</h3>
                             <p class="product-description">@product.Description</p>
                             <span class="product-category">@product.Category</span>
-                            <a href="/Product/Details/@product.Id" class="btn btn-details">
+                            <a asp-action="Details" asp-controller="Product" asp-route-title="@product.Name.Replace(" ", "-")" asp-route-Id="@product.Id" class="btn btn-details">
                                 <i class="fas fa-info-circle me-2"></i> التفاصيل
                             </a>
                         </div>
